@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/dashboard" class="list-group-item">
+          <h4 class="list-group-item-heading">Justiça Alternativa</h4>
+        </a>
+        <?$authNamespace = new Zend_Session_Namespace('userInformation');
+        $institution = $authNamespace->institution; 
+        $user = new Application_Model_User();
+        $status = $user->validUser($authNamespace->user_id);
+        
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+        <a href="/conflicts/types" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros <?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+        
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados</a>
+        <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
+
+        <?if($institution != 2){?>
+        <a href="/conflicts/view-accepted/type/1" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Mediador <?if($this->mediadorConflicts){?><span class="badge"><?=$this->mediadorConflicts?></span><?}?></a>
+
+        <a href="/conflicts/view-accepted/type/2" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Conciliador <?if($this->conciliadorConflicts){?><span class="badge"><?=$this->conciliadorConflicts?></span><?}?></a>
+
+        <?}
+        if($institution == 2 || $institution == 1 || $institution == 4){?>
+        <a href="/conflicts/view-accepted/type/3" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Árbitro <?if($this->arbitroConflicts){?><span class="badge"><?=$this->arbitroConflicts?></span><?}?></a>
+        <?}?>
+
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+
+        <?if($institution == 1 || $institution == 4){?>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <?}
+        }
+        else if($status['status'] == 1){?>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+      </div>
+    </div>
+    <div class="col-md-9">
+
+      <div class="text-center">
+		    <img src='/img/fundo.png' class="img-responsive img-thumbnail" width="1500px;"><br><br>
+	  </div>
+	 </div>
+	</div>
+</div>

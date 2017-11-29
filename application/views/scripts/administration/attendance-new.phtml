@@ -1,0 +1,208 @@
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Usuários</h4>
+            </a>
+            <a href="/administration/user-new" class="list-group-item">Novo</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Cidades</h4>
+            </a>
+            <a href="/administration/city-new" class="list-group-item">Novo</a>
+            <a href="/administration/city" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Padrão de Veículo</h4>
+            </a>
+            <a href="/administration/pattern-new" class="list-group-item">Novo</a>
+            <a href="/administration/pattern" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Modelos de Chassi</h4>
+            </a>
+            <a href="/administration/chassi-new" class="list-group-item">Novo</a>
+            <a href="/administration/chassi" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Tipos de Veículo</h4>
+            </a>
+            <a href="/administration/type-new" class="list-group-item">Novo</a>
+            <a href="/administration/type" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Cores</h4>
+            </a>
+            <a href="/administration/color-new" class="list-group-item ">Novo</a>
+            <a href="/administration/color" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Carroceria</h4>
+            </a>
+            <a href="/administration/body-new" class="list-group-item">Novo</a>
+            <a href="/administration/body" class="list-group-item">Pesquisar</a>
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Concessões </h4>
+            </a>
+            <a href="/administration/contract-new" class="list-group-item ">Novo</a>
+            <a href="/administration/contract" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Atendimento</h4>
+            </a>
+            <a href="/administration/attendance-new" class="list-group-item active">Novo</a>
+            <a href="/administration/attendance" class="list-group-item">Pesquisar</a>
+          </div>
+        </div><!--/span-->
+        <div class="span9">   
+          <div class="page-header">
+            <h1>Atendimento <small>defina aqui os dados do atendimento</small></h1>
+            <hr>
+            <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Nº de Comunicação</label>
+              <div class="col-lg-7">
+                <input type="text" name="communication" id="communication" value="" placeholder="Digite o Nº Comunicação" class="form-control" required="">
+                <input type="text" name="check_communication" id="check_communication" value="" hidden>
+              </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Nome do Atendimento</label>
+                <div class="col-lg-7">
+                  <input type="text" name="name" id="name" value="" placeholder="Digite o Nome do Atendimento" class="form-control" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Padrão de Serviço</label>
+                <div class="col-lg-7">
+                  <select required="" class="form-control text-center" name="serv_sd" id="serv_sd" >
+                    <option value="">-- Escolha o Padrão de Serviço --</option>
+                    <?foreach($this->attendanceList2 as $listAttendance){?>
+                    <option value="<?=$listAttendance->id?>"><?=$listAttendance->name?></option>
+                    <?}?>
+                    
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Tipo de Operação</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="op_type" id="op_type" required="">
+                    <option value="">-- Escolha o Tipo de Operação --</option>
+                   <?foreach($this->attendanceList as $listAttendance){?>
+                    <option value="<?=$listAttendance->id?>"><?=$listAttendance->id .' - '.$listAttendance->name?></option>
+                    <?}?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Origem</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="city_ori" id="city_ori" required="">
+                    <option value="">-- Escolha a Origem --</option>
+                     <?foreach($this->attendanceList1 as $listAttendance){?>
+                    <option value="<?=$listAttendance->id?>"><?=$listAttendance->id .' - '.$listAttendance->name?></option>
+                    <?}?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Destino</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="city_des" id="city_des" required="">
+                    <option value="">-- Escolha o Destino --</option>
+                    <?foreach($this->attendanceList1 as $listAttendance){?>
+                    <option value="<?=$listAttendance->id?>"><?=$listAttendance->id .' - '.$listAttendance->name?></option>
+                    <?}?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Linha</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="line" id="line" required="">
+                    <option value="">-- Escolha a Linha --</option>
+                    <?foreach($this->attendanceList3 as $listAttendance){?>
+                    <option value="<?=$listAttendance->id?>"><?=$listAttendance->contract .' - '.$listAttendance->name_contract?></option>
+                    <?}?>
+                  </select>
+                </div>
+              </div>
+             
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Informação de Viagem</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="travel_info" id="travel_info" required="">
+                    <option value="">-- Escolha o Informação de Viagem --</option>
+                    <option value="0">MCO</option>
+                    <option value="1">QDMP</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Atendimento Complementar</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="attendance_complementary" id="attendance_complementary" required="">
+                    <option value="">-- Escolha o Atendimento complementar --</option>
+                    <option value="0">Sim</option>
+                    <option value="1">Não</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Integração Tarifariar</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="tariff_integration" id="tariff_integration" required="">
+                    <option value="">-- Escolha a Integracao Tarifaria --</option>
+                    <option value="0">Sim</option>
+                    <option value="1">Não</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Integração Física</label>
+                <div class="col-lg-7">
+                  <select class="form-control text-center" name="physical_integration" id="physical_integration" required="">
+                    <option value="">-- Escolha a Integração Física --</option>
+                    <option value="0">Sim</option>
+                    <option value="1">Não</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Data de Vigência</label>
+                <div class="col-lg-7">
+                  <input type="date" name="date_start" id="date_start" value="" class="form-control" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-lg-3 control-label optional">Data Final</label>
+                <div class="col-lg-7">
+                  <input type="date" name="date_end" id="date_end" value="" class="form-control" required="">
+                </div>
+              </div>                
+              <div class="form-group"><div class="col-lg-7">
+                <input type="submit" name="submit_attendance" id="submit_attendance" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+              </div>
+            </form>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->

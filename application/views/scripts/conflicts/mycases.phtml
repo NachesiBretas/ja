@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/dashboard" class="list-group-item">
+          <h4 class="list-group-item-heading">Justiça Alternativa</h4>
+        </a>
+        <?$authNamespace = new Zend_Session_Namespace('userInformation');
+        $institution = $authNamespace->institution; 
+        $user = new Application_Model_User();
+        $status = $user->validUser($authNamespace->user_id);
+        
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+        <a href="/conflicts/types" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados</a>
+        <a href="/conflicts/accepted" class="list-group-item "><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
+        <a href="/conflicts/mycases" class="list-group-item active"><i class="fa fa-list-ul"></i> Meus casos</a>
+
+        <?if($institution == 1 || $institution == 4){?>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <?}
+        }
+        else if($status['status'] == 1){?>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="page-header">
+        <h1>Cadastro <?php echo $this->type ?> <small>gerencie aqui os dados</small></h1>
+        <!--
+        <hr>
+        <form class="form-inline" action="/fleet/view" method="get" role="form">
+          <div class="form-group col-md-5">
+            <input type="text" class="form-control" placeholder="pesquisa" name="field" value="<?=$this->field?>" id="textSearchFleet">
+          </div>
+          <div class="form-group col-md-3">
+            <select name="option" class="form-control" id="searchFleet">
+              <option value="0">Pesquisar por:</option>
+              <option value="1" <?//if($this->option == 1) echo 'selected="selected"';?>>Placa</option>
+              <option value="2" <?//if($this->option == 2) echo 'selected="selected"';?>>Renavam</option>
+              <option value="3" <?//if($this->option == 3) echo 'selected="selected"';?>>Número de ordem</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Pesquisar</button>
+        </form>
+        -->
+        <hr>
+        <table class="table table-hover table-bordered">
+          <thead>
+            <th>Nome Solicitante</th>
+            <th>Nome outra parte</th>
+            <th>Descrição do conflito</th>
+            <th>Ações</th>
+          </thead>
+          <tbody>
+            <?if(count($this->list)){
+              foreach($this->list as $body){?>
+                <tr>
+                  <td><?=$body->name?></td>
+                  <td><?=$body->name?></td>
+                  <td><?=$body->desc_conflict?></td>
+                  <td>                                                            
+                      <a href="/conflicts/edit/id/<?=$body->id_conflict?>/type/<?=$this->type?>" class="btn btn-default btn-sm help" title="Visualizar dados do conflito"><i class="fa fa-eye"></i></a>                     
+                  </td>
+                </tr>
+                <?} // FIM do foreach($this->list as $body)
+              } // FIM do if(count($this->list))          
+            else{?>
+              <tr>
+                <td colspan="7"><h4>Não há conflitos cadastrados.</h4></td>
+              </tr>
+            <?}?>
+          </tbody>
+        </table>
+        <?if(is_object($this->list) && !isset($this->list->name)){ echo $this->paginationControl($this->list,'Sliding','pagination.phtml'); }?>
+      </div>
+    </div><!--/span-->
+  </div>
+</div>
+

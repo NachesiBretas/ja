@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/scheduling" class="list-group-item">
+          <h4 class="list-group-item-heading">Agendamento</h4>
+            <p class="list-group-item-text">Gerencie aqui os dados dos atendimentos</p>
+        </a>
+        <a href="/scheduling/treatment" class="list-group-item"><span class="glyphicon glyphicon-calendar"></span> Calendário</a>
+        <a href="/scheduling/calendar" class="list-group-item"><span class="glyphicon glyphicon-book"></span> Recessos</a>
+        <a href="/scheduling/hour" class="list-group-item"><span class="glyphicon glyphicon-saved"></span> Horários</a>
+        <a href="/scheduling/print" class="list-group-item active"><span class="glyphicon glyphicon-search"></span> Buscar</a>
+        <!-- <a href="/scheduling/report" class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span> Relatórios</a> -->
+        <!-- <a href="/scheduling/graphic" class="list-group-item"><span class="glyphicon glyphicon-picture"></span> Gráfico</a> -->
+      </div>
+    </div><!--/col-md-->
+    <div class="col-md-9">
+      <ol class="breadcrumb">
+        <li><a href="/dashboard">Página Inicial</a></li>
+        <li><a href="/scheduling">Agendamento</a></li>
+        <li class="active">Imprimir</li>
+      </ol>  
+      <hr>
+      <div>
+        <h1>Buscar calendário <small>selecione aqui a data de busca</small></h1>
+      </div>
+      <hr>
+        <div class="row" >
+          <div class="col-md-3">
+            <div class="panel panel-default" style=" text-align:center">
+            <strong style="font-size:17px;">Dia:
+            <?=Application_Model_General::DateToBr($this->date)?></strong>
+                <table class="table table-bordered table-hover">
+                  <?if(!is_null($this->list)){
+        	          foreach ($this->list as $value) {?>
+        	          <tr>
+        	            <td><?=$value->str_hour;?></td>
+        	            <td><?=$value->name;?></td>
+        	          </tr>
+                  <?  }
+                  }
+                  else{?>
+                  	<tr><td>Não foram agendados horários para este dia</td></tr>
+                  	<?}?>
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

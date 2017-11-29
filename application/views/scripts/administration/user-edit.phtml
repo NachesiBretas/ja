@@ -1,0 +1,68 @@
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Usuários</h4>
+            </a>
+            <a href="/administration/user-new" class="list-group-item">Novo</a>
+            <a href="/administration/user" class="list-group-item active">Edição</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Administrador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Sub Administrador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Arbitro</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Concialiador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Mediador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Cidadão</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Advogado/Ente conveniado</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Empresa/Poder público</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Arbitragem</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Valor das causas</h4>
+            </a>
+            <a href="/administration/" class="list-group-item">Novo</a>
+            <a href="/administration/" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Edição do site</h4>
+            </a>
+            <a href="/administration/" class="list-group-item">Novo</a>
+            <a href="/administration/" class="list-group-item">Pesquisar</a>
+          </div>
+          
+        </div><!--/span-->
+        <div class="span9">   
+          <div class="page-header">
+            <h1>Usuário <small>defina aqui os dados do usuário</small></h1>
+            <hr>
+            <?=$this->form?>
+          </div>
+          <a class="btn btn-danger" data-toggle="modal" data-target="#inativa_user">Inativar</a>
+        </div><!--/span-->
+      </div><!--/row-->
+
+<form action="/administration/inativa-user" method="post">
+  <div class="modal fade" id="inativa_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Inativar usuário</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Inativar este usuário?</h4>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="userId" value="<?=$this->userId?>">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-success">Inativar</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</form>

@@ -1,0 +1,85 @@
+date/time         : 2017-11-02, 19:53:05, 492ms
+computer name     : NACHESI-PC
+user name         : SISTEMA <admin>
+operating system  : Windows NT New x64 build 9200
+system language   : Portuguese
+system up time    : 21 days 17 hours
+program up time   : 279 milliseconds
+processors        : 8x Intel(R) Core(TM) i7-3632QM CPU @ 2.20GHz
+physical memory   : 4574/8050 MB (free/total)
+free disk space   : (C:) 833,87 GB
+display mode      : 1024x768, 32 bit
+process id        : $3238
+allocated memory  : 9,41 MB
+command line      : C:\wamp\sendmail.exe -t -oi -f"from@example.com" -t
+executable        : sendmail.exe
+exec. date/time   : 2011-06-18 01:10
+compiled with     : Delphi 2006/07
+madExcept version : 3.0l
+callstack crc     : $1d5da2f6, $5ffb10c0, $5ffb10c0
+exception number  : 1
+exception class   : EIdSocketError
+exception message : Socket Error # 11001 Host not found.
+
+main thread ($2b80):
+00435e23 +0073 sendmail.exe IdStack                        706  +42 TIdStack.RaiseSocketError
+00433faf +0123 sendmail.exe IdStackWindows                1227  +55 TIdStackWindows.HostByName
+00435a75 +006d sendmail.exe IdStack                        571  +10 TIdStack.ResolveHost
+00440a70 +00fc sendmail.exe IdIOHandlerStack               314  +23 TIdIOHandlerStack.ConnectClient
+0046554d +0031 sendmail.exe IdSSLOpenSSL                  2086   +8 TIdSSLIOHandlerSocketOpenSSL.ConnectClient
+00444a9f +0063 sendmail.exe IdIOHandlerSocket              335  +13 TIdIOHandlerSocket.Open
+00465637 +0007 sendmail.exe IdSSLOpenSSL                  2122   +1 TIdSSLIOHandlerSocketOpenSSL.Open
+0044157d +0235 sendmail.exe IdTCPClient                    318  +53 TIdTCPClientCustom.Connect
+00445cc8 +00a4 sendmail.exe IdExplicitTLSClientServerBase  257  +23 TIdExplicitTLSClient.Connect
+0045ab7b +0017 sendmail.exe IdSMTP                         373   +2 TIdSMTP.Connect
+004b5f14 +1060 sendmail.exe sendmail                       808 +326 initialization
+77348742 +0022 KERNEL32.DLL                                         BaseThreadInitThunk
+
+thread $2494:
+77348742 +22 KERNEL32.DLL  BaseThreadInitThunk
+
+thread $2804:
+77348742 +22 KERNEL32.DLL  BaseThreadInitThunk
+
+thread $180c:
+77348742 +22 KERNEL32.DLL  BaseThreadInitThunk
+
+thread $1b20:
+77348742 +22 KERNEL32.DLL  BaseThreadInitThunk
+
+stack dump:
+0019fc68  28 5e 43 00 de fa ed 0e - 01 00 00 00 07 00 00 00  (^C.............
+0019fc78  7c fc 19 00 28 5e 43 00 - 38 cc 16 01 ec 28 43 00  |...(^C.8....(C.
+0019fc88  30 50 16 01 f9 2a 00 00 - b8 fc 19 00 98 fc 19 00  0P...*..........
+0019fc98  c0 fc 19 00 c8 4b 40 00 - b8 fc 19 00 00 00 00 00  .....K@.........
+0019fca8  00 00 00 00 00 00 00 00 - f9 2a 00 00 30 50 16 01  .........*..0P..
+0019fcb8  04 fd 19 00 b2 3f 43 00 - 2c fd 19 00 c8 4b 40 00  .....?C.,....K@.
+0019fcc8  04 fd 19 00 54 fd 19 00 - 19 00 00 00 ec 28 43 00  ....T........(C.
+0019fcd8  00 00 00 00 00 00 00 00 - 02 00 00 00 01 00 00 00  ................
+0019fce8  00 00 00 00 00 00 00 00 - 00 00 00 00 00 00 00 00  ................
+0019fcf8  00 00 00 00 00 00 00 00 - 00 00 00 00 20 fd 19 00  ................
+0019fd08  77 5a 43 00 4c fd 19 00 - 00 00 00 00 ff ff ff 00  wZC.L...........
+0019fd18  e8 a9 17 01 30 50 16 01 - 58 fd 19 00 75 0a 44 00  ....0P..X...u.D.
+0019fd28  4c fd 19 00 60 fd 19 00 - c8 4b 40 00 58 fd 19 00  L...`....K@.X...
+0019fd38  b4 4e 4b 00 80 5e 0f 01 - 80 5e 0f 01 d0 6a 15 01  .NK..^...^...j..
+0019fd48  00 00 00 00 00 00 00 00 - 00 00 00 00 80 5e 0f 01  .............^..
+0019fd58  74 fd 19 00 52 55 46 00 - 88 fd 19 00 c8 4b 40 00  t...RUF......K@.
+0019fd68  74 fd 19 00 b4 4e 4b 01 - 80 5e 0f 01 bc fd 19 00  t....NK..^......
+0019fd78  a5 4a 44 00 80 5e 0f 01 - 3c 56 46 00 83 15 44 00  .JD..^..<VF...D.
+0019fd88  94 fd 19 00 5f 4d 40 00 - bc fd 19 00 e8 fd 19 00  ...._M@.........
+0019fd98  c8 4b 40 00 bc fd 19 00 - b4 4e 4b 00 80 5e 0f 01  .K@......NK..^..
+
+disassembling:
+[...]
+00435e13       push    eax
+00435e14       mov     ecx, [ebp-8]
+00435e17       mov     dl, 1
+00435e19       mov     eax, [$4352ac]
+00435e1e       call    -$717 ($43570c)        ; IdStack.EIdSocketError.CreateError
+00435e23     > call    -$3113c ($404cec)      ; System.@RaiseExcept
+00435e28 707   xor     eax, eax
+00435e2a       pop     edx
+00435e2b       pop     ecx
+00435e2c       pop     ecx
+00435e2d       mov     fs:[eax], edx
+[...]

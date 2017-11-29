@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/dashboard" class="list-group-item">
+          <h4 class="list-group-item-heading">Justiça Alternativa</h4>
+        </a>
+        <?$authNamespace = new Zend_Session_Namespace('userInformation');$institution = $authNamespace->institution; 
+        $user = new Application_Model_User();
+        $status = $user->validUser($authNamespace->user_id);
+        
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+        <a href="/conflicts/types" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+        
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados</a>
+        <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos</a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?if($institution == 1 || $institution == 4){?>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <?}
+        }
+        else if($status['status'] == 1){?> 
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="page-header">
+        <h1>Cupons <small>gere aqui os cupons de desconto</small></h1>
+      </div>
+      <form method="post" class="form-horizontal" id='frm_cupom' action="/conflicts/cupom" enctype="multipart/form-data">
+        <div class="col-md-12">
+          <div class="form-group">
+              <label class="col-sm-2">% de desconto</label>
+              <div class="col-sm-3">
+                <select name="desconto" id='val_desconto' class="form-control">
+                  <option value="0">-- Selecione --</option>
+                  <option value="5">5%</option>
+                  <option value="10">10%</option>
+                  <option value="15">15%</option>
+                  <option value="20">20%</option>
+                  <option value="25">25%</option>
+                  <option value="30">30%</option>
+                  <option value="35">35%</option>
+                  <option value="20">40%</option>
+                  <option value="25">45%</option>
+                  <option value="30">50%</option>
+                  <option value="35">55%</option>
+                  <option value="20">60%</option>
+                  <option value="25">65%</option>
+                  <option value="30">70%</option>
+                  <option value="35">75%</option>
+                  <option value="20">80%</option>
+                  <option value="25">85%</option>
+                  <option value="30">90%</option>
+                  <option value="35">95%</option>
+                  <option value="35">100%</option>
+                </select>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success" id='gera_cupom'>Gerar cupom</button>
+  	    </div>
+      </form>
+      <br>
+
+      <?php 
+        if($this->cupom){
+          echo "Anote o número do Cupom gerado: <b style='font-size: 20px;'>".$this->cupom."</b> .";
+        }
+      ?>
+	</div>
+</div>
+</div>
+

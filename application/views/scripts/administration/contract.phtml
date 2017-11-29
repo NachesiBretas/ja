@@ -1,0 +1,233 @@
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Usuários</h4>
+            </a>
+            <a href="/administration/user-new" class="list-group-item">Novo</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Cidades</h4>
+            </a>
+            <a href="/administration/city-new" class="list-group-item">Novo</a>
+            <a href="/administration/city" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Padrão de Veículo</h4>
+            </a>
+            <a href="/administration/pattern-new" class="list-group-item">Novo</a>
+            <a href="/administration/pattern" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Modelos de Chassi</h4>
+            </a>
+            <a href="/administration/chassi-new" class="list-group-item">Novo</a>
+            <a href="/administration/chassi" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Tipos de Veículo</h4>
+            </a>
+            <a href="/administration/type-new" class="list-group-item">Novo</a>
+            <a href="/administration/type" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Cores</h4>
+            </a>
+            <a href="/administration/color-new" class="list-group-item">Novo</a>
+            <a href="/administration/color" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Carroceria</h4>
+            </a>
+            <a href="/administration/body-new" class="list-group-item">Novo</a>
+            <a href="/administration/body" class="list-group-item ">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Concessões</h4>
+            </a>
+            <a href="/administration/contract-new" class="list-group-item">Novo</a>
+            <a href="/administration/contract" class="list-group-item active">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Atendimento</h4>
+            </a>
+            <a href="/administration/attendance-new" class="list-group-item">Novo</a>
+            <a href="/administration/attendance" class="list-group-item ">Pesquisar</a>
+          </div>
+        </div><!--/span-->
+        <div class="col-md-9">
+          <div class="page-header">
+            <h1>Pesquisa <small>Gerencie aqui os dados das Concessões</small></h1>
+            <hr>
+            <ul class="nav nav-tabs" id="myTab">
+              <li id="prin"  <?if($this->result == 0){?>class="active"<?}?>><a href="#rit">Rit</a></li>
+              <li <?if($this->result == 1){?>class="active"<?}?>><a href="#delega">Delegataria</a</li>
+              <li <?if($this->result == 2){?>class="active"<?}?>><a href="#company">Empresa</a></li>
+              <li <?if($this->result == 3){?>class="active"<?}?>><a href="#celula">Célula Operacional</a></li>
+              <li <?if($this->result == 4){?>class="active"<?}?>><a href="#line">Contrato</a></li>
+            </ul>
+            <hr>
+            <div class="tab-content">
+              <div class="tab-pane <?if($this->result == 0){?>active<?}?>" id="rit">
+                  <form class="form-inline" action="/administration/contract" method="get" role="form">
+                    <div class="form-group col-md-5">
+                      <input type="text"  class="form-control" placeholder="nome da RIT" name="field0" value="<?=$this->field0?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                  </form>
+                <hr>
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <th>Nome</th>
+                  </thead>
+                  <tbody>
+                    <?if(is_object($this->rit) && !isset($this->rit->name)){
+                      foreach($this->rit as $rit){?>
+                        <tr>
+                          <td><a href="/administration/contract-edit/id/<?=$rit->id?>/result/0"><?=$rit->nome_rit.' - '.$rit->description?></a></td>
+                        </tr>
+                    <?} } else{?>
+                      <tr>
+                        <td colspan="7">Não encontrado nenhum fiscal na pesquisa.</td>
+                      </tr>
+                    <?}?>
+                  </tbody>
+                </table>
+                
+              </div>
+              <div class="tab-pane <?if($this->result == 1){?>active<?}?>" id="delega">
+                  <form class="form-inline" action="/administration/contract" method="get" role="form">
+                    <div class="form-group col-md-5">
+                      <input type="text"  class="form-control" placeholder="nome do Consorcio" name="field1" value="<?=$this->field1?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                  </form>
+                <hr>
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <th>Nome</th>
+                  </thead>
+                  <tbody>
+                    <?if(is_object($this->list) && !isset($this->list->name)){
+                      foreach($this->list as $consortium){?>
+                        <tr>
+                          <td><a href="/administration/contract-edit/id/<?=$consortium->id?>/result/1"><?=$consortium->name?></a></td>
+                        </tr>
+                    <?} } else{?>
+                      <tr>
+                        <td colspan="7">Não encontrado nenhum fiscal na pesquisa.</td>
+                      </tr>
+                    <?}?>
+                  </tbody>
+                </table>
+                
+              </div>
+              <div class="tab-pane <?if($this->result == 2){?>active<?}?>" id="company">
+                  <form class="form-inline" action="/administration/contract" method="get" role="form">
+                    <div class="form-group col-md-5">
+                      <input type="text"  class="form-control" placeholder="nome da Empresa" name="field2" value="<?=$this->field2?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                  </form>
+                <hr>
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <th>Nome</th>
+                  </thead>
+                  <tbody>
+                    <?if(is_object($this->companyList) && !isset($this->companyList->name)){
+                      foreach($this->companyList as $companyList){?>
+                        <tr>
+                          <td><a href="/administration/contract-edit/id/<?=$companyList->id?>/result/2"><?=$companyList->company?></a></td>
+                        </tr>
+                    <?} } else{?>
+                      <tr>
+                        <td colspan="7">Não encontrado nenhum fiscal na pesquisa.</td>
+                      </tr>
+                    <?}?>
+                  </tbody>
+                </table>
+                
+              </div>
+              <div class="tab-pane <?if($this->result == 3){?>active<?}?>" id="celula">
+                  <form class="form-inline" action="/administration/contract" method="get" role="form">
+                    <div class="form-group col-md-5">
+                      <input type="text"  class="form-control" placeholder="nome da Célula Operacional" name="field3" value="<?=$this->field3?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                  </form>
+                <hr>
+                <table class="table table-hover table-condensed">
+                  <thead>
+                    <th>Rit</th>
+                    <th>Célula</th>
+                    <th>Delegataria da célula</th>
+                    <th>Empresa da Célula</th>
+                  </thead>
+                  <tbody>
+                    <?if(is_object($this->companyList) && !isset($this->companyList->name)){
+                      foreach($this->celulaList as $celulaList){?>
+                        <tr data-url="/administration/contract-edit/id/<?=$celulaList->id?>/result/3" style='cursor:pointer' id="clickLine">
+                          <td><a href="/administration/contract-edit/id/<?=$celulaList->id?>/result/3"><?=$celulaList->nome_rit?></a></td>
+                          <td><a href="/administration/contract-edit/id/<?=$celulaList->id?>/result/3"><?=$celulaList->name?></a></td>
+                          <td><a href="/administration/contract-edit/id/<?=$celulaList->id?>/result/3"><?=$celulaList->name_cons?></a></td>
+                          <td><a href="/administration/contract-edit/id/<?=$celulaList->id?>/result/3"><?=$celulaList->company?></a></td>
+                        </tr>
+                    <?} } else{?>
+                      <tr>
+                        <td colspan="7">Não encontrado nenhum fiscal na pesquisa.</td>
+                      </tr>
+                    <?}?>
+                  </tbody>
+                </table>  
+              </div>
+              <div class="tab-pane <?if($this->result == 4){?>active<?}?>" id="line">
+                  <form class="form-inline" action="/administration/contract/" method="get" role="form">
+                    <div class="form-group col-md-5">
+                      <input type="text" class="form-control" placeholder="numero do contrato" name="field4" value="<?=$this->field4?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                  </form>
+                <hr>
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <th>Número - Nome</th>
+                  </thead>
+                  <tbody>
+                    <?if(is_object($this->consortiumList) && !isset($this->consortiumList->name)){
+                      foreach($this->consortiumList as $contract){?>
+                        <tr>
+                          <td><a href="/administration/contract-edit/id/<?=$contract->id?>/result/4"><?=$contract->contract?> - <?=$contract->name_contract?></a></td>
+                        </tr>
+                    <?} } else{?>
+                      <tr>
+                        <td colspan="7">Não encontrado nenhuma consorcio na pesquisa.</td>
+                      </tr>
+                    <?}?>
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>  
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->

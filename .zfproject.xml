@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<projectProfile type="default" version="1.12.0">
+  <projectDirectory>
+    <projectProfileFile filesystemName=".zfproject.xml"/>
+    <applicationDirectory classNamePrefix="Application_">
+      <configsDirectory>
+        <applicationConfigFile type="ini"/>
+      </configsDirectory>
+      <controllersDirectory>
+        <controllerFile controllerName="Index">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Administration">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="user"/>
+          <actionMethod actionName="userNew"/>
+          <actionMethod actionName="userEdit"/>
+        </controllerFile>
+        <controllerFile controllerName="Doesntallow">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Mail">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="inbox"/>
+          <actionMethod actionName="outbox"/>
+          <actionMethod actionName="new"/>
+          <actionMethod actionName="view"/>
+          <actionMethod actionName="parent"/>
+          <actionMethod actionName="listLastChild"/>
+          <actionMethod actionName="parentOut"/>
+          <actionMethod actionName="newAnnex"/>
+          <actionMethod actionName="download"/>
+          <actionMethod actionName="forward"/>
+        </controllerFile>
+        <controllerFile controllerName="Agendamento">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cancelScheduling"/>
+          <actionMethod actionName="cancelProtocol"/>
+        </controllerFile>
+        <controllerFile controllerName="Scheduling">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="returnAllEvents"/>
+          <actionMethod actionName="returnEvents"/>
+          <actionMethod actionName="treatment"/>
+          <actionMethod actionName="calendar"/>
+          <actionMethod actionName="hour"/>
+          <actionMethod actionName="report"/>
+          <actionMethod actionName="returnHour"/>
+          <actionMethod actionName="returnSchedulings"/>
+          <actionMethod actionName="deleteHour"/>
+          <actionMethod actionName="graphic"/>
+          <actionMethod actionName="returnSchedulingsVis"/>
+          <actionMethod actionName="reportScheduling"/>
+          <actionMethod actionName="remove"/>
+          <actionMethod actionName="reschedule"/>
+          <actionMethod actionName="print"/>
+          <actionMethod actionName="printCalendar"/>
+        </controllerFile>
+      </controllersDirectory>
+      <formsDirectory enabled="false">
+        <formFile formName="Mail"/>
+        <formFile formName="Absence"/>
+        <formFile formName="SchedulingHour"/>
+      </formsDirectory>
+      <layoutsDirectory enabled="false"/>
+      <modelsDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="MailBox"/>
+          <dbTableFile dbTableName="Scheduling"/>
+          <dbTableFile dbTableName="SchedulingError"/>
+          <dbTableFile dbTableName="SchedulingHoliday"/>
+          <dbTableFile dbTableName="SchedulingHourAllowed"/>
+          <dbTableFile dbTableName="SchedulingLog"/>
+          <dbTableFile dbTableName="SchedulingType"/>
+          <dbTableFile dbTableName="SchedulingUser"/>
+        </dbTableDirectory>
+        <modelFile modelName="General"/>
+        <modelFile modelName="Mail"/>
+        <modelFile modelName="Scheduling"/>
+      </modelsDirectory>
+      <modulesDirectory enabled="false"/>
+      <servicesDirectory enabled="false"/>
+      <viewsDirectory>
+        <viewScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="error"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Administration">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Administration">
+            <viewScriptFile forActionName="user"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Administration">
+            <viewScriptFile forActionName="userNew"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Administration">
+            <viewScriptFile forActionName="userEdit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Doesntallow">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="inbox"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="outbox"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="new"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="view"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="parent"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="listLastChild"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="parentOut"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="newAnnex"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="download"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Mail">
+            <viewScriptFile forActionName="forward"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Agendamento">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Agendamento">
+            <viewScriptFile forActionName="cancelScheduling"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Agendamento">
+            <viewScriptFile forActionName="cancelProtocol"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="returnAllEvents"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="returnEvents"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="treatment"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="calendar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="hour"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="report"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="returnHour"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="returnSchedulings"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="deleteHour"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="graphic"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="returnSchedulingsVis"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="reportScheduling"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="remove"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="reschedule"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="print"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Scheduling">
+            <viewScriptFile forActionName="printCalendar"/>
+          </viewControllerScriptsDirectory>
+        </viewScriptsDirectory>
+        <viewHelpersDirectory/>
+        <viewFiltersDirectory enabled="false"/>
+      </viewsDirectory>
+      <bootstrapFile filesystemName="Bootstrap.php"/>
+    </applicationDirectory>
+    <dataDirectory enabled="false">
+      <cacheDirectory enabled="false"/>
+      <searchIndexesDirectory enabled="false"/>
+      <localesDirectory enabled="false"/>
+      <logsDirectory enabled="false"/>
+      <sessionsDirectory enabled="false"/>
+      <uploadsDirectory enabled="false"/>
+    </dataDirectory>
+    <docsDirectory>
+      <file filesystemName="README.txt"/>
+    </docsDirectory>
+    <libraryDirectory>
+      <zfStandardLibraryDirectory enabled="false"/>
+    </libraryDirectory>
+    <publicDirectory>
+      <publicStylesheetsDirectory enabled="false"/>
+      <publicScriptsDirectory enabled="false"/>
+      <publicImagesDirectory enabled="false"/>
+      <publicIndexFile filesystemName="index.php"/>
+      <htaccessFile filesystemName=".htaccess"/>
+    </publicDirectory>
+    <projectProvidersDirectory enabled="false"/>
+    <temporaryDirectory enabled="false"/>
+    <testsDirectory>
+      <testPHPUnitConfigFile filesystemName="phpunit.xml"/>
+      <testPHPUnitBootstrapFile filesystemName="bootstrap.php"/>
+      <testApplicationDirectory>
+        <testApplicationControllerDirectory>
+          <testApplicationControllerFile forControllerName="Index"/>
+          <testApplicationControllerFile forControllerName="Mail">
+            <testApplicationActionMethod forActionName="index"/>
+            <testApplicationActionMethod forActionName="inbox"/>
+            <testApplicationActionMethod forActionName="outbox"/>
+            <testApplicationActionMethod forActionName="new"/>
+            <testApplicationActionMethod forActionName="view"/>
+            <testApplicationActionMethod forActionName="parent"/>
+            <testApplicationActionMethod forActionName="listLastChild"/>
+            <testApplicationActionMethod forActionName="parentOut"/>
+            <testApplicationActionMethod forActionName="newAnnex"/>
+            <testApplicationActionMethod forActionName="download"/>
+            <testApplicationActionMethod forActionName="forward"/>
+          </testApplicationControllerFile>
+        </testApplicationControllerDirectory>
+      </testApplicationDirectory>
+      <testLibraryDirectory/>
+    </testsDirectory>
+  </projectDirectory>
+</projectProfile>

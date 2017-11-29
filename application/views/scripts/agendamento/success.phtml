@@ -1,0 +1,13 @@
+<div class="jumbotron">
+	
+	<h1>Reunião agendada!</h1><hr>
+	<p>Sua reunião foi agendada com sucesso. <!-- Os dados de agendamento são:<br><br>
+	<b>Data:</b> <?=Application_Model_General::DateToBr($this->schedule->date)?><br>
+	<b>Hora:</b> <?=$this->schedule->str_hour?><br>
+-->
+</p>
+	<p>
+	<a href="/conflicts/edit/id/<?=$this->conflictId?>/type/<?=$this->schedule->id?>" class="btn btn-success btn-lg">Ok!</a>
+	<!--<a href="/agendamento/cancel-scheduling/id/<?=$this->schedule->id?>" class="btn btn-danger btn-lg">Cancelar Agendamento</a>-->
+	</p>
+</div>

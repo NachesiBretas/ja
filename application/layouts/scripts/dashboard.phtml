@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+  <head>
+    <meta charset="utf-8">
+    <title>JUSTIÇA ALTERNATIVA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 80px;
+      }
+
+    </style>
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/datepicker.css" rel="stylesheet">
+    <link href="/css/general.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+    <link href="/css/toastr.min.css" rel="stylesheet"/>
+    <?if($this->treatment){?>
+    <link href="/css/fullcalendar.css" rel="stylesheet">
+    <link href="/css/fullcalendar.print.css" rel="stylesheet">
+    <?}?>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+  	<script src="/js/jquery-1.10.1.min.js"></script>
+  	<script src="/js/jquery.validate.min.js"></script>
+  	<script src="/js/additional-methods.min.js"></script>
+  
+    <? 
+      $authNamespace = new Zend_Session_Namespace('userInformation');
+      $institution = $authNamespace->institution;
+      $userId = $authNamespace->user_id; 
+
+      $user = new Application_Model_User();
+      $status = $user->validUser($authNamespace->user_id);
+    ?>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/dashboard"> &nbsp;JUSTIÇA ALTERNATIVA</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <?if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+            <!--<li><a href="/conflicts/types">Cadastros</a></li>-->
+
+            <li class="dropdown">
+              <a href="/conflicts/types" class="dropdown-toggle" data-toggle="dropdown"> &nbsp;Cadastros <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              <?if($institution != 2){?>
+                <li><a href="/conflicts/view/type/1"><i class="fa fa-folder-open"></i> Cadastros Cidadãos</a></li>
+                <li><a href="/conflicts/view/type/2"><i class="fa fa-folder-open"></i> Cadastros Empresas</a></li>
+                <li><a href="/conflicts/view/type/3"><i class="fa fa-folder-open"></i> Cadastros Advogados</a></li>
+                <?}
+                if($institution == 2 || $institution == 1 || $institution == 4){?>
+                  <li><a href="/conflicts/view/type/4"><i class="fa fa-folder-open"></i> Cadastros Arbitragem</a></li>
+                <?}?>
+              </ul>
+            </li>
+
+            <li><a href="/conflicts/returneds"> &nbsp;Retornados</a></li>
+            <li><a href="/conflicts/accepted"> &nbsp;Aceitos</a></li>
+            <li><a href="/conflicts/mycases"> &nbsp;Meus casos</a></li>
+
+            <?if($institution == 1 || $institution == 4){?>
+            <li><a href="/conflicts/research"> &nbsp;Buscas</a></li>
+            <li><a href="/conflicts/payment"> &nbsp;Pagamento</a></li>
+            <li><a href="/conflicts/cupom"> &nbsp;Cupons</a></li>
+            <?}?>
+            
+            <li><a href="/scheduling">Agendamento Online</a></li>
+
+            <?}
+              else if($status['status'] == 1){?>
+            <li><a href="/conflicts/mycases"> &nbsp;Meus casos</a></li>
+            <li><a href="/conflicts/payment"> &nbsp;Pagamento</a></li>
+            <?}?>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <!--<li>
+              <a href="/mail/inbox">
+                Mensagens 
+              </a>
+            </li>-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> &nbsp;<i class="glyphicon glyphicon-user"></i><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/account"><i class="fa fa-wrench"></i> Minha conta</a></li>
+                <?if($institution == 1){?>
+                <li> <a href="/administration"><i class="fa fa-eye"></i> Administração</a></li>
+                <?}?>
+                <li class="divider"></li>
+                <li> <a href="/auth/logout"><i class="fa fa-sign-out"></i> Sair</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container  wrapper">
+
+      <?
+        switch ($this->save) {
+          case 'success':
+            $title = 'Ok!';
+            $message = 'Dados atualizados com sucesso.';
+            $class = 'success';
+            break;
+
+          case 'registered':
+            $title = 'Próximo passo:';
+            $message = 'Finalize a inserção das informações e anexe os documentos para o agendamento da vistoria.';
+            $class = 'success';
+            break;
+
+          case 'waiting':
+            $title = 'Ok!';
+            $message = 'Continue com a inserção dos dados.';
+            $class = 'success';
+            break;
+
+          case 'error':
+            $title = 'Ops!';
+            $message = ' Houve algum erro na inserção dos dados. Tente novamente preenchendo os dados corretamente.';
+            $class = 'danger';
+            break;
+            
+          case 'exists':
+            $title = 'Ops!';
+            $message = ' Houve algum erro na inserção dos dados. Eles já estão inseridos no sistema.';
+            $class = 'danger';
+            break;
+
+          case 'scheduling_error':
+            $title = 'Ops!';
+            $message = ' Não é permitido realizar agendamento para o dia corrente. São necessárias pelo menos 6h de antecedência.';
+            $class = 'danger';
+            break;
+
+          case 'empty':
+            $title = 'Ops!';
+            $message = ' Preencha todos os dados!.';
+            $class = 'danger';
+            break;
+
+          case 'msg_cupom':
+            $title = 'Ops!';
+            $message = ' Preencha os dados de % do cupom que deseja gerar!';
+            $class = 'danger';
+            break;
+            
+
+          default:
+            $title = 'Ops!';
+            $message = 'Houve algum erro na inserção dos dados. Tente novamente preenchendo os dados corretamente.';
+            $class = 'danger';
+            break;
+        }
+      ?>
+      <?if($this->save){?>
+      <div class="row">
+        <div class="col-md-12 text-center alert alert-<?=$class?> fade in">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <h3><?=$title?></h3> <?=$message?>
+        </div>
+      </div>
+      <?}?>
+      <?if($this->password_error){?>
+      <div class="row">
+        <div class="col-md-12 text-center alert alert-danger fade in">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>Ops!</strong> Senha antiga não confere ou senhas não conferem.
+        </div>
+      </div>
+      <?}?>
+      <?php echo $this->layout()->content; ?>
+    </div>
+    <footer">
+     <div class="container">
+     <b>       
+          <?
+            if($status['status'] == 1){
+              $userInform = new Application_Model_User();
+              $infor = $userInform->returnUserInformation($userId);
+              echo $infor->name.' ('.$infor->username.') ';
+              $aux = explode('-', $infor->access_date);
+              $aux1 = explode(' ', $aux[2]); // separa o dia da hora
+              $dateTime = $aux1[0].'/'.$aux[1].'/'.$aux[0].' às '.$aux1[1];
+              echo " <br> Último acesso: ".$dateTime;
+           }
+          ?>
+          </b>
+        </div>        
+     </footer>
+    <script src="/js/jquery-1.10.1.min.js"></script>
+    <script src="/js/jquery.maskedinput.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <script src="/js/language/pt-BR.js"></script>
+    <script src="/js/d3.v3.min.js"></script>
+    <!-- <script src="/js/d3.min.js"></script>
+    <script src="/js/d3.js"></script>  Testar se essa versão afeta o que o Ivan fez --> 
+    <script src="/js/bootstrap3-typeahead.min.js"></script>
+    <script src="/js/jquery.typing-0.2.0.min.js"></script>
+    <script src="/js/general_2.js"></script>
+    <script src="/js/jquery.printElement.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/jquery.inputmask.bundle.js"></script>
+
+    <?if($this->treatment){?>
+    <script src="/js/fullcalendar.js"></script>
+    <script src="/js/gcal.js"></script>
+    <script src="/js/jquery.livequery.js"></script>
+    <script src="/js/scheduling_v3.js"></script>
+    <?}else{?>
+    <script src="/js/schedule.js"></script>
+    <?}?>
+
+</html>

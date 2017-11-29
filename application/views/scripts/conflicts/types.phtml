@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/dashboard" class="list-group-item">
+          <h4 class="list-group-item-heading">Justiça Alternativa</h4>
+        </a>
+        <?$authNamespace = new Zend_Session_Namespace('userInformation');
+        $institution = $authNamespace->institution; 
+        $user = new Application_Model_User();
+        $status = $user->validUser($authNamespace->user_id);
+        
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+        <a href="/dashboard" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>  
+
+        <?if($institution != 2){?>
+        <a href="/conflicts/view/type/1" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Cidadão<?if($this->citizenConflicts){?><span class="badge"><?=$this->citizenConflicts?></span><?}?></a>
+
+        <a href="/conflicts/view/type/2" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Empresa / Poder público<?if($this->companyConflicts){?><span class="badge"><?=$this->companyConflicts?></span><?}?></a>
+
+        <a href="/conflicts/view/type/3" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Advogado / Ente conveniado<?if($this->lawyerConflicts){?><span class="badge"><?=$this->lawyerConflicts?></span><?}?></a>
+        <?}
+        
+        if($institution == 2 || $institution == 1 || $institution == 4){?>
+        <a href="/conflicts/view/type/4" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Arbitragem<?if($this->arbitrationConflicts){?><span class="badge"><?=$this->arbitrationConflicts?></span><?}?></a>
+        <?}?>
+
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados <?if($this->allReturnedConflicts){?><span class="badge"><?=$this->allReturnedConflicts?></span><?}?></a></a>
+
+        <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
+
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
+
+        <?if($institution == 1 || $institution == 4){?>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <?}?>
+
+        <?}
+        else if($status['status'] == 1){?>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="text-center">
+		    <img src='/img/fundo.png' class="img-responsive img-thumbnail" width="1500px;"><br><br>
+	  </div>
+	 </div>
+	</div>
+</div>

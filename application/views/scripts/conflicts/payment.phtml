@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/dashboard" class="list-group-item">
+          <h4 class="list-group-item-heading">Justiça Alternativa</h4>
+        </a>
+        <?$authNamespace = new Zend_Session_Namespace('userInformation');
+        $institution = $authNamespace->institution; 
+        $user = new Application_Model_User();
+        $status = $user->validUser($authNamespace->user_id);
+         
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+        <a href="/conflicts/types" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados</a>
+        <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+
+        <?if($institution == 1 || $institution == 4){?>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <?}
+        }
+        else if($status['status'] == 1){?>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="page-header">
+        <h1>Pagamento <small>efetue seu pagamento</small></h1>
+      </div>
+      <div class="col-md-12">
+        <p>Ao clicar no botão abaixo você será redirecionado para o site do PagSeguro para efetuar o pagamento.</p>
+        <p> * Você terá alguns dias de livre acesso ao sistema do Justiça Alternativa, para analisar se deseja proseguir com seu caso, antes de efetuar o pagamento, porém o Justiça Alternativa irá tornar o pagamento obrigatório após prazo de análise.</p>
+      </div>
+      <div class="col-md-12 col-md-offset-2">
+        <br>
+        <!-- PAGSEGURO --> 
+          <!-- Declaração do formulário -->   
+          <form method="post" target="pagseguro" action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
+            <!-- Campos obrigatórios -->  
+            <input name="receiverEmail" type="hidden" value="contato@justicaalternativa.com.br">  
+            <input name="currency" type="hidden" value="BRL">  
+      
+            <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
+            <input name="itemId1" type="hidden" value="0001">  
+            <input name="itemDescription1" type="hidden" value="Justica Alternativa">  
+            <input name="itemAmount1" type="hidden" value="<?php echo number_format($this->taxaReg, 2, '.', ' ');?>">  
+            <input name="itemQuantity1" type="hidden" value="1">    
+      
+            <!-- submit do form (obrigatório) -->  
+        <input alt="Pague com PagSeguro" name="submit"  type="image"  src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>      
+          </form>  
+        <!-- PAGSEGURO --> 
+	    </div>
+	 </div>
+	</div>
+</div>

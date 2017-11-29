@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a href="/dashboard" class="list-group-item">
+          <h4 class="list-group-item-heading">Justiça Alternativa</h4>
+        </a>
+        <?$authNamespace = new Zend_Session_Namespace('userInformation');?>
+        <?if($authNamespace->institution == 1 || $authNamespace->institution == 3 || $authNamespace->institution == 4){?>
+        <a href="/dashboard" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>  
+        <?}?>
+        <?if($authNamespace->institution == 1){?>
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados</a>
+        <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <?}?>
+        <?if($authNamespace->institution == 2){?>
+        <a href="/scheduling" class="list-group-item"><i class="fa fa-calendar"></i> Agendamento online</a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+        <?if($authNamespace->institution == 3){?>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <?}?>
+      </div>
+    </div>
+    <div class="col-md-9">
+        <div class="page-header">
+    	  <h1>Pesquisa <small>busque aqui as informações dos conflitos</small></h1>
+          <hr>
+          <form class="form-inline" action="/conflicts/research" method="get" role="form">
+            <div class="form-group col-md-5">
+              <input type="text" class="form-control" placeholder="pesquisa" name="field" value="<?=$this->field?>" id="textSearch">
+            </div>
+            <div class="form-group col-md-3">
+              <select name="option" class="form-control" id="searchFleet">
+                <option value="0">Pesquisar por:</option>
+                <option value="1" <?//if($this->option == 1) echo 'selected="selected"';?>>Estado</option>
+                <option value="2" <?//if($this->option == 2) echo 'selected="selected"';?>>Cidade</option>
+                <option value="3" <?//if($this->option == 3) echo 'selected="selected"';?>>Tipo de Conflito</option>
+                <option value="4" <?//if($this->option == 4) echo 'selected="selected"';?>>Tipo de Demanda</option>
+                <option value="3" <?//if($this->option == 5) echo 'selected="selected"';?>>Grupo do Conflito</option>
+                <option value="3" <?//if($this->option == 6) echo 'selected="selected"';?>>Operador do sistema</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+          </form>
+          <hr>
+
+
+
+
+          <table class="table table-hover table-bordered">
+          <thead>
+            <th>Status do conflito</th>
+            <th>Nome parte 1</th> <!-- parte solicitante-->
+            <th>Nome parte 2</th> <!-- outra parte          isso independe do tipo do conflito ou tipo da demanda-->
+            <th>Descrição</th>
+            <th>Tipo de conflito</th>
+            <th>Grupo do conflito</th>
+            <th>Tipo de demanda</th>
+          </thead>
+          <tbody>
+            <?if(count($this->conflicts)){
+              foreach($this->conflicts as $body){?>
+                <tr>
+                  <td <?if($this->institution == 1){?> title="<?=$body->status?>"<?}?>><?=$body->id_conflict?></td>
+                  <td><?=$body->desc_conflict?></td>
+                  <?php 
+                    if($body->type == 1){
+                        $type = 'Cidadão';
+                    }
+                    elseif ($body->type == 2) {
+                        $type = 'Empresa/Ente Conveniado';
+                    }
+                    elseif ($body->type == 3) {
+                        $type = 'Advogado';
+                    }
+                    elseif ($body->type == 4) {
+                        $type = 'Arbitragem';
+                    }
+
+                    if ($body->status == 0) {
+                        $status = 'Novo';
+                    }
+                    elseif ($body->status == 1) {
+                       $status = 'Mediadores';
+                    }
+                    elseif ($body->status == 2) {
+                        $status = 'Conciliadores';
+                    }
+                    elseif ($body->status == 3) {
+                        $status = 'Àrbitros';
+                    }
+                  ?>
+                  <td><?=$type?></td>
+                  <td><?=$status?></td>
+                </tr>
+                <?} // FIM do foreach($this->conflicts as $body)
+              } // FIM do if(count($this->conflicts))          
+            else{?>
+              <tr>
+                <td colspan="7"><h4>Não há buscas realizadas ou não foi encontrado o que você buscou.</h4></td>
+              </tr>
+            <?}?>
+          </tbody>
+        </table>
+
+
+
+
+
+	  </div>
+	 </div>
+	</div>
+</div>

@@ -1,0 +1,370 @@
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Usuários</h4>
+            </a>
+            <a href="/administration/user-new" class="list-group-item">Novo</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Cidades</h4>
+            </a>
+            <a href="/administration/city-new" class="list-group-item">Novo</a>
+            <a href="/administration/city" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Padrão de Veículo</h4>
+            </a>
+            <a href="/administration/pattern-new" class="list-group-item">Novo</a>
+            <a href="/administration/pattern" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Modelos de Chassi</h4>
+            </a>
+            <a href="/administration/chassi-new" class="list-group-item">Novo</a>
+            <a href="/administration/chassi" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Tipos de Veículo</h4>
+            </a>
+            <a href="/administration/type-new" class="list-group-item">Novo</a>
+            <a href="/administration/type" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Cores</h4>
+            </a>
+            <a href="/administration/color-new" class="list-group-item ">Novo</a>
+            <a href="/administration/color" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Carroceria</h4>
+            </a>
+            <a href="/administration/body-new" class="list-group-item">Novo</a>
+            <a href="/administration/body" class="list-group-item">Pesquisar</a>
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Concessões</h4>
+            </a>
+            <a href="/administration/contract-new" class="list-group-item active">Novo</a>
+            <a href="/administration/contract" class="list-group-item">Pesquisar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Atendimento</h4>
+            </a>
+            <a href="/administration/attendance-new" class="list-group-item">Novo</a>
+            <a href="/administration/attendance" class="list-group-item">Pesquisar</a>
+          </div>
+        </div><!--/span-->
+        <div class="span9">   
+          <div class="page-header">
+            <h1>Concessões <small>defina aqui os dados das Concessões</small></h1>
+            <hr>
+            <ul class="nav nav-tabs" id="myTab">
+              <li id="prin"  <?if($this->result == 0){?>class="active"<?}?>><a href="#rit">Rit</a></li>
+              <li <?if($this->result == 1){?>class="active"<?}?>><a href="#delega">Delegataria</a</li>
+              <li <?if($this->result == 2){?>class="active"<?}?>><a href="#company">Empresa</a></li>
+              <li <?if($this->result == 3){?>class="active"<?}?>><a href="#celula">Célula Operacional</a></li>
+              <li <?if($this->result == 4){?>class="active"<?}?>><a href="#line">Contrato</a></li>
+            </ul>
+            <hr>
+            <div class="tab-content">
+              <div class="tab-pane <?if($this->result == 0){?>active<?}?>" id="rit">
+                <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+                
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Descrição da Rit</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="description" id="description" value="<?=$this->rit->description?>" placeholder="Digite o nome da Rit" required=""  class="form-control">
+                    </div>
+                  </div>   
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome Rit</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="nameRit" id="nameRit" value="<?=$this->rit->nome_rit?>" placeholder="Digite o nome da Rit" required=""  class="form-control">
+                    </div>
+                  </div>   
+                  <div class="form-group"><div class="col-lg-7">
+                    <input type="submit" name="submit" id="submit" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane <?if($this->result == 1){?>active<?}?>" id="delega">
+                <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Código</label>
+                    <div class="col-lg-7">
+                      <input type="number" name="code" id="code" value="<?=$this->consortium->number?>" placeholder="Digite o código da delegataria" required=""  class="form-control">
+                  </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="name_consortium" id="name_consortium" value="<?=$this->consortium->name?>" placeholder="Digite o Nome do Contrato" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Número do Contrato</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="contract_setop" id="contract_setop" value="<?=$this->consortium->contract_setop?>" placeholder="Digite o numero do contrato " required="" class="form-control">
+                    </div>
+                  </div>                  
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">CNPJ</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="cnpj" id="cnpj" value="<?=$this->consortium->cnpj?>" placeholder="Digite o CNPJ " required="" class="form-control" onkeypress="mascara(this,cnpjMask)" maxlength="18" pattern="^\d{2}.\d{3}.\d{3}/\d{4}-\d{2}$">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Data Inicio Contrato </label>
+                    <div class="col-lg-7">
+                      <input type="text" name="dateIni" id="dateIni" value="<?=Application_Model_General::dateToBr($this->consortium->date_start)?>" placeholder=" " required="" class="form-control dateMask">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Data Final Contrato</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="dateEnd" id="dateEnd" value="<?=Application_Model_General::dateToBr($this->consortium->date_end)?>" placeholder=" " required="" class="form-control dateMask">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">RIT</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="rit" id="rit">
+                        <option value="0">-- Escolha o numero da rit --</option>
+                    <?foreach($this->ritList as $listconsortium){?>
+                    <option value="<?=$listconsortium->id?>"<?if($listconsortium->id == $this->consortium->rit_id) echo "selected='selected'";?>><?=$listconsortium->nome_rit?></option>
+                    <?}?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Inscricão Estadual</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="state_registration" id="state_registration" value="<?=$this->consortium->state_registration?>" placeholder="Digite os números da Inscricão Estadual" class="form-control" onkeypress="mascara(this,inscriçãoEsta)" maxlength="16" pattern="^\d{3}.\d{3}.\d{3}/\d{4}$">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Quantidades de U V E</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="uve" id="uve" value="<?=$this->consortium->uve?>" placeholder="Digite o numero do contrato " required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome Empresa Lider</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="leader" id="leader">
+                        <option value="0">-- Escolha o Nome da Empresa Lider --</option>
+                    <?foreach($this->companyList as $listconsortium){?>
+                    <option value="<?=$listconsortium->company?>"<?if($listconsortium->company == $this->consortium->leader_company) echo "selected='selected'";?>><?=$listconsortium->company?></option>
+                    <?}?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group"><div class="col-lg-7">
+                    <input type="submit" name="submit" id="submit" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane <?if($this->result == 2){?>active<?}?>" id="company">
+                <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+                
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome da Empresa</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="nameCompany" id="nameCompany" value="<?=$this->company->company?>" placeholder="Digite o Nome da Empresa" required=""  class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Código Empresa</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="codeCompany" id="codeCompany" value="<?=$this->company->code?>" placeholder="Digite o código da Empresa" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Número do contrato Empresa</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="contractCompany" id="contractCompany" value="<?=$this->company->contract?>" placeholder="Digite o Contrato da Empresa" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">CNPJ</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="cnpjCompany" id="cnpjCompany" value="<?=$this->company->cnpj?>" placeholder="Digite o CNPJ da Empresa" required=""  class="form-control" onkeypress="mascara(this,cnpjMask)" maxlength="18" pattern="^\d{2}.\d{3}.\d{3}/\d{4}-\d{2}$">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Inscrição Estadual</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="inscCompany" id="inscCompany" value="<?=$this->company->state_registration?>" placeholder="Digite a Inscrição Estadual da Empresa" class="form-control" onkeypress="mascara(this,inscriçãoEsta)" maxlength="16" pattern="^\d{3}.\d{3}.\d{3}/\d{4}$">
+                    </div>
+                  </div>  
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Endereço</label>
+                  </div> 
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Logradouro</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="streetCompany" id="streetCompany" value="<?=$this->company->street?>" placeholder="Digite o Nome da Rua da Empresa" required=""  class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Número</label>
+                    <div class="col-lg-7">
+                      <input type="number" name="numberCompany" id="numberCompany" value="<?=$this->company->number?>" placeholder="Digite o número da Empresa" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Bairro</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="districtCompany" id="districtCompany" value="<?=$this->company->neighborhood?>" placeholder="Digite o Bairro da Empresa" required=""  class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">CEP</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="cepCompany" id="cepCompany" value="<?=$this->company->cep?>" placeholder="Digite o CEP da Empresa" required=""  class="form-control" onkeypress="mascara(this,cepMask)" maxlength="9" pattern="^\d{5}-\d{3}$">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Cidade</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="cityCompany" id="cityCompany" value="<?=$this->company->city?>" placeholder="Digite a Cidade da Empresa" required=""  class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Complemento</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="complement" id="complement" value="<?=$this->company->complement?>" placeholder="Digite o Complemento da Empresa"   class="form-control">
+                    </div>
+                  </div>     
+                  <div class="form-group"><div class="col-lg-7">
+                    <input type="submit" name="submit" id="submit" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane <?if($this->result == 3){?>active<?}?>" id="celula">
+                <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Código Delegataria</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="consortId" id="consortId">
+                        <option value="0">-- Escolha uma Delegataria --</option>
+                    <?foreach($this->consortiumList as $listconsortium){?>
+                    <option value="<?=$listconsortium->id?>"<?if($listconsortium->id == $this->celula->consortium_id) echo "selected='selected'";?>><?=$listconsortium->number.' - '.$listconsortium->name?></option>
+                    <?}?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome da Célula</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="nameCelula" id="nameCelula" value="<?=$this->celula->name?>" placeholder="Digite o nome da Célula (ex: Célula 1)" required=""  class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Célula Operacional</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="codeCelula" id="codeCelula" value="<?=$this->celula->celula?>" placeholder="Digite o nome da Célula (ex: 001)" required=""  class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome Empresa</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="companyId" id="companyId">
+                        <option value="0">-- Escolha o Nome da Empresa --</option>
+                    <?foreach($this->companyList as $listconsortium){?>
+                    <option value="<?=$listconsortium->id?>"<?if($listconsortium->id == $this->celula->company) echo "selected='selected'";?>><?=$listconsortium->company?></option>
+                    <?}?>
+                      </select>
+                    </div>
+                  </div>   
+                  <div class="form-group"><div class="col-lg-7">
+                    <input type="submit" name="submit" id="submit" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane <?if($this->result == 4){?>active<?}?>" id="line">
+                <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Nome do Contrato</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="nameContract" id="nameContract" value="<?=$this->contract->name_contract?>" placeholder="Digite o Nome do Contrato" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Numeração contratual</label>
+                    <div class="col-lg-7">
+                      <input type="number" name="numberContract" id="numberContract" value="<?=$this->contract->contract?>"  placeholder="Digite a Numeração contratual" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">RIT</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="rit" id="rit">
+                        <option value="0">-- Escolha o numero da rit --</option>
+                    <?foreach($this->ritList as $listconsortium){?>
+                    <option value="<?=$listconsortium->id?>"<?if($listconsortium->id == $this->contract->rit) echo "selected='selected'";?>><?=$listconsortium->nome_rit?></option>
+                    <?}?>
+                      </select>
+                    </div>
+                  </div>
+                   <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Delegataria</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="consId" id="consId">
+                        <option value="0">-- Escolha uma Delegataria --</option>
+                    <?foreach($this->consortiumList as $listconsortium){?>
+                    <option value="<?=$listconsortium->id?>" <?if($listconsortium->id == $this->contract->rit) echo "selected='selected'";?>><?=$listconsortium->number.' - '.$listconsortium->name?></option>
+                    <?}?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Célula Operacional</label>
+                    <div class="col-lg-7">
+                      <select class="form-control text-center" name="consortiumCom" id="consortiumCom">
+                        <?foreach($this->consortiumCompanies as $listconsortium){?>
+                        <option value="<?=$listconsortium->id?>" <?if($listconsortium->id == $this->contract->consortium_companies_id) echo "selected='selected'";?>><?=$listconsortium->name?></option>
+                      <?}?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Data de vigência</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="dateIni" id="dateIni" value="<?=Application_Model_General::dateToBr($this->contract->date_start)?>"" placeholder="Digite a data de vigência " required="" class="form-control dateMask">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-lg-3 control-label optional">Data Final</label>
+                    <div class="col-lg-7">
+                      <input type="text" name="dateEnd" id="dateEnd" value="<?=Application_Model_General::dateToBr($this->contract->date_end)?>" placeholder="Digite a data final " required="" class="form-control dateMask">
+                    </div>
+                  </div>              
+                  <div class="form-group"><div class="col-lg-7">
+                    <input type="submit" name="submit" id="submit" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+                  </div>
+                </form>
+              </div>
+            </div>    
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
