@@ -358,8 +358,9 @@ class Application_Model_Conflict
 	}
 
 
-	public function newConflictCid($data,$id_user)
+	public function newConflictCid($data,$id_user, $file)
 	{
+		// var_dump($data);exit;
 		if($data)
 		{
 
@@ -372,28 +373,25 @@ class Application_Model_Conflict
 			$data['desc_conflict'] = $data['cidadao_desc_conflito'];
 			$data['desc_sugest_resolution'] = $data['cidadao_desc_resolucao_conflito'];
 			$data['id_user'] = $id_user;//$authNamespace->user_id;
- 			$data['id_other_user'] = NULL; // TIRAR ESSE CAMPO DESSA TABELA
 			$data['estimate_price'] = $data['simulacao'];
 			$data['type'] = 1;
 			$data['status'] = 0; //0 vai ser NOVO na tabela de status
 			$data['conflict_type'] = NULL;
-			$data['id_conflict_documents'] = NULL; /// TIRAR ESSE CAMPO DESSA TABELA
 			$conflictNew = $conflict->createRow($data);
 			$id = $conflictNew->save();
 
 			$this->newOtherUser($id,$data);
+			$this->createAnnex($id,$id_user,1,$file);
 			return $id;
 		}
 		return false;
 	}
 
-	public function newConflictEmp($data)
+	public function newConflictEmp($data, $id_user, $file)
 	{
+		// var_dump($data);exit;
 		if($data)
 		{
-			//$authNamespace = new Zend_Session_Namespace('userInformation');
-			$id_user = $this->newUserCid($data);
-
 			$conflict = new Application_Model_DbTable_Conflict();
 			$data['tribunal'] = NULL;
 			$data['comarca'] = NULL;
@@ -401,22 +399,68 @@ class Application_Model_Conflict
 			$data['desc_conflict'] = $data['emp_desc_conflito'];
 			$data['desc_sugest_resolution'] = $data['emp_desc_resolucao_conflito'];
 			$data['id_user'] = $id_user;//$authNamespace->user_id;
- 			$data['id_other_user'] = NULL; // TIRAR ESSE CAMPO DESSA TABELA
 			$data['estimate_price'] = $data['simulacao'];
-			$data['type'] = 1;
+			$data['type'] = 2;
 			$data['status'] = 0; //0 vai ser NOVO na tabela de status
 			$data['conflict_type'] = NULL;
-			$data['id_conflict_documents'] = NULL; /// TIRAR ESSE CAMPO DESSA TABELA
 			$conflictNew = $conflict->createRow($data);
 			$id = $conflictNew->save();
 
 			$this->newOtherUser($id,$data);
+			$this->createAnnex($id,$id_user,2,$file);
 			return $id;
 		}
 		return false;
 	}
 
-	public function newUserCid($data,$user_type)
+	public function newConflictadv($data, $id_user, $file)
+	{
+		if($data)
+		{
+			if ($data['tipo_conflito'] = 1) {
+
+				$conflict = new Application_Model_DbTable_Conflict();
+				$data['tribunal'] = $data['tribunal'];
+				$data['comarca'] = $data['comarca'];
+				$data['process_number'] = NULL;
+				$data['desc_conflict'] = $data['resolucao_conflito'];
+				$data['id_user'] = $id_user;//$authNamespace->user_id;
+				$data['estimate_price'] = $data['simular_custo_j'];
+				$data['type'] = 3;
+				$data['status'] = 0; //0 vai ser NOVO na tabela de status
+				$data['conflict_type'] = NULL;
+				$conflictNew = $conflict->createRow($data);
+				$id = $conflictNew->save();
+				$this->newOtherUserAdv($id,$data);
+
+				return $id;
+				
+			}else{
+				$conflict = new Application_Model_DbTable_Conflict();
+				$data['tribunal'] = NULL;
+				$data['comarca'] = NULL;
+				$data['process_number'] = NULL;
+				$data['desc_conflict'] = $data['desc_conflito_nj'];
+				$data['desc_sugest_resolution'] = $data['resolucao_conflito_nj'];
+				$data['id_user'] = $id_user;//$authNamespace->user_id;
+				$data['estimate_price'] = $data['simulacao_j'];
+				$data['type'] = 3;
+				$data['status'] = 0; //0 vai ser NOVO na tabela de status
+				$data['conflict_type'] = NULL;
+				$conflictNew = $conflict->createRow($data);
+				$id = $conflictNew->save();
+
+				$this->newOtherUserCliente($id,$data);
+				$this->createAnnexCliente($id,$id_user,3,$file);
+				$this->newOtherUser($id,$data);
+				$this->createAnnex($id,$id_user,3,$file);
+				return $id;
+			}
+		}
+		return false;
+	}
+
+	public function newUserCid($data,$user_type)// Não entendi o motivo dessa função Lucas Naves
 	{
 		$user = new Application_Model_DbTable_User();
 		$userRow = $user->createRow();
@@ -434,7 +478,6 @@ class Application_Model_Conflict
 		$userRow->nationality = $data['cidadao_nationalidade'];
 		$userRow->profession = $data['cidadao_profissao'];
 		$userRow->oab_number = NULL;
-		$userRow->id_address = NULL; //TIRAR ESSE CAMPO DESSA TABELA
 		$user_id = $userRow->save();
 
 		$this->newUserAddress($user_id,$data,0);
@@ -464,7 +507,6 @@ class Application_Model_Conflict
 		}
 		$userRow->type = $user_type;
 
-		print_r($userRow);exit();
 		return $userRow->save();
 	}
 
@@ -478,11 +520,45 @@ class Application_Model_Conflict
 		$userRow->phone = $data['phone_op'];
 		$userRow->person_type = $data['tp_op'];
 		$userRow->cpf_cnpj = $data['cpf_op'];
-		$userRow->id_address = null;
 		$userRow->conflict_id = $id_conflict;
 		$user_id = $userRow->save();
 
 		$this->newUserAddressOP($user_id,$data,1);
+
+		return $user_id;
+	}
+
+	public function newOtherUserCliente($id_conflict,$data)
+	{
+		$user = new Application_Model_DbTable_OtherUser();
+		$userRow = $user->createRow();
+		$userRow->name = $data['nome_cliente_jud'];
+		$userRow->email = $data['email_cliente_nj'];
+		$userRow->phone = $data['phone_cliente_nj'];
+		$userRow->person_type = $data['tipo_pessoa_cliente_nj'];
+		$userRow->cpf_cnpj = $data['cpf_cliente_nj'];
+		$userRow->conflict_id = $id_conflict;
+		$user_id = $userRow->save();
+
+		$this->newUserAddressOPCliente($user_id,$data);
+
+		return $user_id;
+	}
+
+	public function newOtherUserAdv($id_conflict,$data)
+	{
+		$user = new Application_Model_DbTable_OtherUser();
+		$userRow = $user->createRow();
+		$userRow->name = $data['nome_adv_parte_re'];
+		$userRow->email = $data['adv_mail_re'];
+		$userRow->phone = $data['adv_phone_re'];
+		$userRow->person_type = $data['adv_type_re'];
+		$userRow->cpf_cnpj = $data['adv_cpf_re'];
+		$userRow->cpf_cnpj = $data['num_oab_re'];
+		$userRow->conflict_id = $id_conflict;
+		$user_id = $userRow->save();
+
+		$this->newUserAddressOPAdv($user_id,$data);
 
 		return $user_id;
 	}
@@ -508,6 +584,128 @@ class Application_Model_Conflict
 		}
 		$userRow->type = $user_type;
 		return $userRow->save();
+	}
+
+	public function newUserAddressOPCliente($user_id,$data)
+	{
+		$user = new Application_Model_DbTable_UserAddress();
+		$userRow = $user->createRow();
+		$userRow->place = $data['logradouro_cliente'];
+		$userRow->number = $data['num_log_cliente'];
+		$userRow->complement = $data['complemento_cliente'];
+		$userRow->neighborhood = $data['bairro_cliente'];
+		$userRow->uf = $data['uf_cliente'];
+		$userRow->city = $data['cidade_cliente'];
+		$userRow->cep = $data['cep_cliente'];
+		$userRow->user_id = NULL;
+		$userRow->other_user_id = $user_id;
+		$userRow->type = 1;
+		return $userRow->save();
+	}
+
+	public function newUserAddressOPAdv($user_id,$data)
+	{
+		$user = new Application_Model_DbTable_UserAddress();
+		$userRow = $user->createRow();
+		$userRow->place = $data['logradouro_re'];
+		$userRow->number = $data['num_logradouro_re'];
+		$userRow->complement = $data['complemento_re'];
+		$userRow->neighborhood = $data['bairro_re'];
+		$userRow->uf = $data['uf_re'];
+		$userRow->city = $data['cidade_re'];
+		$userRow->cep = $data['cep_re'];
+		$userRow->user_id = NULL;
+		$userRow->other_user_id = $user_id;
+		$userRow->type = 1;
+		return $userRow->save();
+	}
+
+	public function createAnnex($id, $id_user, $type, $file)
+	{		
+	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
+	    
+      // O nome original do arquivo no computador do usuário
+      $fileName = $file['arquivo']['name'];
+
+      // O tipo mime do arquivo. Um exemplo pode ser "image/gif"
+      $fileType = $file['arquivo']['type'];
+      // O tamanho, em bytes, do arquivo
+      $fileSize = $file['arquivo']['size'];
+      // O nome temporário do arquivo, como foi guardado no servidor
+      $fileTemp = $file['arquivo']['tmp_name'];
+      // O código de erro associado a este upload de arquivo
+      $fileError = $file['arquivo']['error'];
+     	//var_dump($fileType);exit;
+      if ($fileError == 0) {
+        // Verifica o tipo de arquivo enviado
+        if (array_search($fileType, $permittedNot) !== false) {
+
+          return 0;
+        // Não houveram erros, move o arquivo
+        }else{
+        	mkdir("../public/upload/conflitos/$id_user/");
+          $folder = "../public/upload/conflitos/$id_user/";
+          //var_dump($folder);exit;
+          $upload = move_uploaded_file($fileTemp, $folder.$fileName);
+        } 
+      }
+      //var_dump($upload);exit;
+      if ($upload == true) {
+        $doc = new Application_Model_DbTable_ConflictDocuments(); 
+       	$docRow = $doc->createRow();
+       		$docRow->conflict_id = $id;
+					$docRow->document = $fileName;
+					$docRow->user_id = $id_user;
+					$docRow->date = new Zend_Db_Expr('NOW()');
+					$docRow->document_type = $type;
+					return $docRow->save();
+				
+			}
+		
+	}
+
+	public function createAnnexCliente($id, $id_user, $type, $file)
+	{		
+	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
+	    
+      // O nome original do arquivo no computador do usuário
+      $fileName = $file['procuracao_cliente']['name'];
+
+      // O tipo mime do arquivo. Um exemplo pode ser "image/gif"
+      $fileType = $file['procuracao_cliente']['type'];
+      // O tamanho, em bytes, do arquivo
+      $fileSize = $file['procuracao_cliente']['size'];
+      // O nome temporário do arquivo, como foi guardado no servidor
+      $fileTemp = $file['procuracao_cliente']['tmp_name'];
+      // O código de erro associado a este upload de arquivo
+      $fileError = $file['procuracao_cliente']['error'];
+     	//var_dump($fileType);exit;
+      if ($fileError == 0) {
+        // Verifica o tipo de arquivo enviado
+        if (array_search($fileType, $permittedNot) !== false) {
+
+          return 0;
+        // Não houveram erros, move o arquivo
+        }else{
+        	mkdir("../public/upload/conflitos/$id_user/");
+          $folder = "../public/upload/conflitos/$id_user/";
+          //var_dump($folder);exit;
+          $upload = move_uploaded_file($fileTemp, $folder.$fileName);
+        } 
+      }
+      //var_dump($upload);exit;
+      if ($upload == true) {
+        $doc = new Application_Model_DbTable_ConflictDocuments(); 
+       	$docRow = $doc->createRow();
+       		$docRow->conflict_id = $id;
+					$docRow->document = $fileName;
+					$docRow->user_id = $id_user;
+					$docRow->date = new Zend_Db_Expr('NOW()');
+					$docRow->document_type = $type;
+					return $docRow->save();
+				
+			}
+		
 	}
 
 

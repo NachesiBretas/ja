@@ -26,12 +26,23 @@ class Application_Model_User
 			$userRow = $user->createRow();
 			$userRow->name = $data['cidadao_nome'];
 			$userRow->username = $data['cidadao_email'];
-			$userRow->password = sha1($data['cidadao_senha']);
 			$userRow->email = $data['cidadao_email'];
 			$userRow->phone = $data['cidadao_phone'];
+			$userRow->cpf_cnpj = $data['cidadao_cpf'];
+			$userRow->sex = $data['cidadao_sexo'];
+			$userRow->marital_status = $data['cidadao_estado_civil'];
+			$userRow->date_birth = $data['cidadao_data_nascimento'];
+			$userRow->nationality = $data['cidadao_nationalidade'];
+			$userRow->password = sha1($data['cidadao_senha']);
+			$userRow->profession = $data['cidadao_profissao'];
 			$userRow->date = new Zend_Db_Expr('NOW()');
 			$userRow->institution = 6;
-			return $userRow->save();
+			$userRow->status = 1;
+			$user_id = $userRow->save();
+
+			$this->newAddressUser($user_id,$data);
+
+			return $user_id;
 		}
 
 		if($data['empresa_nome'])
@@ -40,12 +51,18 @@ class Application_Model_User
 			$userRow = $user->createRow();
 			$userRow->name = $data['empresa_nome'];
 			$userRow->username = $data['empresa_email'];
-			$userRow->password = sha1($data['empresa_senha']);
 			$userRow->email = $data['empresa_email'];
 			$userRow->phone = $data['empresa_phone'];
+			$userRow->cpf_cnpj = $data['empresa_cnpj'];
+			$userRow->password = sha1($data['empresa_senha']);
 			$userRow->date = new Zend_Db_Expr('NOW()');
 			$userRow->institution = 7;
-			return $userRow->save();
+			$userRow->status = 1;
+			$user_id = $userRow->save();
+
+			$this->newAddressUser($user_id,$data);
+
+			return $user_id;
 		}
 
 		if($data['adv_nome'])
@@ -54,12 +71,24 @@ class Application_Model_User
 			$userRow = $user->createRow();
 			$userRow->name = $data['adv_nome'];
 			$userRow->username = $data['adv_email'];
-			$userRow->password = sha1($data['adv_senha']);
 			$userRow->email = $data['adv_email'];
 			$userRow->phone = $data['adv_phone'];
+			$userRow->cpf_cnpj = $data['adv_cpf_cnpj'];
+			$userRow->sex = $data['adv_sexo'];
+			$userRow->marital_status = $data['adv_estado_civil'];
+			$userRow->date_birth = $data['adv_data_nascimento'];
+			$userRow->nationality = $data['adv_nationalidade'];
+			$userRow->password = sha1($data['adv_senha']);
+			$userRow->oab_number = $data['adv_num_oab'];
+			$userRow->type_user = $data['user_type_adv'];
 			$userRow->date = new Zend_Db_Expr('NOW()');
 			$userRow->institution = 8;
-			return $userRow->save();
+			$userRow->status = 1;
+			$user_id = $userRow->save();
+
+			$this->newAddressUser($user_id,$data);
+
+			return $user_id;
 		}
 
 		/////////// 9 é o geral do sistema pra consulta Ajax
@@ -68,17 +97,44 @@ class Application_Model_User
 		{
 			$user = new Application_Model_DbTable_User();
 			$userRow = $user->createRow();
-			$userRow->name = $data['arbitro_nome'];
-			$userRow->username = $data['arbitro_email'];
-			$userRow->password = sha1($data['arbitro_senha']);
-			$userRow->email = $data['arbitro_email'];
-			$userRow->phone = $data['arbitro_phone'];
+			$userRow->name = $data['arbitragem_nome'];
+			$userRow->username = $data['arbitragem_email'];
+			$userRow->email = $data['arbitragem_email'];
+			$userRow->phone = $data['arbitragem_telefone'];
+			$userRow->type_user = $data['arbitragem_type_user'];
+			$userRow->cpf_cnpj = $data['arbitragem_cpf_cnpj'];
+			$userRow->sex = $data['arbitragem_sexo'];
+			$userRow->date_birth = $data['arbitragem_data_nascimento'];
+			$userRow->password = sha1($data['arbitragem_senha']);
 			$userRow->date = new Zend_Db_Expr('NOW()');
 			$userRow->institution = 10;
-			return $userRow->save();
+			$user_id = $userRow->save();
+
+			$this->newAddressUser($user_id,$data);
+			$conflict = new Application_Model_Conflict();
+			$annex = $conflict->createAnnex($id_conflito,$user_id,4,$_FILES);
+
+			return $user_id;
 		}
 
     	return false;
+	}
+
+	public function newAddressUser($user_id,$data)
+	{
+		$user = new Application_Model_DbTable_UserAddress();
+		$userRow = $user->createRow();
+		$userRow->place = $data['logradouro'];
+		$userRow->number = $data['num_logradouro'];
+		$userRow->complement = $data['complemento'];
+		$userRow->neighborhood = $data['bairro'];
+		$userRow->uf = $data['uf'];
+		$userRow->city = $data['cidade'];
+		$userRow->cep = $data['cep'];
+		$userRow->user_id = $user_id;
+		$userRow->other_user_id = NULL;		
+		$userRow->type = 0;
+		return $userRow->save();
 	}
 
 	public function lists()

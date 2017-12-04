@@ -11,6 +11,7 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
 
+
       $auth = new Application_Model_Auth();
       $data = array(
           username => 'guest',
@@ -36,22 +37,36 @@ class IndexController extends Zend_Controller_Action
       if($this->getRequest()->isPost()) 
       {
         $data = $this->getRequest()->getPost();
-
-        print_r($data);
         if($data['cidadao_nome']){
-          echo"entra";
+          var_dump($data['accept_terms_cid']);exit;
           // insere o usuario novo na tabela de usuarios
           $user = new Application_Model_User();
           $id_user = $user->newUser($data);
 
-
           $conflict = new Application_Model_Conflict();
-          $conflictId = $conflict->newConflictCid($data,$id_user);
+          $conflictId = $conflict->newConflictCid($data,$id_user, $_FILES);
         }
 
         if($data['empresa_nome']){
+          $user = new Application_Model_User();
+          $id_user = $user->newUser($data);
+
           $conflict = new Application_Model_Conflict();
-          $conflictId = $conflict->newConflictEmp($data);
+          $conflictId = $conflict->newConflictEmp($data,$id_user, $_FILES);
+        }
+        if($data['adv_nome']){
+          var_dump($data);exit;
+          $user = new Application_Model_User();
+          $id_user = $user->newUser($data);
+
+          $conflict = new Application_Model_Conflict();
+          $conflictId = $conflict->newConflictadv($data,$id_user, $_FILES);
+        }
+
+        if($data['arbitragem_nome']){
+          // var_dump($data);exit;
+          $user = new Application_Model_User();
+          $id_user = $user->newUser($data, $_FILES);
         }
 
         $this->_redirect('/auth/login');
