@@ -431,7 +431,8 @@ class Application_Model_Conflict
 				$data['conflict_type'] = NULL;
 				$conflictNew = $conflict->createRow($data);
 				$id = $conflictNew->save();
-				$this->newOtherUserAdv($id,$data);
+				$this->newOtherUserAdvRe($id,$data);
+				$this->newOtherUserAdvAutora($id,$data);
 
 				return $id;
 				
@@ -450,7 +451,7 @@ class Application_Model_Conflict
 				$conflictNew = $conflict->createRow($data);
 				$id = $conflictNew->save();
 
-				$this->newOtherUserCliente($id,$data);
+				$this->newOtherUserParte1($id,$data);
 				$this->createAnnexCliente($id,$id_user,3,$file);
 				$this->newOtherUser($id,$data);
 				$this->createAnnex($id,$id_user,3,$file);
@@ -528,7 +529,7 @@ class Application_Model_Conflict
 		return $user_id;
 	}
 
-	public function newOtherUserCliente($id_conflict,$data)
+	public function newOtherUserParte1($id_conflict,$data)
 	{
 		$user = new Application_Model_DbTable_OtherUser();
 		$userRow = $user->createRow();
@@ -544,21 +545,57 @@ class Application_Model_Conflict
 
 		return $user_id;
 	}
+	public function newOtherUserParte2($id_conflict,$data)
+	{
+		$user = new Application_Model_DbTable_OtherUser();
+		$userRow = $user->createRow();
+		$userRow->name = $data['nome_op'];
+		$userRow->email = $data['email_op'];
+		$userRow->phone = $data['phone_op'];
+		$userRow->person_type = $data['tp_op'];
+		$userRow->cpf_cnpj = $data['cpf_op'];
+		$userRow->conflict_id = $id_conflict;
+		$user_id = $userRow->save();
 
-	public function newOtherUserAdv($id_conflict,$data)
+		$this->newUserAddressOP($user_id,$data,1);
+
+		return $user_id;
+	}
+
+	public function newOtherUserAdvRe($id_conflict,$data)
 	{
 		$user = new Application_Model_DbTable_OtherUser();
 		$userRow = $user->createRow();
 		$userRow->name = $data['nome_adv_parte_re'];
-		$userRow->email = $data['adv_mail_re'];
+		$userRow->email = $data['adv_email_re'];
 		$userRow->phone = $data['adv_phone_re'];
-		$userRow->person_type = $data['adv_type_re'];
+		$userRow->person_type = $data['adv_tp_re""'];
 		$userRow->cpf_cnpj = $data['adv_cpf_re'];
-		$userRow->cpf_cnpj = $data['num_oab_re'];
+		$userRow->adv_judicializado = $data['num_oab_re'];
 		$userRow->conflict_id = $id_conflict;
+		$userRow->adv = 2; //adv da parte re 
 		$user_id = $userRow->save();
 
-		$this->newUserAddressOPAdv($user_id,$data);
+		$this->newUserAddressOPAdvRe($user_id,$data);
+
+		return $user_id;
+	}
+
+	public function newOtherUserAdvAutora($id_conflict,$data)
+	{
+		$user = new Application_Model_DbTable_OtherUser();
+		$userRow = $user->createRow();
+		$userRow->name = $data['nome_adv_parte_au'];
+		$userRow->email = $data['adv_mail_au'];
+		$userRow->phone = $data['adv_phone_au'];
+		$userRow->person_type = $data['adv_type_au'];
+		$userRow->cpf_cnpj = $data['adv_cpf_au'];
+		$userRow->adv_judicializado = $data['num_oab_au'];
+		$userRow->conflict_id = $id_conflict;
+		$userRow->adv = 1; //adv da parte autora
+		$user_id = $userRow->save();
+
+		$this->newUserAddressOPAdvAutora($user_id,$data);
 
 		return $user_id;
 	}
@@ -603,7 +640,7 @@ class Application_Model_Conflict
 		return $userRow->save();
 	}
 
-	public function newUserAddressOPAdv($user_id,$data)
+	public function newUserAddressOPAdvRe($user_id,$data)
 	{
 		$user = new Application_Model_DbTable_UserAddress();
 		$userRow = $user->createRow();
@@ -614,6 +651,23 @@ class Application_Model_Conflict
 		$userRow->uf = $data['uf_re'];
 		$userRow->city = $data['cidade_re'];
 		$userRow->cep = $data['cep_re'];
+		$userRow->user_id = NULL;
+		$userRow->other_user_id = $user_id;
+		$userRow->type = 1;
+		return $userRow->save();
+	}
+
+	public function newUserAddressOPAdvAutora($user_id,$data)
+	{
+		$user = new Application_Model_DbTable_UserAddress();
+		$userRow = $user->createRow();
+		$userRow->place = $data['logradouro_au'];
+		$userRow->number = $data['num_logradouro_au'];
+		$userRow->complement = $data['complemento_au'];
+		$userRow->neighborhood = $data['bairro_au'];
+		$userRow->uf = $data['uf_au'];
+		$userRow->city = $data['cidade_au'];
+		$userRow->cep = $data['cep_au'];
 		$userRow->user_id = NULL;
 		$userRow->other_user_id = $user_id;
 		$userRow->type = 1;

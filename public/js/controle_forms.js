@@ -294,24 +294,36 @@ $("#tipo_conflito").change(function(){
 
 /////////// RECAPTCHA /////////////////////////////////////////////////////////////
 
-$("#accept_terms_cid").change(function(){
-    $('#captchaModal').modal();
+// $("#accept_terms_cid").change(function(){
+//     $('#captchaModal').modal();
+// });
+
+// $("#accept_terms_emp").change(function(){
+//     $('#captchaModal').modal();
+// });
+
+// $("#accept_terms_adv").change(function(){ 
+//      $('#captchaModal').modal();
+// });
+
+// $("#accept_terms_arb").change(function(){
+//      $('#captchaModal').modal();
+// });
+
+
+// $("#ok_captcha").click(function(){
+//      // preencher alguma variavel pra ver se retornou valido ou nao
+// });
+
+$(".captcha").click(function(){
+
+    $("#captchaModal").show();
+    $("html,body").css({"overflow":"hidden"});
 });
 
-$("#accept_terms_emp").change(function(){
-    $('#captchaModal').modal();
-});
-
-$("#accept_terms_adv").change(function(){ 
-     $('#captchaModal').modal();
-});
-
-$("#accept_terms_arb").change(function(){
-     $('#captchaModal').modal();
-});
-
-$("#ok_captcha").click(function(){
-     // preencher alguma variavel pra ver se retornou valido ou nao
+$("#ok").click(function(){
+    $("#captchaModal").hide();
+    $("html,body").css({"overflow":"auto"});
 });
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -439,4 +451,28 @@ $('#arbForm').keyup(function(){
         $('#finalizarArb').prop('disabled', true);
     }
   })
+
+
+// validação de campos Adv 
+
+$('#advForm').keyup(function(){
+    var value = $('#adv_nome').val();
+    if(value.length != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" 
+        & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" 
+        & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" 
+        & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" 
+        & $('#accept_terms_adv').val() != null) {
+      $('#continuarAdv').prop('disabled', false);
+        $('#preencherAdv').prop('hidden', true);
+    }else if(value.length == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
+        & $('#adv_cpf_cnpj').val() == "" & $('#adv_senha').val() == "" 
+        & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" 
+        & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" 
+        & $('#accept_terms_adv').val() == null) {
+      $('#continuarAdv').prop('disabled', true);
+    }else{
+        $('#continuarAdv').prop('disabled', true);
+    }
+  })
+
 

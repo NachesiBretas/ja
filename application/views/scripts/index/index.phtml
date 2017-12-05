@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Justiça Alternativa!!!</title>
+    <title>Justiça Alternativa</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -542,9 +542,9 @@
                                 </div>
                                 </div>
                              </div>
-                             <div class="checkbox">
+                                  <div class="checkbox">
                                 <label>
-                                  <input type="checkbox" name="accept_terms_cid" id="accept_terms_cid" value="1">
+                                  <input type="checkbox" name="accept_terms_cid" id="accept_terms_cid" value="1" class="captcha">
                                   <strong><a href="#politicaModal" data-toggle="modal">Eu li e aceito os termos de uso</a></strong>
                                 </label>
                              </div>
@@ -553,7 +553,7 @@
 
                              <br><br>
                                 
-                                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
+                                   <button type="button" class="btn btn-danger" id="butao"><i class="fa fa-times"></i> Cancelar</button>
                                    <input id="continuarCid"  type="button" disabled="true" class="btn btn-success submit" value="Continuar">
                                 
                                
@@ -724,6 +724,8 @@
                       <span >3 - Honorários finais: <b>R$ </b></span> <span id="taxa_final"><b> </b></span>
                     </div>
                  </div>
+
+                 
 
                      <br><br>
                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
@@ -907,7 +909,7 @@
                  </div>
                  <div class="checkbox">
                             <label>
-                              <input type="checkbox" name="accept_terms_emp" id="accept_terms_emp" value="1">
+                              <input type="checkbox" name="accept_terms_emp" id="accept_terms_emp" value="1" class="captcha">
                               <strong><a href="#politicaModal" data-toggle="modal">Eu li e aceito os termos de uso</a></strong>
                             </label>
                        </div>
@@ -1145,7 +1147,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body text-left">
-                          <form enctype="multipart/form-data" action="" method="post">
+                          <form enctype="multipart/form-data" action="" method="post" id="advForm">
                             <h2>Formulário de cadastro Advogado/ente conveniado</h2>
                             <br>
 
@@ -1198,7 +1200,7 @@
                           <div class="row individual" style="">
                     <div class="col-md-3"><div class="form-group string optional conciliation_requesters_born_on"><label class="string optional control-label" for="">Data de nascimento</label><input class="string optional form-control mask_date form-control" type="date" name="adv_data_nascimento" id="adv_data_nascimento"></div></div>
                     <div class="col-md-3"><div class="form-group string optional conciliation_requesters_marital_status"><label class="string optional control-label" for="conciliation_requesters_attributes_0_marital_status">Estado civil</label><input class="string optional form-control form-control" type="text" name="adv_estado_civil" id="adv_estado_civil"></div></div>
-                    <div class="col-md-3"><div class="form-group string optional conciliation_requesters_nationaly"><label class="string optional control-label" for="conciliation_requesters_attributes_0_nationaly">Nacionalidade</label><input class="string optional form-control form-control" type="text" name="empresa_nationalidade" id="empresa_nationalidade"></div></div>
+                    <div class="col-md-3"><div class="form-group string optional conciliation_requesters_nationaly"><label class="string optional control-label" for="conciliation_requesters_attributes_0_nationaly">Nacionalidade</label><input class="string optional form-control form-control" type="text" name="adv_nationalidade" id="adv_nationalidade"></div></div>
                     <div class="col-md-3">
                       <div class="form-group string optional">
                         <label class="string optional control-label" >Número OAB/UF</label>
@@ -1226,16 +1228,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-9"><div class="form-group string required conciliation_requesters_address_street" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_street" aria-required="true"><abbr title="obrigatório">*</abbr> Logradouro</label><input class="string required form-control address_street form-control" type="text" name="logradouro" id="logradouro" aria-required="true"></div></div>
-                    <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="number" name="cnum_logradouro" id="num_logradouro" aria-required="true"></div></div>
+                    <div class="col-md-9"><div class="form-group string required conciliation_requesters_address_street" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_street" aria-required="true"><abbr title="obrigatório">*</abbr> Logradouro</label><input class="string required form-control address_street form-control" type="text" name="logradouro" id="logradouro1" aria-required="true"></div></div>
+                    <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="number" name="num_logradouro" id="num_logradouro1" aria-required="true"></div></div>
                 </div>
                 <div class="form-group string optional conciliation_requesters_address_complement"><label class="string optional control-label" for="conciliation_requesters_attributes_0_address_complement">Complemento</label><input class="string optional form-control form-control" type="text" name="complemento" id="complemento"></div>
                 <div class="row">
                     <div class="col-md-4">
-                      <div class="form-group string required conciliation_requesters_address_district" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_district" aria-required="true"><abbr title="obrigatório">*</abbr> Bairro</label><input class="string required form-control address_district form-control" type="text" name="bairro" id="bairro" aria-required="true"></div>
+                      <div class="form-group string required conciliation_requesters_address_district" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_district" aria-required="true"><abbr title="obrigatório">*</abbr> Bairro</label><input class="string required form-control address_district form-control" type="text" name="bairro" id="bairro1" aria-required="true"></div>
                     </div>
                     <div class="col-md-2">
-                      <div class="form-group select required conciliation_requesters_address_state_id" aria-required="true"><label class="select required control-label" for="conciliation_requesters_attributes_0_address_state_id" aria-required="true"><abbr title="obrigatório">*</abbr> UF</label><select class="select required form-control state_options address_state_id form-control" name="uf" id="uf" aria-required="true">
+                      <div class="form-group select required conciliation_requesters_address_state_id" aria-required="true"><label class="select required control-label" for="conciliation_requesters_attributes_0_address_state_id" aria-required="true"><abbr title="obrigatório">*</abbr> UF</label><select class="select required form-control state_options address_state_id form-control" name="uf" id="uf1" aria-required="true">
                         <option value=""></option>
                     <option value="1">AC</option>
                     <option value="2">AL</option>
@@ -1268,14 +1270,14 @@
                     <div class="col-md-6">
                       <div class="form-group select required conciliation_requesters_address_city_id" aria-required="true">
                         <label class="select required control-label" for="conciliation_requesters_attributes_0_address_city_id" aria-required="true"><abbr title="obrigatório">*</abbr> Cidade</label>
-                        <input class="string required form-control" type="text" name="cidade" id="cidade" aria-required="true">
+                        <input class="string required form-control" type="text" name="cidade" id="cidade1" aria-required="true">
                       </div>
                     </div>
                  </div>
 
                  <div class="checkbox">
                             <label>
-                              <input type="checkbox" name="accept_terms_adv" id="accept_terms_adv" value="1">
+                              <input type="checkbox" name="accept_terms_adv" id="accept_terms_adv" value="1" class="captcha">
                               <strong><a href="#politicaModal" data-toggle="modal">Eu li e aceito os termos de uso</a></strong>
                             </label>
                        </div>
@@ -1285,7 +1287,9 @@
                        <br><br>
 
                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                             <button id="continuarAdv" type="button" class="btn btn-success"><i class="fa fa-check"></i> Continuar</button>
+                             <input id="continuarAdv"  type="button"  class="btn btn-success submit" value="Continuar" disabled="true">
+
+                             <label  id="preencherAdv" style="color: red;">Preencha todos os campos obrigatorio *</label>
                      </div> <!-- FIM DO PRIMEIRO FORM-->
                      <div id="segundoFormAdv">
                       <div class="row">
@@ -1409,7 +1413,7 @@
                       <div class="col-md-9"><div class="form-group string required conciliation_requesters_address_street" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_street" aria-required="true"><abbr title="obrigatório">*</abbr> Logradouro</label><input class="string required form-control address_street form-control" type="text" name="adv_Logradouro_au" id="adv_Logradouro_au" aria-required="true"></div></div>
                       <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="number" name="adv_num_logradouro_au" id="adv_num_logradouro_au" aria-required="true"></div></div>
                   </div>
-                  <div class="form-group string optional conciliation_requesters_address_complement"><label class="string optional control-label" for="conciliation_requesters_attributes_0_address_complement">Complemento</label><input class="string optional form-control form-control" type="text" name="adv_complemento_op" id=""></div>
+                  <div class="form-group string optional conciliation_requesters_address_complement"><label class="string optional control-label" for="conciliation_requesters_attributes_0_address_complement">Complemento</label><input class="string optional form-control form-control" type="text" name="adv_complemento_op" id="adv_complemento_op"></div>
                   <div class="row">
                       <div class="col-md-4">
                         <div class="form-group string required conciliation_requesters_address_district" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_district" aria-required="true"><abbr title="obrigatório">*</abbr> Bairro</label><input class="string required form-control address_district form-control" type="text" name="adv_bairro_au" id="adv_bairro_au" aria-required="true"></div>
@@ -1473,7 +1477,7 @@
                       <div class="col-md-4">
                         <div class="form-group string required conciliation_requesters_tax_id" aria-required="true">
                           <label class="string required control-label" aria-required="true"><abbr title="obrigatório">*</abbr> CPF/CNPJ</label>
-                          <input class="string required form-control" type="text" name="adv_cpf_re" id="cpf_cnpj" aria-required="true" onkeypress="mascara(this,soNumber)" maxlength="14">
+                          <input class="string required form-control" type="text" name="adv_cpf_re" id="adv_cpf_re" aria-required="true" onkeypress="mascara(this,soNumber)" maxlength="14">
                         </div>
                       </div>
 
@@ -1492,7 +1496,7 @@
                         <div class="form-group">
                           <label class="string optional" for="conciliation_requesters_attributes_0_address_zipcode">CEP</label>
                           <div class="input-group">
-                            <input class="string optional form-control cep" type="text" name="" id="" maxlength="9" aria-invalid="false">
+                            <input class="string optional form-control cep" type="text" name="cep_re" id="cep_re" maxlength="9" aria-invalid="false">
                             <div class="input-group-btn">
                                <a class="search_address btn btn-primary" href="http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm" target="_blank">Não sei o CEP</a>
                             </div>
@@ -1502,7 +1506,7 @@
                   </div>
                   <div class="row">
                       <div class="col-md-9"><div class="form-group string required conciliation_requesters_address_street" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_street" aria-required="true"><abbr title="obrigatório">*</abbr> Logradouro</label><input class="string required form-control address_street form-control" type="text" name="logradouro_re" id="logradouro_re" aria-required="true"></div></div>
-                      <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="text" name="num_logradouro_re" id="num_logradouro_re" aria-required="true"></div></div>
+                      <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="number" name="num_logradouro_re" id="num_logradouro_re" aria-required="true"></div></div>
                   </div>
                   <div class="form-group string optional conciliation_requesters_address_complement"><label class="string optional control-label" for="conciliation_requesters_attributes_0_address_complement">Complemento</label><input class="string optional form-control form-control" type="text" name="complemento_re" id="complemento_re"></div>
                   <div class="row">
@@ -2067,7 +2071,7 @@
               <div class="row" style="margin-left: 0px;">
                  <div class="checkbox">
                             <label>
-                              <input type="checkbox" name="accept_terms_arb" id="accept_terms_arb" value="1">
+                              <input type="checkbox" name="accept_terms_arb" id="accept_terms_arb" value="1" class="captcha">
                               <strong><a href="#politicaModal" data-toggle="modal">Eu li e aceito os termos de uso</a></strong>
                             </label>
                        </div>
@@ -4043,13 +4047,11 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
           <div class='g-recaptcha' data-sitekey='6LebLTAUAAAAAFlplX1XyS2ZvrLP01VSaQ5CiWMG'></div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default"  id="ok_captcha" data-dismiss="modal">Ok</button>
+          <button id="ok" type="button" class="btn btn-success"><i class="fa fa-check"></i> Continuar</button>
         </div>
       </div>
       
   </div>
-
-
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
