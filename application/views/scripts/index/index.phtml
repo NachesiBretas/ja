@@ -730,7 +730,7 @@
                      <br><br>
                      <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
                      <button id="finalizarCid" name="finalizarCid" type="submit" disabled="true" class="btn btn-success"><i class="fa fa-check"></i> Finalizar </button>
-                     <label  id="preencher" style="color: red;">Preencha todos os campos obrigatorio *</label>
+                     <label  id="preencherFim" style="color: red;">Preencha todos os campos obrigatorio *</label>
                      </div> <!-- FIM DO SEGUNDO FORM-->
                      </form>
                         </div>
@@ -1921,7 +1921,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body text-left">
-                          <form enctype="multipart/form-data" action="" method="post">
+                          <form enctype="multipart/form-data" action="" method="post" id="arbForm">
                             <h2>Formulário de cadastro de requerente da cláusula compromissória arbitral</h2>
                             <br>
 
@@ -1946,7 +1946,7 @@
                       <div class="form-group string required conciliation_requesters_tax_id" aria-required="true">
                         <label class="string required control-label" for="conciliation_requesters_attributes_0_tax_id" aria-required="true"><abbr title="obrigatório">*</abbr> CPF/CNPJ</label>
                         <div id="inputCpf">
-                          <input class="string required form-control cpf form-control" type="text" name="arbitragem_cpf_cnpj" id="arbitragem_cpf_cnpj" aria-required="true">
+                          <input class="string required form-control cpf form-control" type="text" name="arbitragem_cpf" id="arbitragem_cpf" aria-required="true">
                         </div>
                         <div hidden="" id="inputCnpj">
                           <input class="string required form-control cnpj form-control" type="text" name="arbitragem_cpf_cnpj" id="arbitragem_cpf_cnpj" aria-required="true" hidden>
@@ -1959,7 +1959,16 @@
               </div>
                         <div class="row individual" style="">
                   <div class="col-md-3"><div class="form-group string optional conciliation_requesters_born_on"><label class="string optional control-label" for="conciliation_requesters_attributes_0_born_on">Data de nascimento</label><input class="string optional form-control mask_date form-control" type="date" name="arbitragem_data_nascimento" id="arbitragem_data_nascimento"></div></div>
+              <div class="row individual" style="">
+                    <div class="col-md-3">
+                        <div class="form-group string optional">
+                            <label class="string optional control-label">Senha de acesso</label>
+                            <input class="string optional form-control" type="password" name="arbitragem_senha" id="arbitragem_senha">
+                        </div>
+                    </div>
+                </div>
               </div>
+
 
               <h4><strong><i class="fa fa-map-marker"></i> Endereço</strong></h4>
 
@@ -1977,16 +1986,16 @@
                   </div>
               </div>
               <div class="row">
-                  <div class="col-md-9"><div class="form-group string required conciliation_requesters_address_street" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_street" aria-required="true"><abbr title="obrigatório">*</abbr> Logradouro</label><input class="string required form-control address_street form-control" type="text" name="logradouro" id="logradouro" aria-required="true"></div></div>
-                  <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="number" name="num_logradouro" id="num_logradouro" aria-required="true"></div></div>
+                  <div class="col-md-9"><div class="form-group string required conciliation_requesters_address_street" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_street" aria-required="true"><abbr title="obrigatório">*</abbr> Logradouro</label><input class="string required form-control address_street form-control" type="text" name="logradouro" id="logradouro2" aria-required="true"></div></div>
+                  <div class="col-md-3"><div class="form-group string required conciliation_requesters_address_number" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_number" aria-required="true"><abbr title="obrigatório">*</abbr> Núm.</label><input class="string required form-control address_number form-control" type="number" name="num_logradouro" id="num_logradouro2" aria-required="true"></div></div>
               </div>
-              <div class="form-group string optional conciliation_requesters_address_complement"><label class="string optional control-label" for="conciliation_requesters_attributes_0_address_complement">Complemento</label><input class="string optional form-control form-control" type="text" name="complemento" id="Complemento"></div>
+              <div class="form-group string optional conciliation_requesters_address_complement"><label class="string optional control-label" for="conciliation_requesters_attributes_0_address_complement">Complemento</label><input class="string optional form-control form-control" type="text" name="complemento" id="complemento"></div>
               <div class="row">
                   <div class="col-md-4">
-                    <div class="form-group string required conciliation_requesters_address_district" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_district" aria-required="true"><abbr title="obrigatório">*</abbr> Bairro</label><input class="string required form-control address_district form-control" type="text" name="bairro" id="bairro" aria-required="true"></div>
+                    <div class="form-group string required conciliation_requesters_address_district" aria-required="true"><label class="string required control-label" for="conciliation_requesters_attributes_0_address_district" aria-required="true"><abbr title="obrigatório">*</abbr> Bairro</label><input class="string required form-control address_district form-control" type="text" name="bairro" id="bairro2" aria-required="true"></div>
                   </div>
                   <div class="col-md-2">
-                    <div class="form-group select required conciliation_requesters_address_state_id" aria-required="true"><label class="select required control-label" for="conciliation_requesters_attributes_0_address_state_id" aria-required="true"><abbr title="obrigatório">*</abbr> UF</label><select class="select required form-control state_options address_state_id form-control" name="uf" id="uf" aria-required="true">
+                    <div class="form-group select required conciliation_requesters_address_state_id" aria-required="true"><label class="select required control-label" for="conciliation_requesters_attributes_0_address_state_id" aria-required="true"><abbr title="obrigatório">*</abbr> UF</label><select class="select required form-control state_options address_state_id form-control" name="uf" id="uf2" aria-required="true">
                       <option value=""></option>
                   <option value="1">AC</option>
                   <option value="2">AL</option>
@@ -2017,7 +2026,7 @@
                   <option value="27">TO</option></select></div>
                   </div>
                   <div class="col-md-6">
-                  <div class="form-group select required conciliation_requesters_address_city_id" aria-required="true"><label class="select required control-label" for="conciliation_requesters_attributes_0_address_city_id" aria-required="true"><abbr title="obrigatório">*</abbr> Cidade</label><input class="string required form-control" type="text" name="cidade" id="cidade" aria-required="true"></div>
+                  <div class="form-group select required conciliation_requesters_address_city_id" aria-required="true"><label class="select required control-label" for="conciliation_requesters_attributes_0_address_city_id" aria-required="true"><abbr title="obrigatório">*</abbr> Cidade</label><input class="string required form-control" type="text" name="cidade" id="cidade2" aria-required="true"></div>
                   </div>
                </div>
 
@@ -2083,7 +2092,8 @@
 
                         <br><br>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancelar</button>
-                        <button type="submit" id="finalizarArb" class="btn btn-success"><i class="fa fa-check"></i> Finalizar</button>
+                        <button type="submit" id="finalizarArb" class="btn btn-success" disabled="true"><i class="fa fa-check"></i> Finalizar</button>
+                        <label  id="preencherArb" style="color: red;">Preencha todos os campos obrigatorio *</label>
 
                     </div>
                 </div>
@@ -3871,7 +3881,7 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                         <div class="modal-body text-justify">
 
             <div id="center-column" class="col-md-12">
-            <form method="post" id="userForm" enctype="multipart/form-data" action="junte-se-a-nos" novalidate="novalidate">
+            <form method="post" id="tcForm" enctype="multipart/form-data" action="">
 
               <h2>Cadastro de Mediadores / Conciliadores / Árbitros</h2>
               <br>
@@ -3890,21 +3900,21 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                     <div class="col-md-6">      
                       <div class="form-group rsform-block rsform-block-mediador-nome">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_nome" data-original-title="">Nome<strong class="formRequired">(*)</strong></label>
-                        <input type="text" value="" name="form[mediador_nome]" id="mediador_nome" class="rsform-input-box form-control rsform-input-box">
+                        <input type="text" value="" name="tc_nome" id="tc_nome" class="rsform-input-box form-control rsform-input-box">
                       </div>
                       <div class="form-group rsform-block rsform-block-mediador-datanascimento">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_datanascimento" data-original-title="">Data de Nascimento<strong class="formRequired">(*)</strong></label>
-                        <input type="text" value="" name="form[mediador_datanascimento]" id="mediador_datanascimento" class="rsform-input-box form-control rsform-input-box">
+                        <input type="date" value="" name="tc_nascimento" id="tc_nascimento" class="rsform-input-box form-control rsform-input-box">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group rsform-block rsform-block-mediador-cpf">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_cpf" data-original-title="">CPF<strong class="formRequired">(*)</strong></label>
-                        <input type="text" value="" name="form[mediador_cpf]" id="mediador_cpf" class="rsform-input-box form-control rsform-input-box">
+                        <input type="text" value="" name="tc_cpf" id="tc_cpf" class="rsform-input-box form-control cpf">
                       </div>
                       <div class="form-group rsform-block rsform-block-mediador-sexo">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_sexo" data-original-title="">Sexo<strong class="formRequired">(*)</strong></label>
-                        <select name="form[mediador_sexo][]" id="mediador_sexo" class="rsform-select-box form-control rsform-select-box"><option value="">Selecione</option><option value="masculino">Masculino</option><option value="feminino">Feminino</option></select>
+                        <select name="tc_sexo" id="tc_sexo" class="rsform-select-box form-control rsform-select-box"><option value="">Selecione</option><option value="1">Masculino</option><option value="0">Feminino</option></select>
                       </div>
                     </div>
                   </div>
@@ -3918,7 +3928,7 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                     <div class="col-md-6">
                       <div class="form-group rsform-block rsform-block-mediador-certificado">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_certificado" data-original-title="">Mediador/Conciliador/Árbitro com Certificado?</label>
-                        <select name="form[mediador_certificado][]" id="mediador_certificado" class="rsform-select-box form-control rsform-select-box"><option value="">Selecione</option><option value="certificado">Certificado</option><option value="em_formacao">Em formação</option></select>
+                        <select name="certificado" id="certificado" class="rsform-select-box form-control rsform-select-box"><option value="">Selecione</option><option value="1">Certificado</option><option value="2">Em formação</option></select>
                       </div>
                     </div>
                     <div class="col-md-6"></div>
@@ -3927,7 +3937,7 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                     <div class="col-md-12">
                       <div class="form-group rsform-block rsform-block-mediador-certificado-curso">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_certificado_curso" data-original-title="">Anexar Certificado de Curso PDF</label>
-                        <input type="file" accept="application/pdf" name="form[mediador_certificado_curso]" id="mediador_certificado_curso" class="rsform-upload-box">
+                        <input type="file" name="annex_certificado" id="annex_certificado" class="rsform-upload-box">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -3936,16 +3946,24 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                         <input type="text" value="" name="especialidade" id="especialidade" class="rsform-input-box form-control rsform-input-box">
                       </div>
                     </div>
+                    <div class="col-lg-6">
+                      <label for="name" class="control-label optional">Tipo de usuário<strong class="formRequired">(*)</strong></label>
+                      <select required="" class="form-control text-center" name="type_user" id="type_user" >
+                        <option value="5">Mediador</option>
+                        <option value="3">Conciliador</option>
+                        <option value="2">Árbitro</option>
+                      </select>
+                    </div>
                     <div class="col-md-12">
                       <div class="form-group rsform-block rsform-block-mediador-certificado-curso">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_curriculo" data-original-title="">Anexar Currículo PDF</label>
-                        <input type="file" accept="application/pdf" name="form[mediador_curriculo]" id="mediador_curriculo" class="rsform-upload-box">
+                        <input type="file" name="annex_curriculo" id="annex_curriculo" class="rsform-upload-box">
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group rsform-block rsform-block-mediador-minicurriculo">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_minicurriculo" data-original-title="">Minicurriculo<strong class="formRequired">(*)</strong></label>
-                        <textarea name="form[mediador_minicurriculo]" id="mediador_minicurriculo" class="rsform-text-box form-control rsform-text-box" onkeyup="limitarTexto(this.value, '450'); " maxlength="450"></textarea>
+                        <textarea name="minicurriculo" id="minicurriculo" class="rsform-text-box form-control rsform-text-box" onkeyup="limitarTexto(this.value, '450'); " maxlength="450"></textarea>
                         <span class="text text-info">Descreva a sua experiênica profissional em poucas palavras</span>
                         <div id="infoChar"></div>
                       </div>      
@@ -3961,22 +3979,27 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                     <div class="col-md-6">
                       <div class="form-group rsform-block rsform-block-mediador-email">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_email" data-original-title="">Email Principal<strong class="formRequired">(*)</strong></label>
-                        <input type="text" value="" name="form[mediador_email]" id="mediador_email" class="rsform-input-box form-control rsform-input-box">
+                        <input type="email" value="" name="tc_email" id="tc_email" class="rsform-input-box form-control rsform-input-box">
                       </div>  
                       <div class="form-group rsform-block rsform-block-mediador-telefone">
-                        <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_telefone" data-original-title="">Telefone<strong class="formRequired">(*)</strong></label>
-                        <input type="text" value="" name="form[mediador_telefone]" id="mediador_telefone" class="rsform-input-box form-control rsform-input-box">
+                        <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="tc_phone" data-original-title="">Telefone<strong class="formRequired">(*)</strong></label>
+                        <input type="tel" value="" name="tc_phone" id="tc_phone" class="rsform-input-box form-control phone">
                       </div>                                      
                     </div>
                     <div class="col-md-6">
                       <div class="form-group rsform-block rsform-block-mediador-email2">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_email2" data-original-title="">Email Secundário</label>
-                        <input type="text" value="" name="form[mediador_email2]" id="mediador_email2" class="rsform-input-box form-control rsform-input-box">
+                        <input type="email" value="" name="tc_email_2" id="tc_email_2" class="rsform-input-box form-control rsform-input-box">
                       </div>  
                       <div class="form-group rsform-block rsform-block-mediador-celular">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_celular" data-original-title="">Celular<strong class="formRequired">(*)</strong></label>
-                        <input type="text" value="" name="form[mediador_celular]" id="mediador_celular" class="rsform-input-box form-control rsform-input-box">
+                        <input type="tel" value="" name="tc_cell" id="tc_cell" class="rsform-input-box form-control phone">
                       </div>          
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="control-label">Senha de acesso <strong class="formRequired">(*)</strong></label><input class="form-control" type="password" name="tc_senha" id="tc_senha ">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3991,29 +4014,57 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                   <div class="col-md-6">
                     <div class="form-group rsform-block rsform-block-mediador-cep">
                       <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_cep" data-original-title="">CEP<strong class="formRequired">(*)</strong></label>
-                      <input type="text" value="" name="form[mediador_cep]" id="mediador_cep" class="rsform-input-box form-control rsform-input-box">
+                      <input type="text" value="" name="tc_cep" id="tc_cep" class="form-control cep">
                     </div>
                     <div class="form-group rsform-block rsform-block-mediador-numero">
                       <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_numero" data-original-title="">Número<strong class="formRequired">(*)</strong></label>
-                      <input type="text" value="" name="form[mediador_numero]" id="mediador_numero" class="rsform-input-box form-control rsform-input-box">
+                      <input type="number" value="" name="tc_numero" id="tc_numero" class="rsform-input-box form-control rsform-input-box">
                     </div>  
                     <div class="form-group rsform-block rsform-block-mediador-cidade">
-                      <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_cidade" data-original-title="">Cidade<strong class="formRequired">(*)</strong></label>
-                      <input type="text" value="" name="form[mediador_cidade]" id="mediador_cidade" class="rsform-input-box form-control rsform-input-box">
+                      <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="tc_cidade" data-original-title="">Cidade<strong class="formRequired">(*)</strong></label>
+                      <input type="text" value="" name="tc_cidade" id="tc_cidade" class="rsform-input-box form-control rsform-input-box">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group rsform-block rsform-block-mediador-endereco">
-                      <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_endereco" data-original-title="">Endereço<strong class="formRequired">(*)</strong></label>
-                      <input type="text" value="" name="form[mediador_endereco]" id="mediador_endereco" class="rsform-input-box form-control rsform-input-box">
+                      <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_endereco" data-original-title="">Logradouro<strong class="formRequired">(*)</strong></label>
+                      <input type="text" value="" name="tc_logradouro" id="tc_logradouro" class="rsform-input-box form-control rsform-input-box">
                     </div>
                     <div class="form-group rsform-block rsform-block-mediador-bairro">
-                      <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_bairro" data-original-title="">Bairro<strong class="formRequired">(*)</strong></label>
-                      <input type="text" value="" name="form[mediador_bairro]" id="mediador_bairro" class="rsform-input-box form-control rsform-input-box">
+                      <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="tc_bairro" data-original-title="">Bairro<strong class="formRequired">(*)</strong></label>
+                      <input type="text" value="" name="tc_bairro" id="tc_bairro" class="rsform-input-box form-control rsform-input-box">
                     </div>
                     <div class="form-group rsform-block rsform-block-mediador-estado">
                       <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="mediador_estado" data-original-title="">Estado (UF)<strong class="formRequired">(*)</strong></label>
-                      <input type="text" value="" name="form[mediador_estado]" id="mediador_estado" class="rsform-input-box form-control rsform-input-box">
+                      <select class="select required form-control state_options address_state_id form-control" name="tc_uf" id="tc_uf" aria-required="true">
+                                    <option value="">Selecione o seu estado</option>
+                                <option value="1">AC</option>
+                                <option value="2">AL</option>
+                                <option value="4">AP</option>
+                                <option value="3">AM</option>
+                                <option value="5">BA</option>
+                                <option value="6">CE</option>
+                                <option value="7">DF</option>
+                                <option value="8">ES</option>
+                                <option value="9">GO</option>
+                                <option value="10">MA</option>
+                                <option value="13">MT</option>
+                                <option value="12">MS</option>
+                                <option value="11">MG</option>
+                                <option value="14">PA</option>
+                                <option value="15">PB</option>
+                                <option value="18">PR</option>
+                                <option value="16">PE</option>
+                                <option value="17">PI</option>
+                                <option value="19">RJ</option>
+                                <option value="20">RN</option>
+                                <option value="23">RS</option>
+                                <option value="21">RO</option>
+                                <option value="22">RR</option>
+                                <option value="24">SC</option>
+                                <option value="26">SP</option>
+                                <option value="25">SE</option>
+                                <option value="27">TO</option></select>
                     </div>      
                   </div>
                 </div>
@@ -4022,7 +4073,8 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
               </form>
 
               <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Fechar</button>
-              <button type="submit" class="btn btn-success" data-dismiss="modal"><i class="fa fa-check"></i> Enviar</button>
+              <button id="enviarCadConosco" type="submit" class="btn btn-success" disabled="true"><i class="fa fa-check"></i> Enviar</button>
+              <label  id="prencherCad" style="color: red;">Preencha todos os campos obrigatorio *</label>
             </div>
 
               

@@ -38,13 +38,14 @@ class IndexController extends Zend_Controller_Action
       {
         $data = $this->getRequest()->getPost();
         if($data['cidadao_nome']){
-          var_dump($data['accept_terms_cid']);exit;
+          
           // insere o usuario novo na tabela de usuarios
           $user = new Application_Model_User();
           $id_user = $user->newUser($data);
 
           $conflict = new Application_Model_Conflict();
           $conflictId = $conflict->newConflictCid($data,$id_user, $_FILES);
+          $this->_redirect('/auth/login');
         }
 
         if($data['empresa_nome']){
@@ -53,6 +54,7 @@ class IndexController extends Zend_Controller_Action
 
           $conflict = new Application_Model_Conflict();
           $conflictId = $conflict->newConflictEmp($data,$id_user, $_FILES);
+          $this->_redirect('/auth/login');
         }
         if($data['adv_nome']){
          
@@ -61,15 +63,25 @@ class IndexController extends Zend_Controller_Action
 
           $conflict = new Application_Model_Conflict();
           $conflictId = $conflict->newConflictadv($data,$id_user, $_FILES);
+          $this->_redirect('/auth/login');
         }
 
         if($data['arbitragem_nome']){
           // var_dump($data);exit;
           $user = new Application_Model_User();
           $id_user = $user->newUser($data, $_FILES);
+          $this->_redirect('/auth/login');
         }
 
-        $this->_redirect('/auth/login');
+        // $this->_redirect('/auth/login');
+
+        // Cadastro do modulo trabalhe conosco 
+        if($data['tc_nome']){
+          // var_dump($_FILES);exit;
+          $user = new Application_Model_User();
+          $id_user = $user->newUser($data, $_FILES);
+          $this->_redirect('/index');
+        }
       }
 
     }

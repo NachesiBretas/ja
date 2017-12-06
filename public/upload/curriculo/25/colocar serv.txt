@@ -1,0 +1,41 @@
+Adm Controler 1360
+
+    public function getUserCompanyAction()
+    {
+
+      $this->_helper->layout()->setLayout('ajax');
+      $id = $this->getRequest()->getParam('id');
+      $company = new Application_Model_Company();
+      $result = $company->getUserCompany($id);
+      echo Zend_Json::encode($result);
+    }
+
+company 486
+
+public function getUserCompany($id){
+		$contract = new Application_Model_DbTable_ConsortiumCompanies();
+  	$select = $contract->select()->setIntegrityCheck(false);
+    $select ->from(array('cc' => 'consortium_companies'),array())
+            ->joinInner(array('c' => 'company'),'c.id=cc.company', array('company'))
+            ->where('cc.consortium_id = ?',$id);
+    $result = $contract->fetchAll($select);
+    return $result;
+	}
+
+General 2590
+
+$('#consortium').change(function(){
+	$('#consortium').css('border-color','green').popover('destroy')
+	$('#company_id').val("");
+	$.getJSON('/administration/get-user-company/id/'+this.value, { }, function(data){
+	$('#company_id').empty();
+		if (data.length == 0) {
+			$('#company_id').append("<option value=''> -- Não possui nenhuma Empresa -- </option>"); 
+		}else{
+			$('#company_id').append("<option value=''> -- Selecione uma Empresa -- </option>");
+		}
+		$.each(data, function(index,item) {
+				$('#company_id').append("<option value=" + item.id + ">" + item.company + "</option>");
+		});
+	});
+});

@@ -402,7 +402,7 @@ $('#cidForm').keyup(function(){
     if(value.length != "" & $('#cidadao_desc_resolucao_conflito').val() != "" & $('#nome_op').val() != "" & $('#email_op').val() != "" & $('#cpf_op').val() != "" & $('#logradouro_op').val() != "" & $('#num_log_op').val() != "" & $('#bairro_op').val() != "" & $('#estado_op').val() != "" & $('#cidade_op').val() != "" ) 
     {
         $('#finalizarCid').prop('disabled', false);
-        $('#preencher').prop('hidden', true);
+        $('#preencherFim').prop('hidden', true);
     }else if(value.length == "" & $('#cidadao_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" ) {
         $('#finalizarCid').prop('disabled', true);
     }else{
@@ -433,7 +433,7 @@ $('#cidForm').keyup(function(){
     }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" ) {
         $('#finalizarEmp').prop('disabled', true);
     }else{
-        $('.submit').prop('disabled', true);
+        $('.finalizarEmp').prop('disabled', true);
     }
   })
 
@@ -442,10 +442,10 @@ $('#cidForm').keyup(function(){
 
 $('#arbForm').keyup(function(){
     var value = $('#arbitragem_nome').val();
-    if(value.length != "" & $('#arbitragem_email').val() != "" & $('#arbitragem_phone').val() != "" & $('#arbitragem_cpf').val() != "" & $('#arbitragem_senha').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_arb').val() != null) {
+    if(value.length != "" & $('#arbitragem_email').val() != "" & $('#arbitragem_telefone').val() != "" & $('#arbitragem_cpf').val() != "" & $('#arbitragem_senha').val() != "" & $('#logradouro2').val() != "" & $('#num_logradouro2').val() != "" & $('#bairro2').val() != "" & $('#uf2').val() != "" & $('#cidade2').val() != "" & $('#accept_terms_arb').val() != null) {
       $('#finalizarArb').prop('disabled', false);
-        $('#preencher').prop('hidden', true);
-    }else if(value.length == "" & $('#arbitragem_email').val() == "" & $('#arbitragem_phone').val() == "" & $('#arbitragem_cpf').val() == "" & $('#arbitragem_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_arb').val() == null) {
+        $('#preencherArb').prop('hidden', true);
+    }else if(value.length == "" & $('#arbitragem_email').val() == "" & $('#arbitragem_telefone').val() == "" & $('#arbitragem_cpf').val() == "" & $('#arbitragem_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_arb').val() == null) {
       $('#finalizarArb').prop('disabled', true);
     }else{
         $('#finalizarArb').prop('disabled', true);
@@ -476,3 +476,16 @@ $('#advForm').keyup(function(){
   })
 
 
+// validação de campos Trabalhe conosco
+
+$('#tcForm').keyup(function(){
+    var value = $('#tc_nome').val();
+    if(value.length != "" & $('#tc_cpf').val() != "" & $('#tc_nascimento').val() != "" & $('#tc_sexo').val() != "" & $('#especialidade').val() != "" & $('#minicurriculo').val() != "" & $('#tc_email').val() != "" & $('#tc_phone').val() != "" & $('#tc_cell').val() != "" & $('#tc_senha').val() != "" & $('#tc_cep').val() != "" & $('#tc_logradouro').val() != "" & $('#tc_numero').val() != "" & $('#tc_bairro').val() != "" & $('#tc_cidade').val() != "" & $('#tc_uf').val() != "") {
+      $('#enviarCadConosco').prop('disabled', false);
+        $('#prencherCad').prop('hidden', true);
+    }else if(value.length == "" & $('#tc_cpf').val() == "" & $('#tc_nascimento').val() == "" & $('#tc_sexo').val() == "" & $('#especialidade').val() == "" & $('#minicurriculo').val() == "" & $('#tc_email').val() == "" & $('#tc_phone').val() == "" & $('#tc_cell').val() == "" & $('#tc_senha').val() == "" & $('#tc_cep').val() == "" & $('#tc_logradouro').val() == "" & $('#tc_numero').val() == "" & $('#tc_bairro').val() == "" & $('#tc_cidade').val() == "" & $('#tc_uf').val() == "") {
+      $('#enviarCadConosco').prop('disabled', true);
+    }else{
+        $('#enviarCadConosco').prop('disabled', true);
+    }
+  })

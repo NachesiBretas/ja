@@ -453,7 +453,7 @@ class Application_Model_Conflict
 
 				$this->newOtherUserParte1($id,$data);
 				$this->createAnnexCliente($id,$id_user,3,$file);
-				$this->newOtherUser($id,$data);
+				$this->newOtherUserParte2($id,$data);
 				$this->createAnnex($id,$id_user,3,$file);
 				return $id;
 			}
@@ -676,6 +676,7 @@ class Application_Model_Conflict
 
 	public function createAnnex($id, $id_user, $type, $file)
 	{		
+		// var_dump($file);exit;
 	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
 	    
       // O nome original do arquivo no computador do usuário

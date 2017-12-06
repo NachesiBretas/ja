@@ -3,7 +3,7 @@
 class Application_Model_User
 {
 
-	public function newUser($data)
+	public function newUser($data, $file)
 	{
 
 		if($data['username'])
@@ -102,18 +102,48 @@ class Application_Model_User
 			$userRow->email = $data['arbitragem_email'];
 			$userRow->phone = $data['arbitragem_telefone'];
 			$userRow->type_user = $data['arbitragem_type_user'];
-			$userRow->cpf_cnpj = $data['arbitragem_cpf_cnpj'];
+			$userRow->cpf_cnpj = $data['arbitragem_cpf'];
 			$userRow->sex = $data['arbitragem_sexo'];
 			$userRow->date_birth = $data['arbitragem_data_nascimento'];
 			$userRow->password = sha1($data['arbitragem_senha']);
 			$userRow->date = new Zend_Db_Expr('NOW()');
 			$userRow->institution = 10;
+			$userRow->status = 1;
 			$user_id = $userRow->save();
 
 			$this->newAddressUser($user_id,$data);
 			$conflict = new Application_Model_Conflict();
 			$annex = $conflict->createAnnex($id_conflito,$user_id,4,$_FILES);
 
+			return $user_id;
+		}
+
+		// usuario trabalhe conosco 
+
+		if($data['tc_nome'])
+		{
+			$user = new Application_Model_DbTable_User();
+			$userRow = $user->createRow();
+			$userRow->name = $data['tc_nome'];
+			$userRow->username = $data['tc_email'];
+			$userRow->email = $data['tc_email'];
+			$userRow->email_secundario = $data['tc_email_2'];
+			$userRow->phone = $data['tc_phone'];
+			$userRow->phone_secundario = $data['tc_cell'];
+			$userRow->cpf_cnpj = $data['tc_cpf'];
+			$userRow->sex = $data['tc_sexo'];
+			$userRow->date_birth = $data['tc_nascimento'];
+			$userRow->password = sha1($data['tc_senha']);
+			$userRow->date = new Zend_Db_Expr('NOW()');
+			$userRow->institution = $data['type_user'];
+			$userRow->status = 0;
+			$user_id = $userRow->save();
+			
+			$this->newAddressUserTc($user_id,$data);
+			$profissional = new Application_Model_InfoProfissional();
+			$new = $profissional->newProfissional($user_id, $data);
+			$annexCertficado = $profissional->createAnnexCertificado($new, $file['annex_certificado']);
+			$annexCurriculo = $profissional->createAnnexCurriculo($new, $file['annex_curriculo']);
 			return $user_id;
 		}
 
@@ -131,6 +161,22 @@ class Application_Model_User
 		$userRow->uf = $data['uf'];
 		$userRow->city = $data['cidade'];
 		$userRow->cep = $data['cep'];
+		$userRow->user_id = $user_id;
+		$userRow->other_user_id = NULL;		
+		$userRow->type = 0;
+		return $userRow->save();
+	}
+
+	public function newAddressUserTc($user_id,$data)
+	{
+		$user = new Application_Model_DbTable_UserAddress();
+		$userRow = $user->createRow();
+		$userRow->place = $data['tc_logradouro'];
+		$userRow->number = $data['tc_numero'];
+		$userRow->neighborhood = $data['tc_bairro'];
+		$userRow->uf = $data['tc_uf'];
+		$userRow->city = $data['tc_cidade'];
+		$userRow->cep = $data['tc_cep'];
 		$userRow->user_id = $user_id;
 		$userRow->other_user_id = NULL;		
 		$userRow->type = 0;
