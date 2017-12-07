@@ -326,8 +326,17 @@ $("#ok").click(function(){
     $("html,body").css({"overflow":"auto"});
 });
 
+$("#closeCaptcha").click(function(){
+    $("#captchaModal").hide();
+    $("html,body").css({"overflow":"auto"});
+});
+
 ///////////////////////////////////////////////////////////////////////////////////
 
+$(".fechar").click(function(){
+    $("#politicaModal").hide();
+    $("html,body").css({"overflow":"auto"});
+});
 //Lucas Naves
 
 //Mascaras de campos imput 
@@ -387,10 +396,10 @@ function mascara(o,f){
 // validação dos formularios de cidadao 
 $('#cidForm').keyup(function(){
     var value = $('#cidadao_nome').val();
-    if(value.length != "" & $('#cidadao_email').val() != "" & $('#cidadao_phone').val() != "" & $('#cidadao_cpf').val() != "" & $('#cidadao_senha').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_cid').val() != null) {
+    if(value.length != "" & $('#cidadao_email').val() != "" & $('#cidadao_phone').val() != "" & $('#cidadao_cpf').val() != "" & $('#cidadao_senha1').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_cid').val() != null) {
       $('.submit').prop('disabled', false);
         $('#preencher').prop('hidden', true);
-    }else if(value.length == "" & $('#cidadao_email').val() == "" & $('#cidadao_phone').val() == "" & $('#cidadao_cpf').val() == "" & $('#cidadao_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_cid').val() == null) {
+    }else if(value.length == "" & $('#cidadao_email').val() == "" & $('#cidadao_phone').val() == "" & $('#cidadao_cpf').val() == "" & $('#cidadao_senha1').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_cid').val() == null) {
       $('.submit').prop('disabled', true);
     }else{
         $('.submit').prop('disabled', true);
@@ -414,22 +423,22 @@ $('#cidForm').keyup(function(){
 
 $('#empForm').keyup(function(){
     var value = $('#empresa_nome').val();
-    if(value.length != "" & $('#empresa_email').val() != "" & $('#empresa_phone').val() != "" & $('#empresa_cpf').val() != "" & $('#empresa_senha').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_cid').val() != null) {
+    if(value.length != "" & $('#empresa_email').val() != "" & $('#empresa_phone').val() != "" & $('#empresa_cnpj').val() != "" & $('#empresa_senha').val() != "" & $('#logradouroEmp').val() != "" & $('#num_logradouroEmp').val() != "" & $('#bairroEmp').val() != "" & $('#ufEmp').val() != "" & $('#cidadeEmp').val() != "" & $('#accept_terms_cid').val() != "") {
       $('#continuarEmp').prop('disabled', false);
-        $('#preencher').prop('hidden', true);
-    }else if(value.length == "" & $('#empresa_email').val() == "" & $('#empresa_phone').val() == "" & $('#empresa_cpf').val() == "" & $('#empresa_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_cid').val() == null) {
+        $('#preencherEmp').prop('hidden', true);
+    }else if(value.length == "" & $('#empresa_email').val() == "" & $('#empresa_phone').val() == "" & $('#empresa_cnpj').val() == "" & $('#empresa_senha').val() == "" & $('#logradouroEmp').val() == "" & $('#num_logradouroEmp').val() == "" & $('#bairroEmp').val() == "" & $('#ufEmp').val() == "" & $('#cidadeEmp').val() == "" & $('#accept_terms_cid').val() == "") {
       $('#continuarEmp').prop('disabled', true);
     }else{
         $('#continuarEmp').prop('disabled', true);
     }
   })
 
-$('#cidForm').keyup(function(){
+$('#empForm').keyup(function(){
     var value = $('#emp_desc_conflito').val();
-    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_op').val() != "" & $('#email_op').val() != "" & $('#cpf_op').val() != "" & $('#logradouro_op').val() != "" & $('#num_log_op').val() != "" & $('#bairro_op').val() != "" & $('#estado_op').val() != "" & $('#cidade_op').val() != "" ) 
+    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != "" ) 
     {
         $('#finalizarEmp').prop('disabled', false);
-        $('#preencher').prop('hidden', true);
+        $('#preencheremp2').prop('hidden', true);
     }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" ) {
         $('#finalizarEmp').prop('disabled', true);
     }else{

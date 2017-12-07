@@ -417,7 +417,7 @@ class Application_Model_Conflict
 	{
 		if($data)
 		{
-			if ($data['tipo_conflito'] = 1) {
+			if ($data['tipo_conflito'] == 1) {
 
 				$conflict = new Application_Model_DbTable_Conflict();
 				$data['tribunal'] = $data['tribunal'];
@@ -437,6 +437,7 @@ class Application_Model_Conflict
 				return $id;
 				
 			}else{
+				// echo "string";exit;
 				$conflict = new Application_Model_DbTable_Conflict();
 				$data['tribunal'] = NULL;
 				$data['comarca'] = NULL;
@@ -452,7 +453,7 @@ class Application_Model_Conflict
 				$id = $conflictNew->save();
 
 				$this->newOtherUserParte1($id,$data);
-				$this->createAnnexCliente($id,$id_user,3,$file);
+				$this->createAnnexCliente($id,$id_user,3,$file['procuracao_cliente']);
 				$this->newOtherUserParte2($id,$data);
 				$this->createAnnex($id,$id_user,3,$file);
 				return $id;
@@ -573,7 +574,7 @@ class Application_Model_Conflict
 		$userRow->cpf_cnpj = $data['adv_cpf_re'];
 		$userRow->adv_judicializado = $data['num_oab_re'];
 		$userRow->conflict_id = $id_conflict;
-		$userRow->adv = 2; //adv da parte re 
+		$userRow->adv_judicializado = 2; //adv da parte re 
 		$user_id = $userRow->save();
 
 		$this->newUserAddressOPAdvRe($user_id,$data);
@@ -592,7 +593,7 @@ class Application_Model_Conflict
 		$userRow->cpf_cnpj = $data['adv_cpf_au'];
 		$userRow->adv_judicializado = $data['num_oab_au'];
 		$userRow->conflict_id = $id_conflict;
-		$userRow->adv = 1; //adv da parte autora
+		$userRow->adv_judicializado = 1; //adv da parte autora
 		$user_id = $userRow->save();
 
 		$this->newUserAddressOPAdvAutora($user_id,$data);
@@ -721,19 +722,20 @@ class Application_Model_Conflict
 
 	public function createAnnexCliente($id, $id_user, $type, $file)
 	{		
+		
 	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
 	    
       // O nome original do arquivo no computador do usuário
-      $fileName = $file['procuracao_cliente']['name'];
+      $fileName = $file['name'];
 
       // O tipo mime do arquivo. Um exemplo pode ser "image/gif"
-      $fileType = $file['procuracao_cliente']['type'];
+      $fileType = $file['type'];
       // O tamanho, em bytes, do arquivo
-      $fileSize = $file['procuracao_cliente']['size'];
+      $fileSize = $file['size'];
       // O nome temporário do arquivo, como foi guardado no servidor
-      $fileTemp = $file['procuracao_cliente']['tmp_name'];
+      $fileTemp = $file['tmp_name'];
       // O código de erro associado a este upload de arquivo
-      $fileError = $file['procuracao_cliente']['error'];
+      $fileError = $file['error'];
      	//var_dump($fileType);exit;
       if ($fileError == 0) {
         // Verifica o tipo de arquivo enviado
