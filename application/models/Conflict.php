@@ -720,6 +720,7 @@ class Application_Model_Conflict
 		
 	}
 
+
 	public function createAnnexCliente($id, $id_user, $type, $file)
 	{		
 		
