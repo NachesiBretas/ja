@@ -37,7 +37,7 @@
 
         <?}
         else if($status['status'] == 1){?>
-        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <?}?>
       </div>
     </div>

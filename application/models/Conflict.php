@@ -230,7 +230,9 @@ class Application_Model_Conflict
 		$conflict = new Application_Model_DbTable_Conflict();
 		$select = $conflict->select()->setIntegrityCheck(false);
 		$select	->from(array('c' => 'conflict') )
-				->where('status = ?', $status ,' and type = ?',$type);
+				->where('status = ?', $status)
+				->where('type = ?',$type);
+				//echo $select."<br>";
 		return $conflict->fetchAll($select);
 			
 	}

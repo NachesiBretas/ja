@@ -10,17 +10,17 @@
         <a href="/dashboard" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>  
         <?}?>
         <?if($authNamespace->institution == 1){?>
-        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados</a>
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados <?if($this->allReturnedConflicts){?><span class="badge"><?=$this->allReturnedConflicts?></span><?}?></a>
         <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
-        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
         <?}?>
         <?if($authNamespace->institution == 2){?>
         <a href="/scheduling" class="list-group-item"><i class="fa fa-calendar"></i> Agendamento online</a>
-        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <?}?>
         <?if($authNamespace->institution == 3){?>
-        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos</a>
+        <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <?}?>
       </div>
     </div>

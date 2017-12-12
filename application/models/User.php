@@ -270,5 +270,28 @@ class Application_Model_User
 				//$teste = $user->fetchRow($select); var_dump($teste); exit;
 		return $user->fetchRow($select);
 	}
+
+
+
+	public function listAll()
+	{
+		$user = new Application_Model_DbTable_User();
+		$select = $user->select()->setIntegrityCheck(false);
+		$select	->from(array('u' => 'user'));
+		return $user->fetchAll($select);	
+	}
+
+	public function listByType($type)
+	{
+		$user = new Application_Model_DbTable_User();
+		$select = $user->select()->setIntegrityCheck(false);
+		$select	->from(array('c' => 'user') )
+				->where('institution = ?',$type)
+				->where('id != 169'); // 166 desenvolvimento e 169 produção
+				//echo $select."<br>";
+		return $user->fetchAll($select);
+			
+	}
+
 }
 

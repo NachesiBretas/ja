@@ -15,6 +15,20 @@ class AdministrationController extends Zend_Controller_Action
       }
       $mail = new Application_Model_Mail();
       $this->view->messages = $mail->getUnreadMessages();
+
+      /// PESQUISAS DE TIPOS DE USUARIOS
+      $users = new Application_Model_User();
+      $this->view->allUsers = count($users->listAll());
+      $this->view->UserAdm = count($users->listByType(1));
+      $this->view->UserConciliador = count($users->listByType(3));
+      $this->view->UserMediador = count($users->listByType(5));
+      $this->view->UserArbitro = count($users->listByType(2));
+      $this->view->UserSubAdm = count($users->listByType(4));
+      $this->view->UserCidadao = count($users->listByType(6));
+      $this->view->UserEmpresa = count($users->listByType(7));
+      $this->view->UserAdv = count($users->listByType(8));
+      $this->view->UserArbitragem = count($users->listByType(10));
+
     }
 
     public function indexAction()
@@ -28,10 +42,14 @@ class AdministrationController extends Zend_Controller_Action
       {
         $this->_redirect('/doesntallow');
       }
+
       $user = new Application_Model_User();
       $pagination = new Application_Model_Pagination();
       $field = $this->getRequest()->getParam('field');
       $page = $this->getRequest()->getParam('page');
+
+      $this->view->userType = $userType = $this->getRequest()->getParam('type');
+
       if($page == '') $page = 1;
       if($field != "")
       {
@@ -41,7 +59,36 @@ class AdministrationController extends Zend_Controller_Action
       }
       else
       {
-        $user = $user->lists();
+        if($userType == 1){
+          $user = $user->listByType(1);
+        }
+        else if ($userType == 2) {
+          $user = $user->listByType(2);
+        }
+        else if ($userType == 3) {
+          $user = $user->listByType(3);
+        }
+        else if ($userType == 4) {
+          $user = $user->listByType(4);
+        }
+        else if ($userType == 5) {
+          $user = $user->listByType(5);
+        }
+        else if ($userType == 6) {
+          $user = $user->listByType(6);
+        }
+        else if ($userType == 7) {
+          $user = $user->listByType(7);
+        }
+        else if ($userType == 8) {
+          $user = $user->listByType(8);
+        }
+        else if ($userType == 10) {
+          $user = $user->listByType(10);
+        }
+        else{
+          $user = $user->lists();
+        }
         $this->view->list = $pagination->generatePagination($user,$page,10);
       }
     }

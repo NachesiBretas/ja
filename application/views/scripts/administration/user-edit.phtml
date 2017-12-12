@@ -4,19 +4,19 @@
         <div class="span3">
           <div class="list-group">
             <a href="#" class="list-group-item">
-              <h4 class="list-group-item-heading">Usuários</h4>
+              <h4 class="list-group-item-heading">Usuários <?if($this->allUsers){?><span class="badge"><?=$this->allUsers?></span><?}?></h4>
             </a>
             <a href="/administration/user-new" class="list-group-item">Novo</a>
             <a href="/administration/user" class="list-group-item active">Edição</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Administrador</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Sub Administrador</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Arbitro</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Concialiador</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Mediador</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Cidadão</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Advogado/Ente conveniado</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Empresa/Poder público</a>
-            <a href="/administration/user" class="list-group-item">Pesquisar Arbitragem</a>
+            <a href="/administration/user/type/1" class="list-group-item">Pesq. Administrador<?if($this->UserAdm){?><span class="badge"><?=$this->UserAdm?></span><?}?></a>
+            <a href="/administration/user/type/4" class="list-group-item">Pesq. Sub Administrador<?if($this->UserSubAdm){?><span class="badge"><?=$this->UserSubAdm?></span><?}?></a>
+            <a href="/administration/user/type/2" class="list-group-item">Pesq. Arbitro<?if($this->UserArbitro){?><span class="badge"><?=$this->UserArbitro?></span><?}?></a>
+            <a href="/administration/user/type/3" class="list-group-item">Pesq. Concialiador<?if($this->UserConciliador){?><span class="badge"><?=$this->UserConciliador?></span><?}?></a>
+            <a href="/administration/user/type/5" class="list-group-item">Pesq. Mediador<?if($this->UserMediador){?><span class="badge"><?=$this->UserMediador?></span><?}?></a>
+            <a href="/administration/user/type/6" class="list-group-item">Pesq. Cidadão<?if($this->UserCidadao){?><span class="badge"><?=$this->UserCidadao?></span><?}?></a>
+            <a href="/administration/user/type/8" class="list-group-item">Pesq. Adv./Ente conveniado<?if($this->UserAdv){?><span class="badge"><?=$this->UserAdv?></span><?}?></a>
+            <a href="/administration/user/type/7" class="list-group-item">Pesq. Empresa/Poder público<?if($this->UserEmpresa){?><span class="badge"><?=$this->UserEmpresa?></span><?}?></a>
+            <a href="/administration/user/type/10" class="list-group-item">Pesq. Arbitragem<?if($this->UserArbitragem){?><span class="badge"><?=$this->UserArbitragem?></span><?}?></a>
           </div>
 
           <div class="list-group">

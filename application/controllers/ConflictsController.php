@@ -15,7 +15,7 @@ class ConflictsController extends Zend_Controller_Action
 
       if($this->view->institution == 1)
         {
-          echo"em todas as paginas";
+          //echo"em todas as paginas";
           $this->view->allConflicts = count($conflict->listAll());
           $this->view->citizenConflicts = count($conflict->listNewsByType(0,1));
           $this->view->companyConflicts = count($conflict->listNewsByType(0,2));
@@ -23,6 +23,7 @@ class ConflictsController extends Zend_Controller_Action
           $this->view->arbitrationConflicts = count($conflict->listNewsByType(0,4));
 
           $this->view->allAcceptedConflicts = count($conflict->listAllAccepted());
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(4));
           $this->view->mediadorConflicts = count($conflict->listAcceptedByType(1));
           $this->view->conciliadorConflicts = count($conflict->listAcceptedByType(2));
           $this->view->arbitroConflicts = count($conflict->listAcceptedByType(3));
