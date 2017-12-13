@@ -501,9 +501,9 @@ $('#tcForm').keyup(function(){
 
 
 $('#user_type_adv').change(function(){
-    var x = $('#user_type_adv').val();
-    console.log(x);
-    if (x == 2) {
+    // var x = $('#user_type_adv').val();
+    console.log($('#user_type_adv').val());
+    if ($('#user_type_adv').val() == 0) {
       $('#apaga').prop('hidden', true);
       $('#apaga2').prop('hidden', true);
     }else{
