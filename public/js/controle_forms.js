@@ -498,3 +498,16 @@ $('#tcForm').keyup(function(){
         $('#enviarCadConosco').prop('disabled', true);
     }
   })
+
+
+$('#user_type_adv').change(function(){
+    // var x = $('#user_type_adv').val();
+    console.log($('#user_type_adv').val());
+    if ($('#user_type_adv').val() == 0) {
+      $('#apaga').prop('hidden', true);
+      $('#apaga2').prop('hidden', true);
+    }else{
+      $('#apaga').prop('hidden', false);
+      $('#apaga2').prop('hidden', false);
+    }
+});

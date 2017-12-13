@@ -163,6 +163,56 @@ class AdministrationController extends Zend_Controller_Action
       
     }
 
+    public function newValorAction()
+    {
+      $user = new Application_Model_User();
+      if ( $this->getRequest()->isPost() ) 
+      {
+        $data = $this->getRequest()->getPost();
+        $user->newValorCausa($data);
+
+        $this->_redirect('/administration/valor-causa');
+      }
+    }
+
+    public function valorCausaAction()
+    {
+       
+      $user = new Application_Model_User();
+      $pagination = new Application_Model_Pagination();
+      $field = $this->getRequest()->getParam('field');
+      $page = $this->getRequest()->getParam('page');
+      if($page == '') $page = 1;
+      if($field != "")
+      {
+        $valorCausa = $user->findValorCausa(urldecode($field));
+        $this->view->list = $pagination->generatePagination($valorCausa,$page,10);
+        $this->view->field = $field;
+      }
+      else
+      {
+        $valorCausa = $user->listValorCausa();
+        $this->view->list = $pagination->generatePagination($valorCausa,$page,10);
+      }
+    }
+
+    public function valorCausaEditAction()
+    {
+      $userId = $this->getRequest()->getParam('id');
+      $user = new Application_Model_User();
+      if ( $this->getRequest()->isPost() ) 
+      {
+        $data = $this->getRequest()->getPost();
+        $user->editValorCausa($data, $userId);
+
+        // $this->_redirect('/administration/valor-causa');
+      }
+
+      $this->view->valorCausa = $user->returnValorCausaId($userId);
+    }
+
+    
+
 
 
 }

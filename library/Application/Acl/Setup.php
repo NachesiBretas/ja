@@ -99,7 +99,7 @@ class Application_Acl_Setup
                     ->allow( 'user', 'dashboard', array('index') )
                     ->allow( 'user', 'account', array('index','personal','photo','password') )
                     ->allow( 'user', 'administration', array('index',
-                                            'user', 'user-new', 'user-edit') )
+                                            'user', 'user-new', 'user-edit', 'new-valor', 'valor-causa', 'valor-causa-edit') )
                     ->allow( 'user', 'mail', array('index', 'inbox', 'outbox', 'new', 'parent', 'parent-out', 'download', 'forward') )
                     ->allow( 'user', 'scheduling', array('index', 'treatment', 'calendar', 'return-events', 'return-all-events', 
                                                     'return-hour', 'return-schedulings', 'hour', 'report', 'delete-hour', 'graphic',

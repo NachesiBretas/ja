@@ -272,7 +272,6 @@ class Application_Model_User
 	}
 
 
-
 	public function listAll()
 	{
 		$user = new Application_Model_DbTable_User();
@@ -292,6 +291,65 @@ class Application_Model_User
 		return $user->fetchAll($select);
 			
 	}
+
+
+	public function listValorCausa()
+	{
+		
+		$valorCausa = new Application_Model_DbTable_ValorCausa;
+		$select = $valorCausa->select()->setIntegrityCheck(false);
+		$select ->from(array("vc" => "valor_causa"), array('id','de', 'ate', 'taxa_registro', 'taxa_adm', 'honorario'));
+		return $valorCausa->fetchAll($select);
+	}
+
+	public function findValorCausa($field)
+	{
+
+		$valorCausa = new Application_Model_DbTable_ValorCausa();
+		return $valorCausa->fetchAll($valorCausa->select()->where('de LIKE ?', '%'.$field.'%'));
+	}
+
+	public function newValorCausa($data)
+	{
+		
+			$valorCausa = new Application_Model_DbTable_ValorCausa;
+			$userRow = $valorCausa->createRow();
+			$userRow->de = $data['de'];
+			$userRow->ate = $data['ate'];
+			$userRow->taxa_registro = $data['registro'];
+			$userRow->taxa_adm = $data['tAdministração'];
+			$userRow->honorario = $data['honorario'];		
+			$user_id = $userRow->save();
+			return $user_id;
+	}
+
+	public function editValorCausa($data, $userId)
+	{
+		
+			$valorCausa = new Application_Model_DbTable_ValorCausa;
+		$userRow = $valorCausa->fetchRow($valorCausa->select()->where('id = ?',$userId));
+		if($userRow)
+		{
+			$userRow->de = $data['de'];
+			$userRow->ate = $data['ate'];
+			$userRow->taxa_registro = $data['registro'];
+			$userRow->taxa_adm = $data['tAdministração'];
+			$userRow->honorario = $data['honorario'];		
+			return $userRow->save();
+		}
+		return false;
+	}
+
+	public function returnValorCausaId($userId)
+	{
+		$valorCausa = new Application_Model_DbTable_ValorCausa;
+		$select = $valorCausa->select()->setIntegrityCheck(false);
+		$select ->from(array("vc" => "valor_causa"), array('id','de', 'ate', 'taxa_registro', 'taxa_adm', 'honorario'))
+						->where('id = ?', $userId);
+		return $valorCausa->fetchRow($select);
+	}
+
+
 
 }
 

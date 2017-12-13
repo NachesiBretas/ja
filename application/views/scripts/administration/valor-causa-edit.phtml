@@ -1,0 +1,81 @@
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Usuários</h4>
+            </a>
+            <a href="/administration/user-new" class="list-group-item">Novo</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Administrador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Sub Administrador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Arbitro</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Concialiador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Mediador</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Cidadão</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Advogado/Ente conveniado</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Empresa/Poder público</a>
+            <a href="/administration/user" class="list-group-item">Pesquisar Arbitragem</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Valor das causas</h4>
+            </a>
+            <a href="/administration/new-valor" class="list-group-item">Novo</a>
+            <a href="/administration/valor-causa" class="list-group-item">Pesquisar</a>
+            <a href="/administration/valor-causa-edit" class="list-group-item active">Editar</a>
+          </div>
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading">Edição do site</h4>
+            </a>
+            <a href="/administration/" class="list-group-item">Novo</a>
+            <a href="/administration/" class="list-group-item">Pesquisar</a>
+          </div>
+
+          
+        </div><!--/col-md-->
+        <div class="col-md-9">
+          <div class="page-header">
+            <h1>Valor da Causa <small>defina aqui os dados do valor da causa</small></h1>
+            <hr>
+            <form enctype="application/x-www-form-urlencoded" class="form-horizontal" action="" method="post">
+              <div class="form-group">
+                <label for="de" class="col-lg-3 control-label optional">De</label>
+                <div class="col-lg-7">
+                  <input type="number" name="de" id="de" value="<?=$this->valorCausa->de?>" placeholder="De" class="form-control" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="ate" class="col-lg-3 control-label optional">Até</label>
+                <div class="col-lg-7">
+                  <input type="number" name="ate" id="ate" value="<?=$this->valorCausa->ate?>" placeholder="Até" class="form-control" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="registro" class="col-lg-3 control-label optional">Taxa de registro</label>
+                <div class="col-lg-7">
+                  <input type="number" name="registro" id="registro" value="<?=$this->valorCausa->taxa_registro?>" placeholder="Taxa de registro" class="form-control" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="tAdministração" class="col-lg-3 control-label optional">Taxa de administração</label>
+                <div class="col-lg-7">
+                  <input type="number" name="tAdministração" id="tAdministração" value="<?=$this->valorCausa->taxa_adm?>" placeholder="Taxa de administração" class="form-control" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="honorario" class="col-lg-3 control-label optional">Honorário</label>
+                <div class="col-lg-7">
+                  <input type="number" name="honorario" id="honorario" value="<?=$this->valorCausa->honorario?>" placeholder="Honorário" class="form-control" required="">
+                </div>
+              </div>    
+              <div class="form-group"><div class="col-lg-7">
+                <input type="submit" name="submit_valor" id="submit_valor" value="Gravar" buttons="danger info primary success warning inverse link" class="col-lg-offset-5 btn btn-primary"></div>
+              </div>
+            </form>
+          </div>
+        </div><!--/col-md-->
+      </div><!--/row-->
