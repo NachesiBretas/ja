@@ -315,6 +315,7 @@ $("#tipo_conflito").change(function(){
 //      // preencher alguma variavel pra ver se retornou valido ou nao
 // });
 
+//comecei a mexer aqui - Lucas Naves
 $(".captcha").click(function(){
 
     $("#captchaModal").show();
@@ -332,12 +333,49 @@ $("#closeCaptcha").click(function(){
 });
 
 ///////////////////////////////////////////////////////////////////////////////////
+// controle de modais.
 
 $(".fechar").click(function(){
     $("#politicaModal").hide();
     $("html,body").css({"overflow":"auto"});
 });
-//Lucas Naves
+//cidadao 
+$(".abrirCidadao").click(function(){
+    $("#cadastroCidadaoModal").show();
+    $("html,body").css({"overflow":"hidden"});
+});
+$(".fechar_cidadao1").click(function(){
+    $("#cadastroCidadaoModal").hide();
+    $('.abrirCidadao1').prop('hidden', false);
+      $('.abrirCidadao2').prop('hidden', true);
+    $("html,body").css({"overflow":"auto"});
+});
+
+//empresa 
+$(".abrirEmpresa").click(function(){
+    $("#cadastroEmpresaModal").show();
+    $("html,body").css({"overflow":"hidden"});
+});
+$(".fechar_empresa").click(function(){
+    $("#cadastroEmpresaModal").hide();
+    $('.abrirEmpresa1').prop('hidden', false);
+      $('.abrirEmpresa2').prop('hidden', true);
+    $("html,body").css({"overflow":"auto"});
+});
+
+$("#politica1").click(function(){
+      $('#esconderPolitica').prop('hidden', true);
+      $('#atualizarPolitica').prop('hidden', false);
+      $('#Xesconder').prop('hidden', true);
+      $('#Xatualizar').prop('hidden', false);
+});
+
+
+$(".atualizar").click(function(){
+    window.location = "/index";
+
+});
+
 
 //Mascaras de campos imput 
 $(document).ready(function(){
