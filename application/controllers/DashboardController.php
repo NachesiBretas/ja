@@ -8,6 +8,10 @@ class DashboardController extends Zend_Controller_Action
       $authNamespace = new Zend_Session_Namespace('userInformation');
       $user = new Application_Model_User();
       $status = $user->validUser($authNamespace->user_id);
+      // $data = date('Y-m-d H:i');
+      // $data2 = $status['date'];
+      // $total = $data  $data2;
+      // var_dump($total);exit;
       if($status['status'] == 0){
         $this->_redirect('/doesntallow');
       }
