@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-9">
       <div class="page-header">
-        <h1>Cadastro <?php echo $this->type ?> <small>gerencie aqui os dados</small></h1>
+        <h1>Cadastro <?php echo $this->type;?> <small>gerencie aqui os dados</small></h1>
         <hr>
         <ul class="nav nav-tabs" id="myTab">
           <li <?if($this->result == 1){?>class="active"<?}?>><a href="#data">Principal</a></li>
@@ -40,7 +40,7 @@
         <div class="tab-content">
           <div class="tab-pane <?if($this->result == 1){?>active<?}?>" id="data">
             <hr>
-            <?=$this->mainForm?>
+            <?echo $this->mainForm;?>
           </div>
           <div class="tab-pane <?if($this->result == 2){?>active<?}?>" id="data_user">
             <hr>
@@ -48,7 +48,7 @@
           </div>
           <div class="tab-pane <?if($this->result == 3){?>active<?}?>" id="data_other_user">
             <hr>
-            <?=$this->dataOtherUserForm?>
+            <?echo $this->dataOtherUserForm;?>
           </div>
 
           <div class="tab-pane <?if($this->result == 9){?>active<?}?>" id="documents">
@@ -64,7 +64,7 @@
                 </div>
                 <div id="crlv" class="panel-collapse collapse">
                   <div class="panel-body">
-                    <?$conflict = new Application_Model_Conflict();
+                    <?$conflict = new Application_Model_Conflict(); 
                     $document = $conflict->returnDocument($this->conflictId,'doc');
                     foreach ($document as $doc) {
                         $documents = $doc->document;

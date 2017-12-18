@@ -278,8 +278,9 @@ class ConflictsController extends Zend_Controller_Action
           $conflict->saveConflictHistoric($data,$conflictId);
         }*/
 
-        $this->view->conflictRow = $conflict->returnById($conflictId);
         $this->view->conflictId = $conflictId;
+        $this->view->conflictRow = $conflict->returnById($conflictId);  
+         //echo"aajajaja";exit();  
 
         $this->view->mainForm = new Application_Form_Conflict();
         $this->view->mainForm->populate($this->view->conflictRow->toArray());

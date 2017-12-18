@@ -5,6 +5,7 @@ class Application_Model_Conflict
 
 	public function returnById($conflictId)
 	{
+		echo"hehehe".$conflictId;
 		$conflict = new Application_Model_DbTable_Conflict();
 		$select = $conflict->select()->setIntegrityCheck(false);
 		$select	->from(array('c' => 'conflict'),array('id_conflict', 'desc_conflict', 'id_conflict_documents', 
@@ -13,7 +14,7 @@ class Application_Model_Conflict
 																		'email_u' => 'email',
 																		'phone_u' => 'phone',
 																		'sex',
-																		'cpf',
+																		'cpf_cnpj',
 																		'profession',
 																		'nationality',
 																		'marital_status',
@@ -22,14 +23,14 @@ class Application_Model_Conflict
 																								 'email_ou' => 'email',
 																								 'phone_ou' => 'phone',
 																								 'cpf_cnpj'))
-				->joinLeft(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
+				/*->joinLeft(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
 																							 'number_u' => 'number',
 																							 'complement_u' => 'complement',
 																							 'neighborhood_u' => 'neighborhood',
 																							 'uf_u' => 'uf',
 																							 'city_u' => 'city',
-																							 'cep_u' => 'cep'))
-				->joinLeft(array('aou' => 'user_address'),'ou.id_address=aou.id_address', array('place_ou' => 'place',
+																							 'cep_u' => 'cep'))*/
+				->joinLeft(array('aou' => 'user_address'),'u.id=aou.user_id', array('place_ou' => 'place',
 																							 	'number_ou' => 'number',
 																								 'complement_ou' => 'complement',
 																								 'neighborhood_ou' => 'neighborhood',
@@ -198,7 +199,9 @@ class Application_Model_Conflict
 		$select = $conflict->select()->setIntegrityCheck(false);
 		$select	->from(array('c' => 'conflict'),array('c.id_conflict','c.desc_conflict') )
 						->joinLeft(array('u' => 'user'),'c.id_user=u.id',array('name'))
-						->where('type = ?',$type);
+						->where('type = ?',$type)
+						->where('c.status = 0');
+						//echo $select;
 		return $conflict->fetchAll($select);
 			
 	}
@@ -209,7 +212,7 @@ class Application_Model_Conflict
 		$select = $conflict->select()->setIntegrityCheck(false);
 		$select	->from(array('c' => 'conflict'),array('c.id_conflict','c.desc_conflict') )
 						->joinLeft(array('u' => 'user'),'c.id_user=u.id',array('name'))
-						->where('status = ?',$type);
+						->where('c.status = ?',$type);
 		return $conflict->fetchAll($select);		
 	}
 
@@ -221,7 +224,7 @@ class Application_Model_Conflict
 		$select	->from(array('c' => 'conflict'),array('c.id_conflict','c.desc_conflict') )
 						->joinLeft(array('u' => 'user'),'c.id_user=u.id',array('name'))
 						->where('u.id = ?',$authNamespace->user_id)
-						->where('status != 0 ');
+						->where('c.status != 0 ');
 		return $conflict->fetchAll($select);		
 	}
 
