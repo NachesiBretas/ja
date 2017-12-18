@@ -52,18 +52,24 @@
                 <th>De</th>
                 <th>até</th>
                 <th>Taxa de registro</th>
-                <th>Taxa de administraçãoé</th>
+                <th>Taxa de administração</th>
                 <th>Honorário</th>
               </thead>
               <tbody>
                 <?if(is_object($this->list) && !isset($this->list->name)){
                   foreach($this->list as $body){?>
                     <tr>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>"><?=$body->de?></a></td>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>"><?=$body->ate?></a></td>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>"><?=$body->taxa_registro?></a></td>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>"><?=$body->taxa_adm?></a></td>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>"><?=$body->honorario?></a></td>
+                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->de / 100, 2, ',', '.');?></a></td>
+                      <td>
+                        <?if($body->ate == 0.00){?>
+                          <a href="/administration/valor-causa-edit/id/<?=$body->id?>">Valores Acima</a>
+                          <?}else{?>
+                          <a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->ate / 100, 2, ',', '.');?></a>
+                          <?}?>
+                      </td>
+                      <td ><a href="/administration/valor-causa-edit/id/<?=$body->id?>" >R$ <?echo number_format($body->taxa_registro / 100, 2, ',', '.');?></a></td>
+                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->taxa_adm / 100, 2, ',', '.');?></a></td>
+                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->honorario / 100, 2, ',', '.');?></a></td>
 
                     </tr>
                 <?} } else{?>
@@ -73,7 +79,7 @@
                 <?}?>
               </tbody>
             </table>
-            <?if(is_object($this->list) && !isset($this->list->name)){ echo $this->paginationControl($this->list,'Sliding','pagination.phtml'); }?>
+          
           </div>
         </div><!--/col-md-->
       </div><!--/row-->

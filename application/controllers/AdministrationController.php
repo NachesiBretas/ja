@@ -179,20 +179,20 @@ class AdministrationController extends Zend_Controller_Action
     {
        
       $user = new Application_Model_User();
-      $pagination = new Application_Model_Pagination();
+      // $pagination = new Application_Model_Pagination();
       $field = $this->getRequest()->getParam('field');
-      $page = $this->getRequest()->getParam('page');
+      // $page = $this->getRequest()->getParam('page');
       if($page == '') $page = 1;
       if($field != "")
       {
-        $valorCausa = $user->findValorCausa(urldecode($field));
-        $this->view->list = $pagination->generatePagination($valorCausa,$page,10);
+        $this->view->list = $user->findValorCausa(urldecode($field));
+        // $this->view->list = $pagination->generatePagination($valorCausa,$page,10);
         $this->view->field = $field;
       }
       else
       {
-        $valorCausa = $user->listValorCausa();
-        $this->view->list = $pagination->generatePagination($valorCausa,$page,10);
+        $this->view->list = $user->listValorCausa();
+        // $this->view->list = $pagination->generatePagination($valorCausa,$page,10);
       }
     }
 
@@ -205,7 +205,7 @@ class AdministrationController extends Zend_Controller_Action
         $data = $this->getRequest()->getPost();
         $user->editValorCausa($data, $userId);
 
-        // $this->_redirect('/administration/valor-causa');
+        $this->_redirect('/administration/valor-causa');
       }
 
       $this->view->valorCausa = $user->returnValorCausaId($userId);
