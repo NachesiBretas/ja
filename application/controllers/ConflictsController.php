@@ -344,6 +344,64 @@ class ConflictsController extends Zend_Controller_Action
             $this->view->conflicts = $conflict->returnByTypeDemand($c_type);
           }
 
+          if($option == 5)
+          {
+            // var_dump($field);exit;
+            // 0- novo / 1- mediador / 2 - conciliador / 3- arbitro / 4-retornado mediador / 5- retornado conciliador / 6- retornado arbitro
+            $c_status = 0;
+            if(strtoupper($field) == 'NOVO'){
+              // echo "string";exit;
+              $c_status=0;
+            }
+            if(strtoupper($field) == 'MEDIADOR'){
+              $c_status=1;
+            }
+            if(strtoupper($field) == 'CONCILIADOR'){
+              $c_status=2;
+            }
+            if(strtoupper($field) == 'ARBITRO'){
+              $c_status=4;
+            }
+            if(strtoupper($field) == 'RETOMADO MEDIADOR'){
+              $c_status=5;
+            }
+            if(strtoupper($field) == 'RETOMADO CONCILIADOR'){
+              $c_status=6;
+            }
+            if(strtoupper($field) == 'RETOMADO ARBITRO'){
+              $c_status=7;
+            }
+
+            $this->view->conflicts = $conflict->returnByGrupoConf($c_status);
+          }
+
+           if($option == 6)
+          {
+            $this->view->conflicts = $conflict->returnByOpSistema($field);
+          }
+
+          if($option == 7)
+          {
+            $this->view->conflicts = $conflict->returnByPessoa1($field);
+          }
+
+          if($option == 8)
+          {
+            $this->view->conflicts = $conflict->returnByPessoa2($field);
+          }
+
+          if($option == 9)
+          {
+            $this->view->conflicts = $conflict->returnByStatus($field);
+            // var_dump($a);exit;
+          }
+          if($option == 10)
+          {
+            // var_dump($field);exit;
+            $this->view->conflicts = $conflict->returnByDescricao($field);
+            
+          }
+
         }
 
     }

@@ -47,9 +47,14 @@ class Application_Model_Conflict
 	public function returnByType($type)
 	{
 		$conflict = new Application_Model_DbTable_Conflict();
-		$select = $conflict->select()->setIntegrityCheck(false);
-		$select	->from(array('c' => 'conflict'),array('c.*') )
-				->where('type = ?', $type);
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+				->where('c.type = ?', $type);
 				//echo $select;exit();
 		return $conflict->fetchAll($select);
 	}
@@ -57,71 +62,139 @@ class Application_Model_Conflict
 
 	public function returnByTypeDemand($c_type)
 	{
+		// var_dump($c_type);exit;
 		$conflict = new Application_Model_DbTable_Conflict();
-		$select = $conflict->select()->setIntegrityCheck(false);
-		$select	->from(array('c' => 'conflict'),array('c.*') )
-				->where('type = 3 and conflict_type = ?', $c_type);
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+								->where('c.conflict_type = ?', $c_type)
+								->where('c.type = 3');
 		return $conflict->fetchAll($select);
 	}
 
 	public function returnByCity($city)
 	{
 		$conflict = new Application_Model_DbTable_Conflict();
-		$select = $conflict->select()->setIntegrityCheck(false);
-		$select	->from(array('c' => 'conflict'),array('*') )
-				->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_u' => 'name',
-																		'email_u' => 'email',
-																		'phone_u' => 'phone',
-																		'sex',
-																		'cpf',
-																		'profession',
-																		'nationality',
-																		'marital_status',
-																		'date_birth'))
-				->joinInner(array('ou' => 'other_user'),'c.id_other_user=ou.id_other_user', array('name_ou' => 'name',
-																								 'email_ou' => 'email',
-																								 'phone_ou' => 'phone',
-																								 'cpf_cnpj'))
-				->joinInner(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
-																							 'number_u' => 'number',
-																							 'complement_u' => 'complement',
-																							 'neighborhood_u' => 'neighborhood',
-																							 'uf_u' => 'uf',
-																							 'city_u' => 'city',
-																							 'cep_u' => 'cep'))
-				->where('au.city = ?', $city);
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+								->where('au.city LIKE ?', '%'.$city.'%');
+
 		return $conflict->fetchAll($select);
 	}
 
 	public function returnByState($state)
 	{
 		$conflict = new Application_Model_DbTable_Conflict();
-		$select = $conflict->select()->setIntegrityCheck(false);
-		$select	->from(array('c' => 'conflict'),array('*') )
-				->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_u' => 'name',
-																		'email_u' => 'email',
-																		'phone_u' => 'phone',
-																		'sex',
-																		'cpf',
-																		'profession',
-																		'nationality',
-																		'marital_status',
-																		'date_birth'))
-				->joinInner(array('ou' => 'other_user'),'c.id_other_user=ou.id_other_user', array('name_ou' => 'name',
-																								 'email_ou' => 'email',
-																								 'phone_ou' => 'phone',
-																								 'cpf_cnpj'))
-				->joinInner(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
-																							 'number_u' => 'number',
-																							 'complement_u' => 'complement',
-																							 'neighborhood_u' => 'neighborhood',
-																							 'uf_u' => 'uf',
-																							 'city_u' => 'city',
-																							 'cep_u' => 'cep'))
-				->where('au.uf = ?', $state);
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+								->joinInner(array('uf' => 'uf'),'uf.id=au.uf', array('id','sigla'))
+								->where('uf.sigla LIKE ?', '%'.$state.'%');
 		return $conflict->fetchAll($select);
 	}
-
+	public function returnByGrupoConf($status)
+	{
+		// var_dump($status);exit;
+		$conflict = new Application_Model_DbTable_Conflict();
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                
+								->where('c.status = ?', $status);
+								// echo "$select";exit;
+		return $conflict->fetchAll($select);
+	}
+	public function returnByOpSistema($nome)
+	{
+		$conflict = new Application_Model_DbTable_Conflict();
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth','institution'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+				->where('u.name LIKE ?', '%'.$nome.'%')
+				->where('u.institution = 2' || 'u.institution = 3' || 'u.institution = 5');
+				// echo $select;exit;
+		return $conflict->fetchAll($select);
+	}
+	public function returnByPessoa1($nome)
+	{
+		$conflict = new Application_Model_DbTable_Conflict();
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+								->where('u.name LIKE ?', '%'.$nome.'%');
+				
+				// echo $select;exit;
+		return $conflict->fetchAll($select);
+	}
+	public function returnByPessoa2($nome)
+	{
+				$conflict = new Application_Model_DbTable_Conflict();
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+								->where('ou.name LIKE ?', '%'.$nome.'%');
+				
+				// echo $select;exit;
+		return $conflict->fetchAll($select);
+	}
+	public function returnByStatus($nome)
+	{
+		$conflict = new Application_Model_DbTable_Conflict();
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+				->where('st.name LIKE ?', '%'.$nome.'%');
+				
+				// echo $select;exit;
+		return $conflict->fetchAll($select);
+	}
+	public function returnByDescricao($desc)
+	{
+		$conflict = new Application_Model_DbTable_Conflict();
+        $select = $conflict->select()->setIntegrityCheck(false);
+        $select ->from(array('c' => 'conflict'))
+                ->joinLeft(array('hc' => 'conflict_historic'),'c.id_conflict=hc.id_conflict', array('id_conflict'))
+                ->joinLeft(array('st' => 'status'),'st.id=hc.status', array('nameStatus' => 'name'))
+                ->joinLeft(array('u' => 'user'),'c.id_user=u.id', array('name_parte1' => 'name','email_u' => 'email','phone_u' => 'phone','sex','cpf_cnpj','profession','nationality','marital_status','date_birth'))
+                ->joinInner(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_parte2' => 'name','email_ou' => 'email','phone_ou' => 'phone','cpf_cnpj'))
+                ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
+				->where('c.desc_conflict LIKE ?', '%'.$desc.'%');
+				
+				// echo $select;exit;
+		return $conflict->fetchAll($select);
+	}
 
 	public function buscaTaxaReg()
 	{
@@ -425,9 +498,10 @@ class Application_Model_Conflict
 			if ($data['tipo_conflito'] == 1) {
 
 				$conflict = new Application_Model_DbTable_Conflict();
+				$data['conflict_type'] = $data['tipo_conflito'];
 				$data['tribunal'] = $data['tribunal'];
 				$data['comarca'] = $data['comarca'];
-				$data['process_number'] = NULL;
+				$data['process_number'] =$data['n_processo'];;
 				$data['desc_conflict'] = $data['resolucao_conflito'];
 				$data['id_user'] = $id_user;//$authNamespace->user_id;
 				$data['estimate_price'] = $data['simular_custo_j'];
@@ -444,6 +518,7 @@ class Application_Model_Conflict
 			}else{
 				// echo "string";exit;
 				$conflict = new Application_Model_DbTable_Conflict();
+				$data['conflict_type'] = $data['tipo_conflito'];
 				$data['tribunal'] = NULL;
 				$data['comarca'] = NULL;
 				$data['process_number'] = NULL;

@@ -39,8 +39,13 @@
                 <option value="2" <?//if($this->option == 2) echo 'selected="selected"';?>>Cidade</option>
                 <option value="3" <?//if($this->option == 3) echo 'selected="selected"';?>>Tipo de Conflito</option>
                 <option value="4" <?//if($this->option == 4) echo 'selected="selected"';?>>Tipo de Demanda</option>
-                <option value="3" <?//if($this->option == 5) echo 'selected="selected"';?>>Grupo do Conflito</option>
-                <option value="3" <?//if($this->option == 6) echo 'selected="selected"';?>>Operador do sistema</option>
+                <option value="5" <?//if($this->option == 5) echo 'selected="selected"';?>>Grupo do Conflito</option>
+                <option value="6" <?//if($this->option == 6) echo 'selected="selected"';?>>Operador do sistema</option>
+                <option value="7" <?//if($this->option == 6) echo 'selected="selected"';?>>Nome Parte 1</option>
+                <option value="8" <?//if($this->option == 6) echo 'selected="selected"';?>>Nome Parte 2</option>
+                <option value="9" <?//if($this->option == 6) echo 'selected="selected"';?>>Status do Conflito</option>
+                <option value="10" <?//if($this->option == 6) echo 'selected="selected"';?>>Descrição do Conflito</option>
+                
               </select>
             </div>
             <button type="submit" class="btn btn-primary">Pesquisar</button>
@@ -64,7 +69,9 @@
             <?if(count($this->conflicts)){
               foreach($this->conflicts as $body){?>
                 <tr>
-                  <td <?if($this->institution == 1){?> title="<?=$body->status?>"<?}?>><?=$body->id_conflict?></td>
+                  <td><?=$body->nameStatus?></td>
+                  <td><?=$body->name_parte1?></td>
+                  <td><?=$body->name_parte2?></td>
                   <td><?=$body->desc_conflict?></td>
                   <?php 
                     if($body->type == 1){
@@ -95,6 +102,12 @@
                   ?>
                   <td><?=$type?></td>
                   <td><?=$status?></td>
+                  <td><?if($body->conflict_type == ""){
+                    echo "-";
+                  }else{
+                    echo $body->conflict_type;
+                  }?></td>
+
                 </tr>
                 <?} // FIM do foreach($this->conflicts as $body)
               } // FIM do if(count($this->conflicts))          
