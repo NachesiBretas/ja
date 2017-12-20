@@ -473,11 +473,11 @@ $('#empForm').keyup(function(){
 
 $('#empForm').keyup(function(){
     var value = $('#emp_desc_conflito').val();
-    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != ""  & $('#accept_terms_cid').val() != "") 
+    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != ""  & $('#accept_terms_emp').val() != "") 
     {
         $('#finalizarEmp').prop('disabled', false);
         $('#preencheremp2').prop('hidden', true);
-    }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" & $('#accept_terms_cid').val() == "") {
+    }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" & $('#accept_terms_emp').val() == "") {
         $('#finalizarEmp').prop('disabled', true);
     }else{
         $('.finalizarEmp').prop('disabled', true);
@@ -549,3 +549,14 @@ $('#user_type_adv').change(function(){
       $('#apaga2').prop('hidden', false);
     }
 });
+$('#recaptcha-accessible-status').keyup(function(){
+    // var x = $('#user_type_adv').val();
+    
+    if ($('#recaptcha-accessible-status').val() != "") {
+      $('#ok').prop('disabled', false);
+    }else{
+      $('#ok').prop('disabled', true);
+    }
+});
+
+
