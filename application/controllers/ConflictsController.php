@@ -313,7 +313,8 @@ class ConflictsController extends Zend_Controller_Action
 
           if($option == 1)
           {
-            $this->view->conflicts = $conflict->returnByState($field);
+            // var_dump($field);exit;
+            $this->view->conflicts = $conflict->returnByState(strtoupper($field));
           }
 
           if($option == 3) // cid emp arb ou adv

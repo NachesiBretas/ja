@@ -112,8 +112,8 @@ class Application_Model_User
 			$user_id = $userRow->save();
 
 			$this->newAddressUser($user_id,$data);
-			$conflict = new Application_Model_Conflict();
-			$annex = $conflict->createAnnex($id_conflito,$user_id,4,$_FILES);
+			// $conflict = new Application_Model_Conflict();
+			// $annex = $conflict->createAnnex($id_conflito,$user_id,4,$_FILES);
 
 			return $user_id;
 		}

@@ -434,13 +434,13 @@ function mascara(o,f){
 // validação dos formularios de cidadao 
 $('#cidForm').keyup(function(){
     var value = $('#cidadao_nome').val();
-    if(value.length != "" & $('#cidadao_email').val() != "" & $('#cidadao_phone').val() != "" & $('#cidadao_cpf').val() != "" & $('#cidadao_senha1').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_cid').val() != null) {
-      $('.submit').prop('disabled', false);
+    if(value.length != "" & $('#cidadao_email').val() != "" & $('#cidadao_phone').val() != "" & $('#cidadao_cpf').val() != "" & $('#cidadao_senha1').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_cid').val() != "") {
+      $('#continuarCid').prop('disabled', false);
         $('#preencher').prop('hidden', true);
-    }else if(value.length == "" & $('#cidadao_email').val() == "" & $('#cidadao_phone').val() == "" & $('#cidadao_cpf').val() == "" & $('#cidadao_senha1').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_cid').val() == null) {
-      $('.submit').prop('disabled', true);
+    }else if(value.length == "" & $('#cidadao_email').val() == "" & $('#cidadao_phone').val() == "" & $('#cidadao_cpf').val() == "" & $('#cidadao_senha1').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_cid').val() == "") {
+      $('#continuarCid').prop('disabled', true);
     }else{
-        $('.submit').prop('disabled', true);
+        $('#continuarCid').prop('disabled', true);
     }
   })
 
@@ -453,7 +453,7 @@ $('#cidForm').keyup(function(){
     }else if(value.length == "" & $('#cidadao_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" ) {
         $('#finalizarCid').prop('disabled', true);
     }else{
-        $('.submit').prop('disabled', true);
+        $('.finalizarCid').prop('disabled', true);
     }
   })
 
