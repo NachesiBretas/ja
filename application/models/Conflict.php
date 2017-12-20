@@ -849,11 +849,19 @@ class Application_Model_Conflict
 
 	public function createAnnexCliente($id, $id_user, $type, $file)
 	{		
-		
+			
+			$nome_type = "";
+			if ($type == 3) {
+				$nome_type = 'advogado';
+			}
+			
 	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
 	    
       // O nome original do arquivo no computador do usuário
-      $fileName = $file['name'];
+     	$name = explode(".",$file['name']);
+	    // var_dump($name);exit;
+      // O nome original do arquivo no computador do usuário
+      $fileName = $fileName = 'doc_'.$nome_type.'_conflito'.$id.'.'.$name[1];
 
       // O tipo mime do arquivo. Um exemplo pode ser "image/gif"
       $fileType = $file['type'];
