@@ -39,10 +39,7 @@ class AgendamentoController extends Zend_Controller_Action
         	$this->view->save = 'error';
         }
       }
-      if($this->view->conflict->external_number == '')
-      {
-        $this->view->conflict = $conflict->returnInactiveById($conflictId);
-      }
+      
       $this->view->hour = $scheduling->returnHour();
     }
 

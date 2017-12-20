@@ -22,7 +22,7 @@ class Application_Model_Conflict
 				->joinLeft(array('ou' => 'other_user'),'c.id_other_user=ou.id_other_user', array('name_ou' => 'name',
 																								 'email_ou' => 'email',
 																								 'phone_ou' => 'phone',
-																								 'cpf_cnpj'))
+																								 'cpf_cnpj_ou' => 'cpf_cnpj'))
 				/*->joinLeft(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
 																							 'number_u' => 'number',
 																							 'complement_u' => 'complement',
@@ -349,6 +349,7 @@ class Application_Model_Conflict
 						->where('substr(v.document,1,4) like ?', $aux."%");
 		
 		$conflictRow = $conflict->fetchAll($select);
+		//echo $select;
 		return $conflictRow;
 	}
 
