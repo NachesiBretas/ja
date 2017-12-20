@@ -473,11 +473,11 @@ $('#empForm').keyup(function(){
 
 $('#empForm').keyup(function(){
     var value = $('#emp_desc_conflito').val();
-    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != "" ) 
+    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != ""  & $('#accept_terms_emp').val() != "") 
     {
         $('#finalizarEmp').prop('disabled', false);
         $('#preencheremp2').prop('hidden', true);
-    }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" ) {
+    }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" & $('#accept_terms_emp').val() == "") {
         $('#finalizarEmp').prop('disabled', true);
     }else{
         $('.finalizarEmp').prop('disabled', true);
@@ -489,10 +489,10 @@ $('#empForm').keyup(function(){
 
 $('#arbForm').keyup(function(){
     var value = $('#arbitragem_nome').val();
-    if(value.length != "" & $('#arbitragem_email').val() != "" & $('#arbitragem_telefone').val() != "" & $('#arbitragem_cpf').val() != "" & $('#arbitragem_senha').val() != "" & $('#logradouro2').val() != "" & $('#num_logradouro2').val() != "" & $('#bairro2').val() != "" & $('#uf2').val() != "" & $('#cidade2').val() != "" & $('#accept_terms_arb').val() != null) {
+    if(value.length != "" & $('#arbitragem_email').val() != "" & $('#arbitragem_telefone').val() != "" & $('#arbitragem_cpf').val() != "" & $('#arbitragem_senha').val() != "" & $('#logradouro2').val() != "" & $('#num_logradouro2').val() != "" & $('#bairro2').val() != "" & $('#uf2').val() != "" & $('#cidade2').val() != "" & $('#accept_terms_arb').val() != "") {
       $('#finalizarArb').prop('disabled', false);
         $('#preencherArb').prop('hidden', true);
-    }else if(value.length == "" & $('#arbitragem_email').val() == "" & $('#arbitragem_telefone').val() == "" & $('#arbitragem_cpf').val() == "" & $('#arbitragem_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_arb').val() == null) {
+    }else if(value.length == "" & $('#arbitragem_email').val() == "" & $('#arbitragem_telefone').val() == "" & $('#arbitragem_cpf').val() == "" & $('#arbitragem_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_arb').val() == "") {
       $('#finalizarArb').prop('disabled', true);
     }else{
         $('#finalizarArb').prop('disabled', true);
@@ -508,14 +508,14 @@ $('#advForm').keyup(function(){
         & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" 
         & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" 
         & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" 
-        & $('#accept_terms_adv').val() != null) {
+        & $('#accept_terms_adv').val() != "") {
       $('#continuarAdv').prop('disabled', false);
         $('#preencherAdv').prop('hidden', true);
     }else if(value.length == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
         & $('#adv_cpf_cnpj').val() == "" & $('#adv_senha').val() == "" 
         & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" 
         & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" 
-        & $('#accept_terms_adv').val() == null) {
+        & $('#accept_terms_adv').val() == "") {
       $('#continuarAdv').prop('disabled', true);
     }else{
         $('#continuarAdv').prop('disabled', true);
@@ -549,3 +549,14 @@ $('#user_type_adv').change(function(){
       $('#apaga2').prop('hidden', false);
     }
 });
+$('#recaptcha-accessible-status').keyup(function(){
+    // var x = $('#user_type_adv').val();
+    
+    if ($('#recaptcha-accessible-status').val() != "") {
+      $('#ok').prop('disabled', false);
+    }else{
+      $('#ok').prop('disabled', true);
+    }
+});
+
+
