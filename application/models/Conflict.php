@@ -208,14 +208,14 @@ class Application_Model_Conflict
 						->where('c.estimate_price != 0.00')
 						->order('id_conflict desc');
 		$preco_estimado = $conflict->fetchRow($select);
-		
+		//echo $select;
 		if(isset($preco_estimado) && $preco_estimado !=0){
 		$vc = new Application_Model_DbTable_ValorCausa();
 		$select2 = $vc->select()->setIntegrityCheck(false);
 		$select2	->from(array('c' => 'valor_causa'),array('valor' =>'(c.taxa_registro + c.taxa_adm)') )
 						->where('c.de <= ?',$preco_estimado['estimate_price'])
 						->where('c.ate >= ?',$preco_estimado['estimate_price']);
-						//echo $select2;
+						echo $select2;
 		$teste = $vc->fetchRow($select2);
 		//print_r($teste); exit();
 		
