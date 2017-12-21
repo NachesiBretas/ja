@@ -17,7 +17,7 @@
         <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
         <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <?if($institution == 1 || $institution == 4){?>
-        <a href="conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
         <?}?>
         <?}
         else if($status['status'] == 1){?>
