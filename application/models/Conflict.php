@@ -93,6 +93,7 @@ class Application_Model_Conflict
 
 	public function returnByState($state)
 	{
+		// var_dump($state);exit;
 		$conflict = new Application_Model_DbTable_Conflict();
         $select = $conflict->select()->setIntegrityCheck(false);
         $select ->from(array('c' => 'conflict'))
@@ -103,6 +104,7 @@ class Application_Model_Conflict
                 ->joinInner(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place','number_u' => 'number','complement_u' => 'complement','neighborhood_u' => 'neighborhood','uf_u' => 'uf','city_u' => 'city','cep_u' => 'cep'))
 								->joinInner(array('uf' => 'uf'),'uf.id=au.uf', array('id','sigla'))
 								->where('uf.sigla LIKE ?', '%'.$state.'%');
+								// echo "$select";exit;
 		return $conflict->fetchAll($select);
 	}
 	public function returnByGrupoConf($status)
@@ -543,6 +545,35 @@ class Application_Model_Conflict
 		return false;
 	}
 
+	public function newConflictArb($data,$id_user, $file)
+	{
+		// var_dump($data);exit;
+		if($data)
+		{
+
+			//$id_user = 153;  //$this->newUserCid($data);
+
+			$conflict = new Application_Model_DbTable_Conflict();
+			$data['tribunal'] = NULL;
+			$data['comarca'] = NULL;
+			$data['process_number'] = NULL;
+			$data['desc_conflict'] = Null;
+			$data['desc_sugest_resolution'] = Null;
+			$data['id_user'] = $id_user;//$authNamespace->user_id;
+			$data['estimate_price'] = $data['simulacao'];
+			$data['type'] = 4;
+			$data['status'] = 0; //0 vai ser NOVO na tabela de status
+			$data['conflict_type'] = NULL;
+			$conflictNew = $conflict->createRow($data);
+			$id = $conflictNew->save();
+
+			$this->createAnnex($id,$id_user,4,$file);
+			
+			return $id;
+		}
+		return false;
+	}
+
 	public function newUserCid($data,$user_type)// Não entendi o motivo dessa função Lucas Naves
 	{
 		$user = new Application_Model_DbTable_User();
@@ -759,11 +790,26 @@ class Application_Model_Conflict
 	public function createAnnex($id, $id_user, $type, $file)
 	{		
 		// var_dump($file);exit;
-	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
-	    
-      // O nome original do arquivo no computador do usuário
-      $fileName = $file['arquivo']['name'];
+			$nome_type = "";
+			if ($type == 1) {
+				$nome_type = 'cidadao';
+			}
+			if ($type == 2) {
+				$nome_type = 'empresa';
+			}
+			if ($type == 3) {
+				$nome_type = 'advogado';
+			}
+			if ($type == 4) {
+				$nome_type = 'arbitagem';
+			}
 
+	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
+	    $name = explode(".",$file['arquivo']['name']);
+	    // var_dump($name);exit;
+      // O nome original do arquivo no computador do usuário
+      $fileName = $fileName = 'doc_'.$nome_type.'_conflito'.$id.'.'.$name[1];
+      // var_dump($fileName);exit;
       // O tipo mime do arquivo. Um exemplo pode ser "image/gif"
       $fileType = $file['arquivo']['type'];
       // O tamanho, em bytes, do arquivo
@@ -780,8 +826,8 @@ class Application_Model_Conflict
           return 0;
         // Não houveram erros, move o arquivo
         }else{
-        	mkdir("../public/upload/conflitos/$id_user/");
-          $folder = "../public/upload/conflitos/$id_user/";
+        	mkdir("../public/upload/conflitos/$id/");
+          $folder = "../public/upload/conflitos/$id/";
           //var_dump($folder);exit;
           $upload = move_uploaded_file($fileTemp, $folder.$fileName);
         } 
@@ -804,11 +850,19 @@ class Application_Model_Conflict
 
 	public function createAnnexCliente($id, $id_user, $type, $file)
 	{		
-		
+			
+			$nome_type = "";
+			if ($type == 3) {
+				$nome_type = 'advogado';
+			}
+			
 	    $permittedNot = array('application/x-msdownload', 'application/octet-stream', 'application/javascript');
 	    
       // O nome original do arquivo no computador do usuário
-      $fileName = $file['name'];
+     	$name = explode(".",$file['name']);
+	    // var_dump($name);exit;
+      // O nome original do arquivo no computador do usuário
+      $fileName = $fileName = 'doc_'.$nome_type.'_conflito'.$id.'.'.$name[1];
 
       // O tipo mime do arquivo. Um exemplo pode ser "image/gif"
       $fileType = $file['type'];
@@ -826,8 +880,8 @@ class Application_Model_Conflict
           return 0;
         // Não houveram erros, move o arquivo
         }else{
-        	mkdir("../public/upload/conflitos/$id_user/");
-          $folder = "../public/upload/conflitos/$id_user/";
+        	mkdir("../public/upload/conflitos/$id/");
+          $folder = "../public/upload/conflitos/$id/";
           //var_dump($folder);exit;
           $upload = move_uploaded_file($fileTemp, $folder.$fileName);
         } 

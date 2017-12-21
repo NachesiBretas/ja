@@ -70,6 +70,9 @@ class IndexController extends Zend_Controller_Action
           // var_dump($data);exit;
           $user = new Application_Model_User();
           $id_user = $user->newUser($data, $_FILES);
+
+          $conflict = new Application_Model_Conflict();
+          $conflictId = $conflict->newConflictArb($data,$id_user, $_FILES);
           $this->_redirect('/auth/login');
         }
 
