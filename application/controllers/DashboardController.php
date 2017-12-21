@@ -43,24 +43,34 @@ class DashboardController extends Zend_Controller_Action
         if($this->view->institution == 5) // mediador
         {
           $this->view->allConflicts = count($conflict->listNewsByType(1,1));
-          $this->view->allAcceptedConflicts = count($conflict->listAcceptedByType(1));
-          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(4));
+          $this->view->allAcceptedConflicts = count($conflict->listAcceptedGroupByType(1,5));
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedGroupByType(4,5));
+
+          $this->view->citizenConflicts = count($conflict->listAcceptedByType(1));
+          $this->view->companyConflicts = count($conflict->listAcceptedByType(2));
+          $this->view->lawyerConflicts = count($conflict->listAcceptedByType(3));
         }
 
         if($this->view->institution == 3) //conciliador
         {
           $this->view->allConflicts = count($conflict->listNewsByType(2,1));
-          $this->view->allAcceptedConflicts = count($conflict->listAcceptedByType(2));
-          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(5));
+          $this->view->allAcceptedConflicts = count($conflict->listAcceptedGroupByType(2,3));
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedGroupByType(5,3));
+
+          $this->view->citizenConflicts = count($conflict->listAcceptedByType(1));
+          $this->view->companyConflicts = count($conflict->listAcceptedByType(2));
+          $this->view->lawyerConflicts = count($conflict->listAcceptedByType(3));
         }
 
         if($this->view->institution == 2) //arbitro
         {
           $this->view->allConflicts = count($conflict->listNewsByType(3,1));
-          $this->view->allAcceptedConflicts = count($conflict->listAcceptedByType(3));
-          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(6));
-        }
+          $this->view->allAcceptedConflicts = count($conflict->listAcceptedGroupByType(3,2));
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedGroupByType(6,2));
 
+          $this->view->arbitrationConflicts = count($conflict->listAcceptedByType(4));
+        }
+        
       }
     }
 

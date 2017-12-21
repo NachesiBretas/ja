@@ -106,7 +106,7 @@ class Application_Acl_Setup
                                                     'return-schedulings-vis', 'report-scheduling', 'remove', 'reschedule','print',
                                                     'print-calendar') )
                     ->allow( 'user', 'agendamento', array('index', 'success','cancel-scheduling','cancel-protocol') )
-                    ->allow( 'user', 'conflicts', array('index', 'view','types','accepted', 'cases','research','verifica-cupom','cupom','edit','payment','calcula-preco','save-status','view-accepted','verifica-caso','research','mycases','returneds'));
+                    ->allow( 'user', 'conflicts', array('index', 'view','types','accepted', 'cases','research','verifica-cupom','cupom','edit','payment','calcula-preco','save-status','view-accepted','verifica-caso','research','mycases','returneds','accepted-group'));
 
     }
 
