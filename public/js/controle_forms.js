@@ -379,7 +379,7 @@ $(".atualizar").click(function(){
 
 //Mascaras de campos imput 
 $(document).ready(function(){
-    $(".phone").mask("(99) 99999-9999");
+    $(".phone").mask("(99) 99999999?9");
     $(".cpf").mask("999.999.999-99"); 
     $(".cep").mask("99999-999");  
   $(".cnpj").mask("99.999.999/9999-99");    
@@ -504,14 +504,14 @@ $('#arbForm').keyup(function(){
 
 $('#advForm').keyup(function(){
     var value = $('#adv_nome').val();
-    if(value.length != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" 
+    if($('#adv_nome').val() != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" 
         & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" 
         & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" 
         & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" 
         & $('#accept_terms_adv').val() != "") {
       $('#continuarAdv').prop('disabled', false);
         $('#preencherAdv').prop('hidden', true);
-    }else if(value.length == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
+    }else if($('#adv_nome').val() == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
         & $('#adv_cpf_cnpj').val() == "" & $('#adv_senha').val() == "" 
         & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" 
         & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" 
