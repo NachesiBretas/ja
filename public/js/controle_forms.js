@@ -379,7 +379,7 @@ $(".atualizar").click(function(){
 
 //Mascaras de campos imput 
 $(document).ready(function(){
-    $(".phone").mask("(99) 99999-9999");
+    $(".phone").mask("(99) 99999999?9");
     $(".cpf").mask("999.999.999-99"); 
     $(".cep").mask("99999-999");  
   $(".cnpj").mask("99.999.999/9999-99");    
@@ -461,10 +461,10 @@ $('#cidForm').keyup(function(){
 
 $('#empForm').keyup(function(){
     var value = $('#empresa_nome').val();
-    if(value.length != "" & $('#empresa_email').val() != "" & $('#empresa_phone').val() != "" & $('#empresa_cnpj').val() != "" & $('#empresa_senha').val() != "" & $('#logradouroEmp').val() != "" & $('#num_logradouroEmp').val() != "" & $('#bairroEmp').val() != "" & $('#ufEmp').val() != "" & $('#cidadeEmp').val() != "" & $('#accept_terms_cid').val() != "") {
+    if(value.length != "" & $('#empresa_email').val() != "" & $('#empresa_phone').val() != "" & $('#empresa_cnpj').val() != "" & $('#empresa_senha').val() != "" & $('#logradouroEmp').val() != "" & $('#num_logradouroEmp').val() != "" & $('#bairroEmp').val() != "" & $('#ufEmp').val() != "" & $('#cidadeEmp').val() != "") {
       $('#continuarEmp').prop('disabled', false);
         $('#preencherEmp').prop('hidden', true);
-    }else if(value.length == "" & $('#empresa_email').val() == "" & $('#empresa_phone').val() == "" & $('#empresa_cnpj').val() == "" & $('#empresa_senha').val() == "" & $('#logradouroEmp').val() == "" & $('#num_logradouroEmp').val() == "" & $('#bairroEmp').val() == "" & $('#ufEmp').val() == "" & $('#cidadeEmp').val() == "" & $('#accept_terms_cid').val() == "") {
+    }else if(value.length == "" & $('#empresa_email').val() == "" & $('#empresa_phone').val() == "" & $('#empresa_cnpj').val() == "" & $('#empresa_senha').val() == "" & $('#logradouroEmp').val() == "" & $('#num_logradouroEmp').val() == "" & $('#bairroEmp').val() == "" & $('#ufEmp').val() == "" & $('#cidadeEmp').val() == "") {
       $('#continuarEmp').prop('disabled', true);
     }else{
         $('#continuarEmp').prop('disabled', true);
@@ -504,17 +504,14 @@ $('#arbForm').keyup(function(){
 
 $('#advForm').keyup(function(){
     var value = $('#adv_nome').val();
-    if(value.length != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" 
-        & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" 
-        & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" 
-        & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" 
-        & $('#accept_terms_adv').val() != "") {
+    if($('#adv_nome').val() != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" & $('#accept_terms_adv').val() != "") 
+    {
       $('#continuarAdv').prop('disabled', false);
         $('#preencherAdv').prop('hidden', true);
-    }else if(value.length == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
+    }else if($('#adv_nome').val() == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
         & $('#adv_cpf_cnpj').val() == "" & $('#adv_senha').val() == "" 
-        & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" 
-        & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" 
+        & $('#logradouro1').val() == "" & $('#num_logradouro1').val() == "" 
+        & $('#bairro1').val() == "" & $('#uf1').val() == "" & $('#cidade1').val() == "" 
         & $('#accept_terms_adv').val() == "") {
       $('#continuarAdv').prop('disabled', true);
     }else{
@@ -549,14 +546,14 @@ $('#user_type_adv').change(function(){
       $('#apaga2').prop('hidden', false);
     }
 });
-$('#recaptcha-accessible-status').keyup(function(){
-    // var x = $('#user_type_adv').val();
+// $('#recaptcha-accessible-status').keyup(function(){
+//     // var x = $('#user_type_adv').val();
     
-    if ($('#recaptcha-accessible-status').val() != "") {
-      $('#ok').prop('disabled', false);
-    }else{
-      $('#ok').prop('disabled', true);
-    }
-});
+//     if ($('#recaptcha-accessible-status').val() != "") {
+//       $('#ok').prop('disabled', false);
+//     }else{
+//       $('#ok').prop('disabled', true);
+//     }
+// });
 
 
