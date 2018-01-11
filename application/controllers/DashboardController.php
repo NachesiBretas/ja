@@ -23,7 +23,7 @@ class DashboardController extends Zend_Controller_Action
         $conflict = new Application_Model_Conflict();
         $this->view->institution = $authNamespace->institution;
 
-        if($this->view->institution == 1)
+        if($this->view->institution == 1 || $this->view->institution == 4)
         {
           //echo"esta aparecendo no dashboard";
           $this->view->allConflicts = count($conflict->listAll());

@@ -13,7 +13,7 @@ class ConflictsController extends Zend_Controller_Action
 
       $conflict = new Application_Model_Conflict();
 
-      if($this->view->institution == 1)
+      if($this->view->institution == 1 || $this->view->institution == 4)
         {
           //echo"em todas as paginas";
           $this->view->allConflicts = count($conflict->listAll());
