@@ -546,14 +546,14 @@ $('#user_type_adv').change(function(){
       $('#apaga2').prop('hidden', false);
     }
 });
-$('#recaptcha-accessible-status').keyup(function(){
-    // var x = $('#user_type_adv').val();
+// $('#recaptcha-accessible-status').keyup(function(){
+//     // var x = $('#user_type_adv').val();
     
-    if ($('#recaptcha-accessible-status').val() != "") {
-      $('#ok').prop('disabled', false);
-    }else{
-      $('#ok').prop('disabled', true);
-    }
-});
+//     if ($('#recaptcha-accessible-status').val() != "") {
+//       $('#ok').prop('disabled', false);
+//     }else{
+//       $('#ok').prop('disabled', true);
+//     }
+// });
 
 
