@@ -59,17 +59,17 @@
                 <?if(is_object($this->list) && !isset($this->list->name)){
                   foreach($this->list as $body){?>
                     <tr>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->de / 100, 2, ',', '.');?></a></td>
+                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->de, 2, ',', '.');?></a></td>
                       <td>
                         <?if($body->ate == 0.00){?>
                           <a href="/administration/valor-causa-edit/id/<?=$body->id?>">Valores Acima</a>
                           <?}else{?>
-                          <a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->ate / 100, 2, ',', '.');?></a>
+                          <a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->ate, 2, ',', '.');?></a>
                           <?}?>
                       </td>
-                      <td ><a href="/administration/valor-causa-edit/id/<?=$body->id?>" >R$ <?echo number_format($body->taxa_registro / 100, 2, ',', '.');?></a></td>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->taxa_adm / 100, 2, ',', '.');?></a></td>
-                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->honorario / 100, 2, ',', '.');?></a></td>
+                      <td ><a href="/administration/valor-causa-edit/id/<?=$body->id?>" >R$ <?echo number_format($body->taxa_registro, 2, ',', '.');?></a></td>
+                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->taxa_adm , 2, ',', '.');?></a></td>
+                      <td><a href="/administration/valor-causa-edit/id/<?=$body->id?>">R$ <?echo number_format($body->honorario, 2, ',', '.');?></a></td>
 
                     </tr>
                 <?} } else{?>
