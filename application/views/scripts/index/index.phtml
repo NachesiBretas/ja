@@ -1056,31 +1056,33 @@
                    </div>
                   </div>
                 <div class="row">
-                    <div class="col-md-5">
+                  <div class="col-md-5">
                     <div class="input-group">
-                            <span class="input-group-addon">R$</span>
-                                    <div class="form-group string required conciliation_value" aria-required="true"><input class="string required form-control mask_price form-control" placeholder="0,00" type="text" name="simulacao" id="simulacao_emp" aria-required="true" onkeyup="moeda(this);"></div>
-                                      <span class="input-group-btn">
-                                        <button id="simular_custo_emp" class="btn btn-primary" type="button" disabled="disabled">Simular custos</button>
-                                      </span>
-                                  </div>
-                                </div>
-                                <div class="col-md-7">
-                                  <span style="font-size: 12px;">Campo destinado ao valor em Reais que está sendo questionado no conflito. Se o conflito é sobre um produto ou contrato coloque um valor estimado e/ou aproximado.</span>
-                                </div>
-                 </div>
-
-                 <br>
-
-                 <div class="row" id="blocoSimulacaoEmp">
+                      <span class="input-group-addon">R$</span>
+                      <div class="form-group string required conciliation_value" aria-required="true">
+                        <input class="string required form-control" type="text" name="simulacao" id="simulacao_emp" aria-required="true"  onkeyup="moeda(this);" >
+                      </div>
+                      <span class="input-group-btn">
+                        <button id="simular_custo_emp" class="btn btn-primary" type="button" disabled="disabled">Simular custos</button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <span style="font-size: 12px;">Campo destinado ao valor em Reais que está sendo questionado no conflito. Se o conflito é sobre um produto ou contrato coloque um valor estimado e/ou aproximado.</span>
+                  </div>
+                </div>
+                <br>
+                <div class="row" id="blocoSimulacaoEmp">
                   <div class="input-group col-md-4" style="margin-left: 15px;">
-                                  <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro"><b> </b></span>
-                                  <br>
-                                  <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm"><b> </b></span>
-                                  <br>
-                                  <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final"><b> </b></span>
-                                </div>
-                 </div>
+                    <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro1"><b> </b></span>
+                    <br>
+                    <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm1"><b> </b></span>
+                    <br>
+                    <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final1"><b> </b></span>
+                  </div>
+                </div>
+
+
 
                  <br><br>
                  <button type="button" class="btn btn-danger fechar_empresa"><i class="fa fa-times"></i> Cancelar</button>
@@ -1568,11 +1570,11 @@
 
                   <div class="row" id="blocoSimulacaoJ">
                     <div class="input-group col-md-4" style="margin-left: 15px;">
-                                    <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro"><b> </b></span>
+                                    <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro3"><b> </b></span>
                                     <br>
-                                    <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm"><b> </b></span>
+                                    <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm3"><b> </b></span>
                                     <br>
-                                    <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final"><b> </b></span>
+                                    <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final3"><b> </b></span>
                                   </div>
                   </div>
 
@@ -1843,11 +1845,11 @@
 
                    <div class="row" id="blocoSimulacaoNJ">
                     <div class="input-group col-md-4" style="margin-left: 15px;">
-                                    <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro"><b> </b></span>
+                                    <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro2"><b> </b></span>
                                     <br>
-                                    <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm"><b> </b></span>
+                                    <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm2"><b> </b></span>
                                     <br>
-                                    <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final"><b> </b></span>
+                                    <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final2"><b> </b></span>
                                   </div>
                    </div>
 
@@ -2061,11 +2063,11 @@
 
               <div class="row" id="blocoSimulacaoArb">
                 <div class="input-group col-md-4" style="margin-left: 15px;">
-                                <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro"><b> </b></span>
+                                <span >1 - Taxa de registro: <b>R$</b></span> <span id="taxa_registro4"><b> </b></span>
                                 <br>
-                                <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm"><b> </b></span>
+                                <span >2 - Taxa de administração: <b>R$</b></span> <span id="taxa_adm4"><b> </b></span>
                                 <br>
-                                <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final"><b> </b></span>
+                                <span >3 - Honorários finais: <b>R$</b></span> <span id="taxa_final4"><b> </b></span>
                               </div>
               </div>
 

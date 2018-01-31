@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action
       if($this->getRequest()->isPost()) 
       {
         $data = $this->getRequest()->getPost();
-        var_dump($data);exit;
+        // var_dump($data);exit;
         if($data['cidadao_nome']){
           
           // insere o usuario novo na tabela de usuarios

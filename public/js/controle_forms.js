@@ -190,6 +190,127 @@ $("#simulacao_emp").keyup(function(){
 
 $("#simular_custo_emp").click(function(){
     $('#blocoSimulacaoEmp').show();
+
+    //$('#taxa_registro').text($('#cupom_cid').val());
+    if($('#cupom_emp').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_emp').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_emp').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro1').text(taxa_registro);
+                            $('#taxa_adm1').text(taxa_adm);
+                            $('#taxa_final1').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_emp').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro1').text(taxa_registro.toFix(2));
+                            $('#taxa_adm1').text(taxa_adm.toFix(2));
+                            $('#taxa_final1').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_emp').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro1').text(taxa_registro);
+                            $('#taxa_adm1').text(taxa_adm);
+                            $('#taxa_final1').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_emp').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro1').text(taxa_registro);
+                $('#taxa_adm1').text(taxa_adm);
+                $('#taxa_final1').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 
@@ -210,6 +331,126 @@ $("#simulacao_arb").keyup(function(){
 
 $("#simular_custo_arb").click(function(){
     $('#blocoSimulacaoArb').show();
+
+    if($('#cupom_arb').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_arb').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_arb').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro4').text(taxa_registro);
+                            $('#taxa_adm4').text(taxa_adm);
+                            $('#taxa_final4').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_arb').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro4').text(taxa_registro.toFix(2));
+                            $('#taxa_adm4').text(taxa_adm.toFix(2));
+                            $('#taxa_final4').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_arb').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro4').text(taxa_registro);
+                            $('#taxa_adm4').text(taxa_adm);
+                            $('#taxa_final4').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_arb').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro4').text(taxa_registro);
+                $('#taxa_adm4').text(taxa_adm);
+                $('#taxa_final4').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 $("#simulacao_nj").keyup(function(){
@@ -219,6 +460,126 @@ $("#simulacao_nj").keyup(function(){
 
 $("#simular_custo_nj").click(function(){
     $('#blocoSimulacaoNJ').show();
+
+        if($('#cupom_nj').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_nj').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_nj').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro2').text(taxa_registro);
+                            $('#taxa_adm2').text(taxa_adm);
+                            $('#taxa_final2').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_nj').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro2').text(taxa_registro.toFix(2));
+                            $('#taxa_adm2').text(taxa_adm.toFix(2));
+                            $('#taxa_final2').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_nj').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro2').text(taxa_registro);
+                            $('#taxa_adm2').text(taxa_adm);
+                            $('#taxa_final2').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_nj').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro2').text(taxa_registro);
+                $('#taxa_adm2').text(taxa_adm);
+                $('#taxa_final2').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 
@@ -229,6 +590,126 @@ $("#simulacao_j").keyup(function(){
 
 $("#simular_custo_j").click(function(){
     $('#blocoSimulacaoJ').show();
+
+    if($('#cupom_j').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_j').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_j').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro3').text(taxa_registro);
+                            $('#taxa_adm3').text(taxa_adm);
+                            $('#taxa_final3').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_j').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro3').text(taxa_registro.toFix(2));
+                            $('#taxa_adm3').text(taxa_adm.toFix(2));
+                            $('#taxa_final3').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_j').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro3').text(taxa_registro);
+                            $('#taxa_adm3').text(taxa_adm);
+                            $('#taxa_final3').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_j').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro3').text(taxa_registro);
+                $('#taxa_adm3').text(taxa_adm);
+                $('#taxa_final3').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 
