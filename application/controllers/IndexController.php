@@ -37,6 +37,7 @@ class IndexController extends Zend_Controller_Action
       if($this->getRequest()->isPost()) 
       {
         $data = $this->getRequest()->getPost();
+        // var_dump($data);exit;
         if($data['cidadao_nome']){
           
           // insere o usuario novo na tabela de usuarios
@@ -111,7 +112,7 @@ class IndexController extends Zend_Controller_Action
 
           $this->_redirect('/index');
          }catch(Zend_Exception $e){
-              echo "Erro ao enviar o email" ;
+              echo "Erro ao enviar o email";  
           }    
       }
 

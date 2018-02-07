@@ -190,6 +190,127 @@ $("#simulacao_emp").keyup(function(){
 
 $("#simular_custo_emp").click(function(){
     $('#blocoSimulacaoEmp').show();
+
+    //$('#taxa_registro').text($('#cupom_cid').val());
+    if($('#cupom_emp').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_emp').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_emp').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro1').text(taxa_registro);
+                            $('#taxa_adm1').text(taxa_adm);
+                            $('#taxa_final1').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_emp').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro1').text(taxa_registro.toFix(2));
+                            $('#taxa_adm1').text(taxa_adm.toFix(2));
+                            $('#taxa_final1').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_emp').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro1').text(taxa_registro);
+                            $('#taxa_adm1').text(taxa_adm);
+                            $('#taxa_final1').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_emp').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro1').text(taxa_registro);
+                $('#taxa_adm1').text(taxa_adm);
+                $('#taxa_final1').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 
@@ -210,6 +331,126 @@ $("#simulacao_arb").keyup(function(){
 
 $("#simular_custo_arb").click(function(){
     $('#blocoSimulacaoArb').show();
+
+    if($('#cupom_arb').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_arb').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_arb').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro4').text(taxa_registro);
+                            $('#taxa_adm4').text(taxa_adm);
+                            $('#taxa_final4').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_arb').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro4').text(taxa_registro.toFix(2));
+                            $('#taxa_adm4').text(taxa_adm.toFix(2));
+                            $('#taxa_final4').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_arb').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro4').text(taxa_registro);
+                            $('#taxa_adm4').text(taxa_adm);
+                            $('#taxa_final4').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_arb').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro4').text(taxa_registro);
+                $('#taxa_adm4').text(taxa_adm);
+                $('#taxa_final4').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 $("#simulacao_nj").keyup(function(){
@@ -219,6 +460,126 @@ $("#simulacao_nj").keyup(function(){
 
 $("#simular_custo_nj").click(function(){
     $('#blocoSimulacaoNJ').show();
+
+        if($('#cupom_nj').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_nj').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_nj').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro2').text(taxa_registro);
+                            $('#taxa_adm2').text(taxa_adm);
+                            $('#taxa_final2').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_nj').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro2').text(taxa_registro.toFix(2));
+                            $('#taxa_adm2').text(taxa_adm.toFix(2));
+                            $('#taxa_final2').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_nj').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro2').text(taxa_registro);
+                            $('#taxa_adm2').text(taxa_adm);
+                            $('#taxa_final2').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_nj').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro2').text(taxa_registro);
+                $('#taxa_adm2').text(taxa_adm);
+                $('#taxa_final2').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 
@@ -229,6 +590,126 @@ $("#simulacao_j").keyup(function(){
 
 $("#simular_custo_j").click(function(){
     $('#blocoSimulacaoJ').show();
+
+    if($('#cupom_j').val() != ''){
+        $.ajax({
+            url: 'conflicts/verifica-cupom',
+            type: 'POST',
+            data: { cupom: $('#cupom_j').val() },
+            success: function(data){
+                var posicaoi = data.indexOf("<#");
+                var posicaof = data.indexOf("#>");
+                var result = data.substring(posicaoi+2, posicaof);
+
+                console.log('hh',result.replace(/^\s+|\s+$/g,""));
+
+                if(result.replace(/^\s+|\s+$/g,"") != 'us' && result.replace(/^\s+|\s+$/g,"") != 'ne'){
+                    //alert('Este cupom existe!');
+                    $.ajax({
+                        url: 'conflicts/calcula-preco',
+                        type: 'POST',
+                        data: { desconto: result.replace(/^\s+|\s+$/g,"") , valor: $('#simulacao_j').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro3').text(taxa_registro);
+                            $('#taxa_adm3').text(taxa_adm);
+                            $('#taxa_final3').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+                else if(result.replace(/^\s+|\s+$/g,"") == 'us'){
+                    alert('Este cupom já foi usado!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_j').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro3').text(taxa_registro.toFix(2));
+                            $('#taxa_adm3').text(taxa_adm.toFix(2));
+                            $('#taxa_final3').text(honorario.toFix(2));
+                        }// fim success ajax preços
+                    }); // FIM AJAX PREÇOS
+                }
+                else{
+                    alert('Este cupom não existe!');
+
+                    $.ajax({
+                    url: 'conflicts/calcula-preco',
+                    type: 'POST',
+                    data: { desconto: 0 , valor: $('#simulacao_j').val() },
+                        success: function(data){
+                            var pireg = data.indexOf("<treg");
+                            var pfreg = data.indexOf("treg>");
+                            var taxa_registro = data.substring(pireg+5, pfreg);
+
+                            var piadm = data.indexOf("<tadm");
+                            var pfadm = data.indexOf("tadm>");
+                            var taxa_adm = data.substring(piadm+5, pfadm);
+
+                            var pihon = data.indexOf("<hon");
+                            var pfhon = data.indexOf("hon>");
+                            var honorario = data.substring(pihon+4, pfhon);
+                            
+                            $('#taxa_registro3').text(taxa_registro);
+                            $('#taxa_adm3').text(taxa_adm);
+                            $('#taxa_final3').text(honorario);
+                        }// fim success ajax preços
+
+                    }); // FIM AJAX PREÇOS
+                }
+            }// fim success do ajax de cupom
+
+        }); // FIM AJAX CUPOM
+    } //fim if se tem cupom
+    else{
+        $.ajax({
+            url: 'conflicts/calcula-preco',
+            type: 'POST',
+            data: { desconto: 0 , valor: $('#simulacao_j').val() },
+            success: function(data){
+                var pireg = data.indexOf("<treg");
+                var pfreg = data.indexOf("treg>");
+                var taxa_registro = data.substring(pireg+5, pfreg);
+
+                var piadm = data.indexOf("<tadm");
+                var pfadm = data.indexOf("tadm>");
+                var taxa_adm = data.substring(piadm+5, pfadm);
+
+                var pihon = data.indexOf("<hon");
+                var pfhon = data.indexOf("hon>");
+                var honorario = data.substring(pihon+4, pfhon);
+                
+                $('#taxa_registro3').text(taxa_registro);
+                $('#taxa_adm3').text(taxa_adm);
+                $('#taxa_final3').text(honorario);
+            }// fim success ajax preços
+        }); // FIM AJAX PREÇOS
+    }
 });
 
 
@@ -432,17 +913,33 @@ function mascara(o,f){
 //   })
 
 // validação dos formularios de cidadao 
-$('#cidForm').keyup(function(){
+$('#accept_terms_cid').bind('change',function(){
     var value = $('#cidadao_nome').val();
-    if(value.length != "" & $('#cidadao_email').val() != "" & $('#cidadao_phone').val() != "" & $('#cidadao_cpf').val() != "" & $('#cidadao_senha1').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "" & $('#accept_terms_cid').val() != "") {
+    if($('#accept_terms_cid').is(':checked')== true & value.length != "" & $('#cidadao_email').val() != "" & $('#cidadao_phone').val() != "" & $('#cidadao_cpf').val() != "" & $('#cidadao_senha1').val() != "" & $('#logradouro').val() != "" & $('#num_logradouro').val() != "" & $('#bairro').val() != "" & $('#uf').val() != "" & $('#cidade').val() != "") {
+      
       $('#continuarCid').prop('disabled', false);
         $('#preencher').prop('hidden', true);
-    }else if(value.length == "" & $('#cidadao_email').val() == "" & $('#cidadao_phone').val() == "" & $('#cidadao_cpf').val() == "" & $('#cidadao_senha1').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_cid').val() == "") {
+    }else if($(this).is(':checked')== false & value.length == "" & $('#cidadao_email').val() == "" & $('#cidadao_phone').val() == "" & $('#cidadao_cpf').val() == "" & $('#cidadao_senha1').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "") {
       $('#continuarCid').prop('disabled', true);
+      $('#preencher').prop('hidden', false);
     }else{
         $('#continuarCid').prop('disabled', true);
+        $('#preencher').prop('hidden', false);
     }
   })
+
+//Exemplo
+  // $('#accept_terms_cid').bind('change',function(){
+  //   // alert('Checkbox checado?'+ $(this).is(':checked'));
+  //   if ($(this).is(':checked')== true) {
+  //     $('#continuarCid').prop('disabled', false);
+  //         $('#preencher').prop('hidden', true);
+  //   }else{
+  //     $('#continuarCid').prop('disabled', true);
+  //     $('#preencher').prop('hidden', false);
+  //   }
+  //   //Seu ajax aqui
+  // })
 
 $('#cidForm').keyup(function(){
     var value = $('#cidadao_desc_conflito').val();
@@ -459,25 +956,27 @@ $('#cidForm').keyup(function(){
 
 // Validação de campos das empresas 
 
-$('#empForm').keyup(function(){
+$('#accept_terms_emp').bind('change',function(){
     var value = $('#empresa_nome').val();
-    if(value.length != "" & $('#empresa_email').val() != "" & $('#empresa_phone').val() != "" & $('#empresa_cnpj').val() != "" & $('#empresa_senha').val() != "" & $('#logradouroEmp').val() != "" & $('#num_logradouroEmp').val() != "" & $('#bairroEmp').val() != "" & $('#ufEmp').val() != "" & $('#cidadeEmp').val() != "") {
+    if($(this).is(':checked')== true & value.length != "" & $('#empresa_email').val() != "" & $('#empresa_phone').val() != "" & $('#empresa_cnpj').val() != "" & $('#empresa_senha').val() != "" & $('#logradouroEmp').val() != "" & $('#num_logradouroEmp').val() != "" & $('#bairroEmp').val() != "" & $('#ufEmp').val() != "" & $('#cidadeEmp').val() != "") {
       $('#continuarEmp').prop('disabled', false);
         $('#preencherEmp').prop('hidden', true);
-    }else if(value.length == "" & $('#empresa_email').val() == "" & $('#empresa_phone').val() == "" & $('#empresa_cnpj').val() == "" & $('#empresa_senha').val() == "" & $('#logradouroEmp').val() == "" & $('#num_logradouroEmp').val() == "" & $('#bairroEmp').val() == "" & $('#ufEmp').val() == "" & $('#cidadeEmp').val() == "") {
+    }else if($(this).is(':checked')== false & value.length == "" & $('#empresa_email').val() == "" & $('#empresa_phone').val() == "" & $('#empresa_cnpj').val() == "" & $('#empresa_senha').val() == "" & $('#logradouroEmp').val() == "" & $('#num_logradouroEmp').val() == "" & $('#bairroEmp').val() == "" & $('#ufEmp').val() == "" & $('#cidadeEmp').val() == "") {
       $('#continuarEmp').prop('disabled', true);
+      $('#preencherEmp').prop('hidden', false);
     }else{
         $('#continuarEmp').prop('disabled', true);
+        $('#preencherEmp').prop('hidden', false);
     }
   })
 
 $('#empForm').keyup(function(){
     var value = $('#emp_desc_conflito').val();
-    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != ""  & $('#accept_terms_emp').val() != "") 
+    if(value.length != "" & $('#emp_desc_resolucao_conflito').val() != "" & $('#nome_opEmp').val() != "" & $('#email_opEmp').val() != "" & $('#cpf_opEmp').val() != "" & $('#logradouro_opEmp').val() != "" & $('#num_log_opEmp').val() != "" & $('#bairro_opEmp').val() != "" & $('#estado_opEmp').val() != "" & $('#cidade_opEmp').val() != "") 
     {
         $('#finalizarEmp').prop('disabled', false);
         $('#preencheremp2').prop('hidden', true);
-    }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "" & $('#accept_terms_emp').val() == "") {
+    }else if(value.length == "" & $('#emp_desc_resolucao_conflito').val() == "" & $('#nome_op').val() == "" & $('#email_op').val() == "" & $('#cpf_op').val() == "" & $('#logradouro_op').val() == "" & $('#num_log_op').val() == "" & $('#bairro_op').val() == "" & $('#estado_op').val() == "" & $('#cidade_op').val() == "") {
         $('#finalizarEmp').prop('disabled', true);
     }else{
         $('.finalizarEmp').prop('disabled', true);
@@ -487,35 +986,39 @@ $('#empForm').keyup(function(){
 
 // validação de campos arbitragem 
 
-$('#arbForm').keyup(function(){
+$('#accept_terms_arb').bind('change',function(){
     var value = $('#arbitragem_nome').val();
-    if(value.length != "" & $('#arbitragem_email').val() != "" & $('#arbitragem_telefone').val() != "" & $('#arbitragem_cpf').val() != "" & $('#arbitragem_senha').val() != "" & $('#logradouro2').val() != "" & $('#num_logradouro2').val() != "" & $('#bairro2').val() != "" & $('#uf2').val() != "" & $('#cidade2').val() != "" & $('#accept_terms_arb').val() != "") {
+    if($(this).is(':checked')== true & value.length != "" & $('#arbitragem_email').val() != "" & $('#arbitragem_telefone').val() != "" & $('#arbitragem_cpf').val() != "" & $('#arbitragem_senha').val() != "" & $('#logradouro2').val() != "" & $('#num_logradouro2').val() != "" & $('#bairro2').val() != "" & $('#uf2').val() != "" & $('#cidade2').val() != "") {
       $('#finalizarArb').prop('disabled', false);
         $('#preencherArb').prop('hidden', true);
-    }else if(value.length == "" & $('#arbitragem_email').val() == "" & $('#arbitragem_telefone').val() == "" & $('#arbitragem_cpf').val() == "" & $('#arbitragem_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "" & $('#accept_terms_arb').val() == "") {
+    }else if($(this).is(':checked')== false & value.length == "" & $('#arbitragem_email').val() == "" & $('#arbitragem_telefone').val() == "" & $('#arbitragem_cpf').val() == "" & $('#arbitragem_senha').val() == "" & $('#logradouro').val() == "" & $('#num_logradouro').val() == "" & $('#bairro').val() == "" & $('#uf').val() == "" & $('#cidade').val() == "") {
       $('#finalizarArb').prop('disabled', true);
+      $('#preencherArb').prop('hidden', false);
     }else{
         $('#finalizarArb').prop('disabled', true);
+        $('#preencherArb').prop('hidden', false);
     }
   })
 
 
 // validação de campos Adv 
 
-$('#advForm').keyup(function(){
+$('#accept_terms_adv').bind('change',function(){
     var value = $('#adv_nome').val();
-    if($('#adv_nome').val() != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" & $('#accept_terms_adv').val() != "") 
+    if($(this).is(':checked')== true & $('#adv_nome').val() != "" & $('#adv_email').val() != "" & $('#adv_phone').val() != "" & $('#adv_cpf_cnpj').val() != "" & $('#adv_senha').val() != "" & $('#logradouro1').val() != "" & $('#num_logradouro1').val() != "" & $('#bairro1').val() != "" & $('#uf1').val() != "" & $('#cidade1').val() != "" & $('#accept_terms_adv').val() != "") 
     {
       $('#continuarAdv').prop('disabled', false);
         $('#preencherAdv').prop('hidden', true);
-    }else if($('#adv_nome').val() == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
+    }else if($(this).is(':checked')== false & $('#adv_nome').val() == "" & $('#adv_email').val() == "" & $('#adv_phone').val() == "" 
         & $('#adv_cpf_cnpj').val() == "" & $('#adv_senha').val() == "" 
         & $('#logradouro1').val() == "" & $('#num_logradouro1').val() == "" 
         & $('#bairro1').val() == "" & $('#uf1').val() == "" & $('#cidade1').val() == "" 
         & $('#accept_terms_adv').val() == "") {
       $('#continuarAdv').prop('disabled', true);
+      $('#preencherAdv').prop('hidden', false);
     }else{
         $('#continuarAdv').prop('disabled', true);
+        $('#preencherAdv').prop('hidden', false);
     }
   })
 
