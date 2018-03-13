@@ -860,7 +860,8 @@ $(".atualizar").click(function(){
 
 //Mascaras de campos imput 
 $(document).ready(function(){
-    // $(".phone").mask("(99) 99999999?9");
+    $(".cell").mask("(99) 99999-9999");
+    $(".tel_casa").mask("(99) 9999-9999");
     $(".cpf").mask("999.999.999-99"); 
     $(".cep").mask("99999-999");  
   $(".cnpj").mask("99.999.999/9999-99");    
