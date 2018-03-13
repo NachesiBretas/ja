@@ -860,7 +860,7 @@ $(".atualizar").click(function(){
 
 //Mascaras de campos imput 
 $(document).ready(function(){
-    $(".phone").mask("(99) 99999999?9");
+    // $(".phone").mask("(99) 99999999?9");
     $(".cpf").mask("999.999.999-99"); 
     $(".cep").mask("99999-999");  
   $(".cnpj").mask("99.999.999/9999-99");    
@@ -897,6 +897,12 @@ function mascara(o,f){
   }
   function soNumber(v){
     v=v.replace(/\D/g,"")                           //Remove tudo o que não é dígito
+    return v
+  }
+  function phone(v){
+    v=v.replace(/\D/g,"")                           //Remove tudo o que não é dígito
+    v=v.replace(/(\d{0})(\d)/,"$1($2")            //Abre o parentes antes de qualquer digito
+     v=v.replace(/(\d{2})(\d)/,"$1)$2")          //Fecha o parentes depois do 2 digito 
     return v
   }
 

@@ -258,7 +258,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Telefone</label>
-                                <input type="text" class="form-control" placeholder="Telefone" name="phone" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <input type="text" class="form-control" placeholder="Telefone" name="phone" id="phone" required data-validation-required-message="Please enter your phone number." >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -462,7 +462,7 @@
                                   <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control" type="email" name="cidadao_email" id="cidadao_email" aria-required="true"></div>
                                 </div>
                                 <div class="col-md-6">
-                                  <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="form-control" type="tel" name="cidadao_phone" id="cidadao_phone" aria-required="true"></div>
+                                  <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="form-control" type="tel" name="cidadao_phone" id="cidadao_phone" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -606,7 +606,7 @@
                       <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control" type="email" name="email_op" id="email_op" aria-required="true"></div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="form-control form-control form-control" type="tel" name="phone_op" id="phone_op" aria-required="true"></div>
+                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="form-control form-control form-control" type="tel" name="phone_op" id="phone_op" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -828,7 +828,7 @@
                       <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control form-control form-control" type="email" name="empresa_email" id="empresa_email" aria-required="true"></div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control" type="tel" name="empresa_phone" id="empresa_phone" aria-required="true"></div>
+                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control" type="tel" name="empresa_phone" id="empresa_phone" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -964,7 +964,7 @@
                       <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control" type="email" name="email_op" id="email_opEmp" aria-required="true"></div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control" type="tel" name="phone_op" id="phone_opEmp" aria-required="true"></div>
+                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control" type="tel" name="phone_op" id="phone_opEmp" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -1157,7 +1157,7 @@
                       <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control" type="email" name="adv_email" id="adv_email" aria-required="true"></div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="adv_phone" id="adv_phone" aria-required="true"></div>
+                      <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="adv_phone" id="adv_phone" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -1366,7 +1366,7 @@
                         <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control form-control form-control" type="email" name="adv_mail_au" id="adv_mail_au" aria-required="true"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="adv_phone_au" id="adv_phone_au" aria-required="true"></div>
+                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="adv_phone_au" id="adv_phone_au" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                       </div>
                   </div>
                   <div class="row">
@@ -1461,7 +1461,7 @@
                         <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control form-control form-control" type="email" name="adv_email_re" id="adv_email_re" aria-required="true"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="adv_phone_re" id="adv_phone_re" aria-required="true"></div>
+                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="adv_phone_re" id="adv_phone_re" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                       </div>
                   </div>
                   <div class="row">
@@ -1631,7 +1631,7 @@
                         <div class="form-group required" aria-required="true"><label class=" required control-label"aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control form-control" type="email" name="email_cliente_nj" id="email_cliente_nj" aria-required="true"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="phone_cliente_nj" id="phone_cliente_nj" aria-required="true"></div>
+                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="phone_cliente_nj" id="phone_cliente_nj" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                       </div>
                   </div>
                   <div class="row">
@@ -1736,7 +1736,7 @@
                         <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="conciliation_requesters_attributes_0_email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control form-control form-control" type="email" name="email_op" id="email_op" aria-required="true"></div>
                       </div>
                       <div class="col-md-6">
-                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="email_op" id="email_op" aria-required="true"></div>
+                        <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="conciliation_requesters_attributes_0_phone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="email_op" id="email_op" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                       </div>
                   </div>
                   <div class="row">
@@ -1930,7 +1930,7 @@
                     <div class="form-group email required conciliation_requesters_email" aria-required="true"><label class="email required control-label" for="email" aria-required="true"><abbr title="obrigatório">*</abbr> E-mail</label><input class="string email required form-control form-control form-control" type="email" name="arbitragem_email" id="arbitragem_email" aria-required="true"></div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="telefone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="arbitragem_telefone" id="arbitragem_telefone" aria-required="true"></div>
+                    <div class="form-group tel required conciliation_requesters_phone" aria-required="true"><label class="tel required control-label" for="telefone" aria-required="true"><abbr title="obrigatório">*</abbr> Telefone</label><input class="string phone required form-control form-control form-control" type="tel" name="arbitragem_telefone" id="arbitragem_telefone" aria-required="true" onkeypress="mascara(this,phone)" maxlength="13"></div>
                   </div>
               </div>
               <div class="row">
@@ -3989,7 +3989,7 @@ procedimento do Ato 0006059-82.2010.2.00.0000;
                       </div>  
                       <div class="form-group rsform-block rsform-block-mediador-telefone">
                         <label class="control-label formControlLabel" data-toggle="tooltip" title="" for="tc_phone" data-original-title="">Telefone<strong class="formRequired">(*)</strong></label>
-                        <input type="tel" value="" name="tc_phone" id="tc_phone" class="rsform-input-box form-control phone">
+                        <input type="tel" value="" name="tc_phone" id="tc_phone" class="rsform-input-box form-control phone" onkeypress="mascara(this,phone)" maxlength="13">
                       </div>                                      
                     </div>
                     <div class="col-md-6">
