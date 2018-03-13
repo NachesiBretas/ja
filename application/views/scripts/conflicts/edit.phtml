@@ -10,17 +10,26 @@
         $user = new Application_Model_User();
         $status = $user->validUser($authNamespace->user_id);
         
-        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
-        <a href="/conflicts/types" class="list-group-item active"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){
         
+        if($institution == 2 || $institution == 3 || $institution == 5){?>
+        <a href="/conflicts/view-accepted" class="list-group-item active"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+
+        <?}else{?>
+        <a href="/conflicts/types" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+
+        <?}?>
+
         <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados <?if($this->allReturnedConflicts){?><span class="badge"><?=$this->allReturnedConflicts?></span><?}?></a>
         <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
         <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
+
         <?if($institution == 1 || $institution == 4){?>
-        <a href="conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
-        <?}?>
+        <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
         <?}
-        else if($status['status'] == 1){?>
+        
+        }
+         else if($status['status'] == 1){?>
         <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <?}?>
       </div>
@@ -58,7 +67,7 @@
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#crlv">
-                      Documento 1
+                      Documento
                     </a>
                   </h4>
                 </div>
@@ -87,7 +96,7 @@
           <div class="tab-pane <?if($this->result == 10){?>active<?}?>" id="reunions">
             <hr>
             <div class="panel-group" id="accordion">
-              Para visualizar sua agenda e gerenciar seus horarios <a href="http://onibus/scheduling/treatment" target="_blank">click aqui</a>.
+              Para visualizar sua agenda e gerenciar seus horarios <a href="/scheduling/treatment" target="_blank">click aqui</a>.
               <br><br>
               Para acessar o Whatsapp Web para reunir ou conversar com o cliente <a href="https://web.whatsapp.com/" target="_blank">click aqui</a>.
               <br><br>

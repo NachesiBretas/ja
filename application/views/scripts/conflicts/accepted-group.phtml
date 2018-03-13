@@ -13,11 +13,11 @@
         if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){
         
         if($institution == 2 || $institution == 3 || $institution == 5){?>
-                <a href="/conflicts/view-accepted" class="list-group-item active"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+                <a href="/conflicts/view-accepted" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
 
 
                 <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados <?if($this->allReturnedConflicts){?><span class="badge"><?=$this->allReturnedConflicts?></span><?}?></a>
-                <a href="/conflicts/accepted" class="list-group-item "><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
+                <a href="/conflicts/accepted" class="list-group-item active"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
                 <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
 
         <?} else{?>

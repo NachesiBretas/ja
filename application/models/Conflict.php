@@ -22,7 +22,7 @@ class Application_Model_Conflict
 				->joinLeft(array('ou' => 'other_user'),'c.id_other_user=ou.id_other_user', array('name_ou' => 'name',
 																								 'email_ou' => 'email',
 																								 'phone_ou' => 'phone',
-																								 'cpf_cnpj'))
+																								 'cpf_cnpj_ou' => 'cpf_cnpj'))
 				/*->joinLeft(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
 																							 'number_u' => 'number',
 																							 'complement_u' => 'complement',
@@ -208,14 +208,14 @@ class Application_Model_Conflict
 						->where('c.estimate_price != 0.00')
 						->order('id_conflict desc');
 		$preco_estimado = $conflict->fetchRow($select);
-		
+		//echo $select;
 		if(isset($preco_estimado) && $preco_estimado !=0){
 		$vc = new Application_Model_DbTable_ValorCausa();
 		$select2 = $vc->select()->setIntegrityCheck(false);
 		$select2	->from(array('c' => 'valor_causa'),array('valor' =>'(c.taxa_registro + c.taxa_adm)') )
 						->where('c.de <= ?',$preco_estimado['estimate_price'])
 						->where('c.ate >= ?',$preco_estimado['estimate_price']);
-						//echo $select2;
+						echo $select2;
 		$teste = $vc->fetchRow($select2);
 		//print_r($teste); exit();
 		
@@ -284,10 +284,19 @@ class Application_Model_Conflict
 	public function listsAccepted($type)
 	{
 		$conflict = new Application_Model_DbTable_Conflict();
-		$select = $conflict->select()->setIntegrityCheck(false);
-		$select	->from(array('c' => 'conflict'),array('c.id_conflict','c.desc_conflict') )
-						->joinLeft(array('u' => 'user'),'c.id_user=u.id',array('name'))
+		if($type !=0){
+			$select = $conflict->select()->setIntegrityCheck(false);
+			$select	->from(array('c' => 'conflict'),array('c.id_conflict','c.desc_conflict') )
+							->joinLeft(array('u' => 'user'),'c.id_user=u.id',array('name'))
 						->where('c.status = ?',$type);
+		}
+		else{
+			$select = $conflict->select()->setIntegrityCheck(false);
+			$select	->from(array('c' => 'conflict'),array('c.id_conflict','c.desc_conflict') )
+							->joinLeft(array('u' => 'user'),'c.id_user=u.id',array('name'))
+							->where('c.status != 0');
+		}
+
 		return $conflict->fetchAll($select);		
 	}
 
@@ -321,6 +330,17 @@ class Application_Model_Conflict
 		$select = $conflict->select()->setIntegrityCheck(false);
 		$select	->from(array('c' => 'conflict') )
 				->where('status = ?',$type);
+		return $conflict->fetchAll($select);
+			
+	}
+
+	public function listAcceptedGroupByType($type,$group)
+	{
+		$conflict = new Application_Model_DbTable_Conflict();
+		$select = $conflict->select()->setIntegrityCheck(false);
+		$select	->from(array('c' => 'conflict') )
+				->where('status = ?',$type)
+				->where('accepted_group = ?',$group);
 		return $conflict->fetchAll($select);
 			
 	}
@@ -389,6 +409,14 @@ class Application_Model_Conflict
 		}
 	}
 
+	public function addUserIntoConflict($conflictId,$user_id)
+	{
+		$conflict = new Application_Model_DbTable_Conflict();
+		$conflictRow = $conflict->fetchRow($conflict->select()->where('id_conflict = ?',$conflictId));
+		$conflictRow->accepted_case_user = $user_id;
+
+		return $conflictRow->save();	
+	}
 
 	public function changeStatus($conflictId,$status)
 	{
@@ -424,6 +452,7 @@ class Application_Model_Conflict
 						->where('substr(v.document,1,4) like ?', $aux."%");
 		
 		$conflictRow = $conflict->fetchAll($select);
+		//echo $select;
 		return $conflictRow;
 	}
 

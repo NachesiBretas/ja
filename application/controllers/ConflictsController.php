@@ -13,7 +13,7 @@ class ConflictsController extends Zend_Controller_Action
 
       $conflict = new Application_Model_Conflict();
 
-      if($this->view->institution == 1)
+      if($this->view->institution == 1 || $this->view->institution == 4)
         {
           //echo"em todas as paginas";
           $this->view->allConflicts = count($conflict->listAll());
@@ -33,22 +33,32 @@ class ConflictsController extends Zend_Controller_Action
         if($this->view->institution == 5) // mediador
         {
           $this->view->allConflicts = count($conflict->listNewsByType(1,1));
-          $this->view->allAcceptedConflicts = count($conflict->listAcceptedByType(1));
-          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(4));
+          $this->view->allAcceptedConflicts = count($conflict->listAcceptedGroupByType(1,5));
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedGroupByType(4,5));
+
+          $this->view->citizenConflicts = count($conflict->listAcceptedByType(1));
+          $this->view->companyConflicts = count($conflict->listAcceptedByType(2));
+          $this->view->lawyerConflicts = count($conflict->listAcceptedByType(3));
         }
 
         if($this->view->institution == 3) //conciliador
         {
           $this->view->allConflicts = count($conflict->listNewsByType(2,1));
-          $this->view->allAcceptedConflicts = count($conflict->listAcceptedByType(2));
-          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(5));
+          $this->view->allAcceptedConflicts = count($conflict->listAcceptedGroupByType(2,3));
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedGroupByType(5,3));
+
+          $this->view->citizenConflicts = count($conflict->listAcceptedByType(1));
+          $this->view->companyConflicts = count($conflict->listAcceptedByType(2));
+          $this->view->lawyerConflicts = count($conflict->listAcceptedByType(3));
         }
 
         if($this->view->institution == 2) //arbitro
         {
           $this->view->allConflicts = count($conflict->listNewsByType(3,1));
-          $this->view->allAcceptedConflicts = count($conflict->listAcceptedByType(3));
-          $this->view->allReturnedConflicts = count($conflict->listAcceptedByType(6));
+          $this->view->allAcceptedConflicts = count($conflict->listAcceptedGroupByType(3,2));
+          $this->view->allReturnedConflicts = count($conflict->listAcceptedGroupByType(6,2));
+
+          $this->view->arbitrationConflicts = count($conflict->listAcceptedByType(4));
         }
 
 
@@ -69,6 +79,11 @@ class ConflictsController extends Zend_Controller_Action
         // action body
     }
 
+    public function acceptedGroupAction()
+    {
+        // action body
+    }
+
     public function returnedsAction()
     {
         // action body
@@ -77,7 +92,10 @@ class ConflictsController extends Zend_Controller_Action
         $conflict = new Application_Model_Conflict();
         $data = $this->getRequest()->getPost(); 
 
-        $conflict->changeStatusReturneds($data['conflictId'],$data['grupo']);
+        $authNamespace = new Zend_Session_Namespace('userInformation');
+        $institution = $authNamespace->institution;
+
+        $conflict->changeStatusReturneds($data['conflictId'],$institution);
         $this->redirect('/conflicts/returneds');
 
       }
@@ -227,6 +245,10 @@ class ConflictsController extends Zend_Controller_Action
         }
         elseif ($type == 3) {
           $this->view->type = 'Árbitro';
+        }
+        else{
+          $this->view->type = '';
+          $type = 0;
         }
 
         $conflict = new Application_Model_Conflict();
@@ -430,6 +452,24 @@ class ConflictsController extends Zend_Controller_Action
         $data = $this->getRequest()->getPost(); 
 
         $conflict->changeStatus($data['conflictId'],$data['grupo']);
+        $this->redirect('/conflicts/types');
+
+      }
+    }
+
+
+    public function acceptCaseUserAction()
+    {
+     if ( $this->getRequest()->isPost()) 
+      {
+        $conflict = new Application_Model_Conflict();
+        $data = $this->getRequest()->getPost(); 
+
+        $authNamespace = new Zend_Session_Namespace('userInformation');
+        $institution = $authNamespace->institution;
+        $user_id = $authNamespace->user_id;
+
+        $conflict->addUserIntoConflict($data['conflictId'],$institution,$user_id);
         $this->redirect('/conflicts/types');
 
       }

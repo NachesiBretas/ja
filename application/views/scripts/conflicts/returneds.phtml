@@ -10,27 +10,26 @@
         $user = new Application_Model_User();
         $status = $user->validUser($authNamespace->user_id);
         
-        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){?>
+        if(($institution == 1 || $institution == 4 || $institution == 2 || $institution == 3 || $institution == 5) && $status['status'] == 1){
+        
+        if($institution == 2 || $institution == 3 || $institution == 5){?>
+        <a href="/conflicts/view-accepted" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
+
+        <?}else{?>
         <a href="/conflicts/types" class="list-group-item"><i class="fa fa-folder-open"></i> Cadastros<?if($this->allConflicts){?><span class="badge"><?=$this->allConflicts?></span><?}?></a>
 
-        <a href="/conflicts/returneds" class="list-group-item active"><i class="fa fa-undo"></i> Retornados <?if($this->allReturnedConflicts){?><span class="badge"><?=$this->allReturnedConflicts?></span><?}?></a>
-
-        <?if($institution != 2){?>
-        <a href="/conflicts/view-accepted/type/1" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Mediador <?if($this->mediadorConflictsReturneds){?><span class="badge"><?=$this->mediadorConflictsReturneds?></span><?}?></a>
-
-        <a href="/conflicts/view-accepted/type/2" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Conciliador <?if($this->conciliadorConflictsReturneds){?><span class="badge"><?=$this->conciliadorConflictsReturneds?></span><?}?></a>
-        <?}
-        if($institution == 2 || $institution == 1 || $institution == 4){?>
-        <a href="/conflicts/view-accepted/type/3" class="list-group-item"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;Árbitro <?if($this->arbitroConflictsReturneds){?><span class="badge"><?=$this->arbitroConflictsReturneds?></span><?}?></a>
         <?}?>
 
+        <a href="/conflicts/returneds" class="list-group-item"><i class="fa fa-undo"></i> Retornados <?if($this->allReturnedConflicts){?><span class="badge"><?=$this->allReturnedConflicts?></span><?}?></a>
         <a href="/conflicts/accepted" class="list-group-item"><i class="fa fa-check"></i> Aceitos <?if($this->allAcceptedConflicts){?><span class="badge"><?=$this->allAcceptedConflicts?></span><?}?></a>
         <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
+
         <?if($institution == 1 || $institution == 4){?>
         <a href="/conflicts/research" class="list-group-item"><i class="fa fa-search"></i> Buscas</a>
         <?}
+        
         }
-        else if($status['status'] == 1){?>
+         else if($status['status'] == 1){?>
         <a href="/conflicts/mycases" class="list-group-item"><i class="fa fa-list-ul"></i> Meus casos <?if($this->myCases){?><span class="badge"><?=$this->myCases?></span><?}?></a>
         <?}?>
       </div>
