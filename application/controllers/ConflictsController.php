@@ -149,15 +149,16 @@ class ConflictsController extends Zend_Controller_Action
 
       $cupom = $this->getRequest()->getParam('desconto');
       $valor = $this->getRequest()->getParam('valor');
+      $valor = str_replace(',','.',str_replace('.','',$valor));
       $conflict = new Application_Model_DbTable_ValorCausa();
       $select = $conflict->select()->where('de <= ?',$valor)->where('ate >= ?',$valor); //de <= 26032.03 and ate >= 26032.03
       $valores = $conflict->fetchRow($select);
       //print_r($tem_cupom);exit();
       if(isset($valores) && $valores['id'] != ''){
-        $valor = str_replace(',','.',str_replace('.','',$valor));
-        $taxa_registro = (($valor*$valores['taxa_registro']));
-        $taxa_adm = (($valor*$valores['taxa_adm']));
-        $honorario = (($valor*$valores['honorario'])/100);
+        // $valor = str_replace(',','.',str_replace('.','',$valor));
+        $taxa_registro = (($valores['taxa_registro']));
+        $taxa_adm = (($valores['taxa_adm']));
+        $honorario = (($valores['honorario']));
         
         if($cupom != 0 && $cupom != '') {
           //$taxa_registro = $taxa_registro - (($taxa_registro*$cupom)/100);

@@ -27,7 +27,7 @@ class Application_Form_DataUser extends Twitter_Bootstrap_Form_Horizontal
           'required '     => ''
       ));
 
-      $this->addElement('text', 'cpf', array(
+      $this->addElement('text', 'cpf_cnpj_u', array(
           'label'         => 'CPF',
           'placeholder'   => 'CPF',
           'class'         => 'form-control',

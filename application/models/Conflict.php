@@ -5,7 +5,7 @@ class Application_Model_Conflict
 
 	public function returnById($conflictId)
 	{
-		echo"hehehe".$conflictId;
+		// echo"hehehe".$conflictId;exit;
 		$conflict = new Application_Model_DbTable_Conflict();
 		$select = $conflict->select()->setIntegrityCheck(false);
 		$select	->from(array('c' => 'conflict'),array('id_conflict', 'desc_conflict', 'id_conflict_documents', 
@@ -14,22 +14,22 @@ class Application_Model_Conflict
 																		'email_u' => 'email',
 																		'phone_u' => 'phone',
 																		'sex',
-																		'cpf_cnpj',
+																		'cpf_cnpj_u' =>'cpf_cnpj',
 																		'profession',
 																		'nationality',
 																		'marital_status',
 																		'date_birth'))
-				->joinLeft(array('ou' => 'other_user'),'c.id_other_user=ou.id_other_user', array('name_ou' => 'name',
+				->joinLeft(array('ou' => 'other_user'),'c.id_conflict=ou.conflict_id', array('name_ou' => 'name',
 																								 'email_ou' => 'email',
 																								 'phone_ou' => 'phone',
 																								 'cpf_cnpj_ou' => 'cpf_cnpj'))
-				/*->joinLeft(array('au' => 'user_address'),'u.id_address=au.id_address', array('place_u' => 'place',
+				->joinLeft(array('au' => 'user_address'),'u.id=au.user_id', array('place_u' => 'place',
 																							 'number_u' => 'number',
 																							 'complement_u' => 'complement',
 																							 'neighborhood_u' => 'neighborhood',
 																							 'uf_u' => 'uf',
 																							 'city_u' => 'city',
-																							 'cep_u' => 'cep'))*/
+																							 'cep_u' => 'cep'))
 				->joinLeft(array('aou' => 'user_address'),'u.id=aou.user_id', array('place_ou' => 'place',
 																							 	'number_ou' => 'number',
 																								 'complement_ou' => 'complement',
@@ -41,6 +41,7 @@ class Application_Model_Conflict
 				//echo $select;exit;
 		return $conflict->fetchRow($select);
 	}
+
 
 
 
